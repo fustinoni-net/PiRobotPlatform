@@ -1,0 +1,173 @@
+Connecting to 192.168.1.186:22
+done.
+profile-rp-calibrate-passwd:
+Connecting to 192.168.1.186:22
+cmd : cd '/home/pi/NetBeansProjects//pi2goLite'; 'sudo' '/usr/lib/jvm/jdk-8-oracle-arm-vfp-hflt/jre//bin/java'  -Dfile.encoding=ISO-8859-1   -jar /home/pi/NetBeansProjects//pi2goLite/dist/pi2goLite.jar 
+Exception in thread "main" 
+java.rmi.server.ExportException: remote object implements illegal remote interface; nested exception is: 
+	java.lang.IllegalArgumentException: illegal remote method encountered: public abstract net.fustinoni.raspberryPi.robot.device.Motor net.fustinoni.raspberryPi.robot.component.LeftRightMotors.getLeftMotor()
+	at sun.rmi.server.UnicastServerRef.exportObject(UnicastServerRef.java:199)
+	at java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:383)
+at java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:320)
+	at java.rmi.server.UnicastRemoteObject.<init>(UnicastRemoteObject.java:198)
+	at java.rmi.server.UnicastRemoteObject.<init>(UnicastRemoteObject.java:180)
+	at net.fustinoni.raspberryPi.pi2Go.Pi2GoLiteRemoteImpl.<init>(Pi2GoLiteRemoteImpl.java:19)
+at net.fustinoni.raspberryPi.pi2Go.Pi2GoLiteRemoteImpl.main(Pi2GoLiteRemoteImpl.java:42)
+Caused by: java.lang.IllegalArgumentException: illegal remote method encountered: public abstract net.fustinoni.raspberryPi.robot.device.Motor net.fustinoni.raspberryPi.robot.component.LeftRightMotors.getLeftMotor()
+	at sun.rmi.server.Util.checkMethod(Util.java:267)
+	at sun.rmi.server.Util.getRemoteInterfaces(Util.java:246)
+	at sun.rmi.server.Util.getRemoteInterfaces(Util.java:216)
+	at sun.rmi.server.Util.createProxy(Util.java:146)
+at sun.rmi.server.UnicastServerRef.exportObject(UnicastServerRef.java:197)
+	... 6 more
+
+
+
+---------------------------------------------------------------------
+
+ant -f C:\\Users\\efustinoni\\Dropbox\\raspberryPi\\robot\\pi2goLiteJava\\pi2goLite -Dnb.internal.action.name=debug -Dremote.platform.rp.target=linuxarmvfphflt-15 -Dremote.platform.password=***** -Dremote.platform.rp.filename=linuxarmvfphflt -Ddebug.class=net.fustinoni.raspberryPi.pi2Go.rmi.Pi2GoLiteRemoteImpl -Dremote.platform.java.spec.ver=18 debug-remote
+init:
+Deleting: C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\pi2goLite\build\built-jar.properties
+deps-jar:
+Updating property file: C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\pi2goLite\build\built-jar.properties
+compile:
+Copying 1 file to C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\pi2goLite\build
+Copy libraries to C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\pi2goLite\dist\lib.
+To run this application from the command line without Ant, try:
+java -jar "C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\pi2goLite\dist\pi2goLite.jar"
+jar:
+Connecting to raspi-pi2go.homenet.telecomitalia.it:22
+Connecting to raspi-pi2go.homenet.telecomitalia.it:22
+cmd : mkdir -p '/home/pi/NetBeansProjects//pi2goLite/dist'
+Connecting to raspi-pi2go.homenet.telecomitalia.it:22
+done.
+profile-rp-calibrate-passwd:
+Connecting to raspi-pi2go.homenet.telecomitalia.it:22
+cmd : cd '/home/pi/NetBeansProjects//pi2goLite'; 'sudo' '/usr/lib/jvm/jdk-8-oracle-arm-vfp-hflt/jre//bin/java' -Xdebug -Xrunjdwp:transport=dt_socket,address=127.0.0.1:64187 -Dfile.encoding=ISO-8859-1   -jar /home/pi/NetBeansProjects//pi2goLite/dist/pi2goLite.jar 
+Exception in thread "main" 
+java.lang.ExceptionInInitializerError
+	at com.pi4j.io.gpio.RaspiGpioProvider.<init>(RaspiGpioProvider.java:51)
+	at com.pi4j.io.gpio.GpioFactory.getDefaultProvider(GpioFactory.java:106)
+	at com.pi4j.io.gpio.impl.GpioControllerImpl.<init>(GpioControllerImpl.java:54)
+	at com.pi4j.io.gpio.GpioFactory.getInstance(GpioFactory.java:89)
+	at net.fustinoni.raspberryPi.robot.BaseRobot.<init>(BaseRobot.java:60)
+	at net.fustinoni.raspberryPi.pi2Go.Pi2GoBase.<init>(Pi2GoBase.java:52)
+at net.fustinoni.raspberryPi.pi2Go.Pi2GoLite.<init>(Pi2GoLite.java:120)
+	at net.fustinoni.raspberryPi.pi2Go.Pi2GoLite.getPi2GoLite(Pi2GoLite.java:125)
+	at net.fustinoni.raspberryPi.pi2Go.rmi.Pi2GoLiteRemoteImpl.<init>(Pi2GoLiteRemoteImpl.java:22)
+	at net.fustinoni.raspberryPi.pi2Go.rmi.Pi2GoLiteRemoteImpl.main(Pi2GoLiteRemoteImpl.java:44)
+Caused by: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "pi4j.debug" "read")
+	at java.security.AccessControlContext.checkPermission(AccessControlContext.java:457)
+	at java.security.AccessController.checkPermission(AccessController.java:884)
+	at java.lang.SecurityManager.checkPermission(SecurityManager.java:549)
+	at java.lang.SecurityManager.checkPropertyAccess(SecurityManager.java:1294)
+	at java.lang.System.getProperty(System.java:714)
+	at com.pi4j.util.NativeLibraryLoader.load(NativeLibraryLoader.java:62)
+	at com.pi4j.wiringpi.Gpio.<clinit>(Gpio.java:174)
+	... 10 more
+BUILD STOPPED (total time: 3 minutes 18 seconds)
+
+----------------------------------------------------------------------------------------------------------
+ant -f C:\\Users\\efustinoni\\Dropbox\\raspberryPi\\robot\\pi2goLiteJava\\wiimotePi2go -Dnb.internal.action.name=debug -Dremote.platform.rp.target=linuxarmvfphflt-15 -Dremote.platform.password=***** -Dremote.platform.rp.filename=linuxarmvfphflt -Ddebug.class=wiimotepi2go.WiimotePi2goClient -Dremote.platform.java.spec.ver=18 debug-remote
+init:
+Deleting: C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\wiimotePi2go\build\built-jar.properties
+deps-jar:
+Updating property file: C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\wiimotePi2go\build\built-jar.properties
+compile:
+Copying 1 file to C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\wiimotePi2go\build
+Copy libraries to C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\wiimotePi2go\dist\lib.
+To run this application from the command line without Ant, try:
+java -jar "C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\wiimotePi2go\dist\wiimotePi2go.jar"
+jar:
+Connecting to raspiscreen.homenet.telecomitalia.it:22
+Connecting to raspiscreen.homenet.telecomitalia.it:22
+cmd : mkdir -p '/home/pi/NetBeansProjects//wiimotePi2go/dist'
+Connecting to raspiscreen.homenet.telecomitalia.it:22
+done.
+profile-rp-calibrate-passwd:
+Connecting to raspiscreen.homenet.telecomitalia.it:22
+cmd : cd '/home/pi/NetBeansProjects//wiimotePi2go'; 'sudo' '/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/jre//bin/java' -Xdebug -Xrunjdwp:transport=dt_socket,address=127.0.0.1:50284 -Dfile.encoding=ISO-8859-1 -Dbluecove.jsr82.psm_minimum_off=true -Djava.security.policy=/home/pi/NetBeansProjects/wiimotePi2go/client.policy -Djava.rmi.server.codebase=file://home/pi/NetBeansProjects/wiimotePi2go/dist/lib/pi2goLite.jar   -jar /home/pi/NetBeansProjects//wiimotePi2go/dist/wiimotePi2go.jar 
+Exception in thread "main" 
+java.rmi.UnmarshalException: error unmarshalling return; nested exception is: 
+java.io.WriteAbortedException: writing aborted; java.io.NotSerializableException: net.fustinoni.raspberryPi.pi2Go.device.MotorImpl
+at sun.rmi.server.UnicastRef.invoke(UnicastRef.java:193)
+at java.rmi.server.RemoteObjectInvocationHandler.invokeRemoteMethod(RemoteObjectInvocationHandler.java:227)
+at java.rmi.server.RemoteObjectInvocationHandler.invoke(RemoteObjectInvocationHandler.java:179)
+at com.sun.proxy.$Proxy0.getLeftMotor(Unknown Source)
+at net.fustinoni.raspberryPi.robot.robotUtils.MotorsDrivers.MotorsDriverImpl.<init>(MotorsDriverImpl.java:49)
+at wiimotepi2go.WiimotePi2goClient.main(WiimotePi2goClient.java:101)
+Caused by: java.io.WriteAbortedException: writing aborted; java.io.NotSerializableException: net.fustinoni.raspberryPi.pi2Go.device.MotorImpl
+at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1355)
+at java.io.ObjectInputStream.readObject(ObjectInputStream.java:371)
+at sun.rmi.server.UnicastRef.unmarshalValue(UnicastRef.java:326)
+at sun.rmi.server.UnicastRef.invoke(UnicastRef.java:175)
+... 5 more
+Caused by: java.io.NotSerializableException: net.fustinoni.raspberryPi.pi2Go.device.MotorImpl
+at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1184)
+at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:348)
+at sun.rmi.server.UnicastRef.marshalValue(UnicastRef.java:294)
+at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:333)
+at sun.rmi.transport.Transport$1.run(Transport.java:178)
+at sun.rmi.transport.Transport$1.run(Transport.java:175)
+at java.security.AccessController.doPrivileged(Native Method)
+at sun.rmi.transport.Transport.serviceCall(Transport.java:174)
+at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:557)
+at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:812)
+at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:671)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+at java.lang.Thread.run(Thread.java:744)
+C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\wiimotePi2go\nbproject\remote-platform-impl.xml:113: The following error occurred while executing this line:
+C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\wiimotePi2go\nbproject\remote-platform-impl.xml:63: Remote command failed with exit status 1
+BUILD FAILED (total time: 22 seconds)
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+rmiregistry &
+
+http://docs.oracle.com/javase/tutorial/rmi/running.html
+
+
+     -Djava.rmi.server.codebase=http://mycomputer/~ann/classes/compute.jar
+        /home/pi/NetBeansProjects//pi2goLite/dist/pi2goLite.jar
+     
+
+     -Djava.rmi.server.codebase=file://home/pi/NetBeansProjects//pi2goLite/dist/pi2goLite.jar
+     -Djava.rmi.server.hostname=raspi-pi2go.homenet.telecomitalia.it
+     -Djava.security.policy=/home/pi/NetBeansProjects/pi2goLite/server.policy
+
+client
+
+     -Djava.rmi.server.codebase=file://home/pi/NetBeansProjects/pi2goLite/dist/liob/pi2goLite.jar
+     -Djava.security.policy=/home/pi/NetBeansProjects/pi2goLite/client.policy
+        
+
+tolte con gestione registry da software
+-Djava.rmi.server.codebase=file://home/pi/NetBeansProjects/pi2goLite/dist/pi2goLite.jar -Djava.rmi.server.hostname=raspi-pi2go.homenet.telecomitalia.it
+
+
+dal client
+-Djava.rmi.server.codebase=file:///home/pi/NetBeansProjects/wiimotePi2go/dist/lib/pi2goLite.jar
+
+
+
+-----------------------------------------------------------------
+
+Connecting to raspiscreen.homenet.telecomitalia.it:22
+cmd : cd '/home/pi/NetBeansProjects//wiimotePi2go'; 'sudo' '/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/jre//bin/java'  -Dfile.encoding=ISO-8859-1 -Dbluecove.jsr82.psm_minimum_off=true -Djava.security.policy=/home/pi/NetBeansProjects/wiimotePi2go/client.policy -Djava.rmi.server.codebase=file://home/pi/NetBeansProjects/wiimotePi2go/dist/lib/pi2goLite.jar   -jar /home/pi/NetBeansProjects//wiimotePi2go/dist/wiimotePi2go.jar 
+Exception in thread "main" 
+java.lang.ClassCastException: com.sun.proxy.$Proxy2 cannot be cast to net.fustinoni.raspberryPi.rmiRobot.sensor.SwitchRemote
+at com.sun.proxy.$Proxy0.getGenericSwitch(Unknown Source)
+at net.fustinoni.raspberryPi.pi2Go.rmi.Pi2GoLiteLocal.getGenericSwitch(Pi2GoLiteLocal.java:37)
+at wiimotepi2go.WiimotePi2goClient.main(WiimotePi2goClient.java:100)
+C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\wiimotePi2go\nbproject\remote-platform-impl.xml:105: The following error occurred while executing this line:
+C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\wiimotePi2go\nbproject\remote-platform-impl.xml:63: Remote command failed with exit status 1
+BUILD FAILED (total time: 53 seconds)

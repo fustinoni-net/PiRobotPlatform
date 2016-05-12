@@ -1,0 +1,7 @@
+grant codeBase "file://home/pi/NetBeansProjects/" {
+    permission java.security.AllPermission;
+};
+
+grant {
+    permission java.security.AllPermission;
+};

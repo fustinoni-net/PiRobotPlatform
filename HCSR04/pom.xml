@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.fustinoni.raspberryPi</groupId>
+    <artifactId>HCSR04</artifactId>
+    <description>HCSR04 JNI Native Library</description>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>net.fustinoni.raspberryPi</groupId>
+        <artifactId>RaspberryPiRobotPlatform</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    
+    <properties>
+        <hcsr04-native-ant-build-target>build-hcsr04.so-remote</hcsr04-native-ant-build-target>
+    </properties>
+
+    <!-- BUILD PROFILES -->
+    <profiles>
+
+        <!-- SPECIAL PROFILE TO DETERMINE IF RUNNING ON THE PI HARDWARE -->
+        <profile>
+            <id>rpi-local</id>
+            <activation>
+                <os>
+                    <name>linux</name>
+                    <family>unix</family>
+                    <arch>arm</arch>
+                </os>
+            </activation>
+            <properties>
+                <hcsr04-native-ant-build-target>build-hcsr04.so-local</hcsr04-native-ant-build-target>
+            </properties>
+        </profile>
+
+        <!-- This profile is used to dynamically rebuild the native library .H 
+        header files from the defined JNI jar classes. This profile should only be 
+        used when changes have been made to the JNI Java wrapper classes and new 
+        native method signatures are required. To use this profile, simply include 
+        the "-generate-jni-headers" command argument with the maven build command. -->
+        <profile>
+            <id>generate-jni-headers</id>
+
+            <!-- SPECIAL PROFILE DEPENDENCIES -->
+            <dependencies>
+
+                <!-- we define the pi4j Java project as a dependency so that the .H header 
+                files can be generated based on the Java native wrapper classes -->
+                <dependency>
+                    <groupId>net.fustinoni.raspberryPi</groupId>
+                    <artifactId>Pi2Go</artifactId>
+                    <version>${project.version}</version>
+                    <scope>compile</scope>
+                </dependency>
+
+            </dependencies>
+
+            <!-- SPECIAL PROFILE BUILD INSTRUCTIONS -->
+            <build>
+                <plugins>
+
+                    <!-- Generate .h header files for JNI wrapper -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>native-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <executions>
+                            <execution>
+                                <id>javah-generate</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>javah</goal>
+                                </goals>
+                                <configuration>
+
+                                    <!-- trigger javah execution -->
+                                    <javahClassNames>
+                                        <javahClassName>net.fustinoni.raspberryPi.pi2Go.sensor.Hcsr04</javahClassName>
+                                    </javahClassNames>
+
+                                    <!-- enable additional javah interface in dependencies list -->
+                                    <javahSearchJNIFromDependencies>true</javahSearchJNIFromDependencies>
+
+                                    <!-- specify the output directory for generated header files -->
+                                    <javahOutputDirectory>src/main/native</javahOutputDirectory>
+
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
+    <!-- BUILD INSTRUCTIONS -->
+    <build>
+        <finalName>hcsr04</finalName>
+        <plugins>
+
+            <!-- GENERATE LICENSE HEADERS IN SOURCE FILES -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+
+                    <!-- ensure that a target directory has been created platform -->
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <tasks>
+                                <mkdir dir="target" />
+                                <mkdir dir="target/classes" />
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- copy the native source files and compile them with gcc on the RaspberyPi 
+                    platform -->
+                    <execution>
+                        <id>build-native-so</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <taskdef resource="net/sf/antcontrib/antcontrib.properties"
+                                                                         classpathref="maven.plugin.classpath" />
+                                <property name="compile_classpath" 
+                                                          refid="maven.compile.classpath"/>
+                                <property name="project-build-directory"
+                                                          value="${project.build.directory}"/>		
+                                <property name="pi-dirBuildTemp" value="${pi.dirBuildTemp}"/>
+
+                                <ant target="${hcsr04-native-ant-build-target}" >
+                                    <property name="pi-abi" value="hard-float"/>
+                                    <property name="pi-port" value="${pi.port}"/>
+                                    <property name="pi-host" value="${pi.host}"/>
+                                    <property name="pi-user" value="${pi.user}"/>
+                                    <property name="pi-password" value="${pi.password}"/>
+                                </ant>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.ant</groupId>
+                        <artifactId>ant-jsch</artifactId>
+                        <version>${ant-jsch.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.jcraft</groupId>
+                        <artifactId>jsch</artifactId>
+                        <version>${jsch.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>ant-contrib</groupId>
+                        <artifactId>ant-contrib</artifactId>
+                        <version>${ant-contrib.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- ATTACH COMPILED NATIVE LIBRARY -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-hard-float-native-artifact</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>${project.build.directory}/hcsr04.so</file>
+                                    <type>so</type>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

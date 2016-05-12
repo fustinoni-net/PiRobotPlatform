@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.fustinoni.raspberryPi</groupId>
+    <artifactId>Pi2Go</artifactId>
+    <packaging>jar</packaging>
+    <parent>
+        <groupId>net.fustinoni.raspberryPi</groupId>
+        <artifactId>RaspberryPiRobotPlatform</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- DEFAULT RASPBERRY PI PROPERTIES -->
+        <pi.main.class>examples.LedsExample</pi.main.class>
+    </properties>
+<build>
+    <plugins>
+            <!-- RETRIEVE THE JNI NATIVE LIBRARY DEPENDENCY -->
+            <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <executions>
+                            <execution>
+                                    <id>copy</id>
+                                    <phase>validate</phase>
+                                    <goals>
+                                            <goal>copy</goal>
+                                    </goals>
+                                    <configuration>
+                                            <artifactItems>
+                                                    <!-- we define the libpi4j native project as a dependency so that 
+                                                            native library can be included in the final packaged pi4j.jar -->
+                                                    <artifactItem>
+                                                            <groupId>net.fustinoni.raspberryPi</groupId>
+                                                            <artifactId>HCSR04</artifactId>
+                                                            <version>${project.version}</version>
+                                                            <type>so</type>
+                                                            <overWrite>true</overWrite>
+                                                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                                                            <destFileName>hcsr04.so</destFileName>
+                                                    </artifactItem>
+                                            </artifactItems>
+                                    </configuration>
+                            </execution>
+                    </executions>
+            </plugin>
+
+            <!-- EMBED THE JNI NATIVE LIBRARY INSIDE THE JAR -->
+            <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <executions>
+                            <execution>
+                                    <id>embed-jni-native-resource</id>
+                                    <phase>generate-resources</phase>
+                                    <goals>
+                                            <goal>add-resource</goal>
+                                    </goals>
+                                    <configuration>
+                                            <resources>
+                                                    <resource>
+                                                            <directory>${project.build.directory}/lib</directory>
+                                                            <targetPath>lib</targetPath>
+                                                    </resource>
+                                            </resources>
+                                    </configuration>
+                            </execution>
+                    </executions>
+            </plugin>
+        
+        
+        
+        <!-- This plugin will generate JAR MANIFEST file inside the JAR in order to make our applicationeasily runnable -->
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <mainClass>${pi.main.class}</mainClass>
+                    </manifest>
+                </archive>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>make-my-jar-with-dependencies</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+
+        <!--This plugin will Transfer the executable JAR file to the Pi and runs it -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+                <execution>
+                    <phase>install</phase>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                    <configuration>
+                        <tasks>
+                            <!-- ensure the target directory exists on the Raspberry Pi -->
+                            <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}" password="${pi.password}" 
+                                     trust="true" failonerror="false" verbose="true" 
+                                     command="mkdir --parents ${pi.deployDirectory}"/>
+
+                            <!-- copy the JAR file to the Raspberry Pi -->
+                            <scp
+                                file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar"
+                                todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}"
+                                port="${pi.port}" trust="true" verbose="true" failonerror="true">
+                            </scp> 
+
+                            <!-- run the JAR file on the Raspberry Pi -->
+                            <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}"
+                                     password="${pi.password}" trust="true" failonerror="false"
+                                     verbose="true" 
+                                     command="sudo java -jar ${pi.deployDirectory}/${project.build.finalName}-jar-with-dependencies.jar"/>
+                        </tasks>
+                    </configuration>
+                </execution>
+            </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.ant</groupId>
+                    <artifactId>ant-jsch</artifactId>
+                    <version>1.9.6</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+</build>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ExecuteFromJar</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>RaspberryPiRobot</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-device</artifactId>
+            <version>1.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+</project>

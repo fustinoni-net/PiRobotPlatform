@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HCSR04" default="build-hcsr04.so-remote" basedir=".">
+
+    <!-- this target is used when building maven project remotely from your workstation -->
+    <target name="build-hcsr04.so-remote">
+    
+        <echo message="Building native hcsr04 library"/>
+    
+		<!-- ensure the target directory is empty on the Raspberry Pi -->
+		<sshexec host="${pi-host}" port="${pi-port}" username="${pi-user}"
+			password="${pi-password}" trust="true" failonerror="true"
+			verbose="true" command="rm --recursive --force ${pi-dirBuildTemp}" />
+	
+		<!-- ensure the target directory exists on the Raspberry Pi -->
+		<sshexec host="${pi-host}" port="${pi-port}" username="${pi-user}"
+			password="${pi-password}" trust="true" failonerror="false"
+			verbose="true" command="mkdir --parents ${pi-dirBuildTemp}" />
+	
+		<!-- copy all the necessary source files to the Raspberry Pi -->
+		<scp todir="${pi-user}:${pi-password}@${pi-host}:${pi-dirBuildTemp}"
+			port="${pi-port}" trust="true" verbose="true" failonerror="true">
+			<fileset dir="src/main/native" />
+		</scp>
+
+        <!-- download and install development prerequisites on the Raspberry Pi platform -->
+        <sshexec host="${pi-host}" port="${pi-port}" username="${pi-user}"
+                 password="${pi-password}" trust="true" failonerror="true"
+                 verbose="true" command="cd ${pi-dirBuildTemp}; sudo chmod +x install-prerequisites.sh; ./install-prerequisites.sh" />
+
+		<!-- download and compile the 'wiringPi.a' native static library on the Raspberry 
+			Pi platform -->
+		<sshexec host="${pi-host}" port="${pi-port}" username="${pi-user}"
+			password="${pi-password}" trust="true" failonerror="true"
+			verbose="true" command="cd ${pi-dirBuildTemp}; sudo chmod +x wiringpi-build.sh; ./wiringpi-build.sh" />
+
+		<!-- compile the 'lib4j.so' JNI native shared library on the Raspberry 
+			Pi platform -->
+		<sshexec host="${pi-host}" port="${pi-port}" username="${pi-user}"
+			password="${pi-password}" trust="true" failonerror="true"
+			verbose="true" command="cd ${pi-dirBuildTemp}; make clean; make all" />
+	
+		<!-- copy the compiled 'lib4j.so' JNI native shared library back -->
+		<scp
+			file="${pi-user}:${pi-password}@${pi-host}:${pi-dirBuildTemp}/hcsr04.so"
+			todir="${project-build-directory}/hcsr04.so" port="${pi-port}" trust="true"
+			verbose="true" failonerror="true">
+		</scp>
+	
+		<!-- remove the temporary target directory from the Raspberry Pi -->
+		<sshexec host="${pi-host}" port="${pi-port}" username="${pi-user}"
+			password="${pi-password}" trust="true" failonerror="true"
+			verbose="true" command="rm --recursive --force ${pi-dirBuildTemp}" />
+		
+    </target>
+
+    <!-- this target is used when building maven project directly on the Raspberry Pi -->
+    <target name="build-hcsr04.so-local">
+        <echo message="Building native hcsr04 shared library"/>
+        <exec command="sudo chmod +x build-local.sh" />
+        <exec executable="/bin/sh">
+            <arg line="build-local.sh"/>
+        </exec>
+    </target>
+
+</project>

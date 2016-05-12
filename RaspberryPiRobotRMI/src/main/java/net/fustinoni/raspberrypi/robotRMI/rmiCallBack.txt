@@ -1,0 +1,98 @@
+rmi callback
+
+https://www2.cs.uic.edu/~i441/RMICallback/
+
+------------------------------------------
+
+ant -f C:\\Users\\efustinoni\\Dropbox\\raspberryPi\\robot\\pi2goLiteJava\\pi2goLite -Dnb.internal.action.name=run -Dremote.platform.rp.target=linuxarmvfphflt-15 -Dremote.platform.password=***** -Dremote.platform.rp.filename=linuxarmvfphflt -Dremote.platform.java.spec.ver=18 run-remote
+init:
+Deleting: C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\pi2goLite\build\built-jar.properties
+deps-jar:
+Updating property file: C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\pi2goLite\build\built-jar.properties
+compile:
+Copying 1 file to C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\pi2goLite\build
+Copy libraries to C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\pi2goLite\dist\lib.
+To run this application from the command line without Ant, try:
+java -jar "C:\Users\efustinoni\Dropbox\raspberryPi\robot\pi2goLiteJava\pi2goLite\dist\pi2goLite.jar"
+jar:
+Connecting to raspi-pi2go.homenet.telecomitalia.it:22
+cmd : mkdir -p '/home/pi/NetBeansProjects//pi2goLite/dist'
+Connecting to raspi-pi2go.homenet.telecomitalia.it:22
+done.
+profile-rp-calibrate-passwd:
+Connecting to raspi-pi2go.homenet.telecomitalia.it:22
+cmd : cd '/home/pi/NetBeansProjects//pi2goLite'; 'sudo' '/usr/lib/jvm/jdk-8-oracle-arm-vfp-hflt/jre//bin/java'  -Dfile.encoding=ISO-8859-1 -Djava.security.policy=/home/pi/NetBeansProjects/pi2goLite/server.policy  -jar /home/pi/NetBeansProjects//pi2goLite/dist/pi2goLite.jar 
+Service bound....
+Mar 16, 2016 6:45:23 PM net.fustinoni.raspberryPi.rmiRobot.listener.SwitchListenerLocal changedEvent
+SEVERE: null
+java.rmi.ConnectException: Connection refused to host: 127.0.1.1; nested exception is: 
+	java.net.ConnectException: Connection refused
+	at sun.rmi.transport.tcp.TCPEndpoint.newSocket(TCPEndpoint.java:619)
+	at sun.rmi.transport.tcp.TCPChannel.createConnection(TCPChannel.java:216)
+	at sun.rmi.transport.tcp.TCPChannel.newConnection(TCPChannel.java:202)
+at sun.rmi.server.UnicastRef.invoke(UnicastRef.java:130)
+	at java.rmi.server.RemoteObjectInvocationHandler.invokeRemoteMethod(RemoteObjectInvocationHandler.java:194)
+	at java.rmi.server.RemoteObjectInvocationHandler.invoke(RemoteObjectInvocationHandler.java:148)
+	at com.sun.proxy.$Proxy4.changedEvent(Unknown Source)
+	at net.fustinoni.raspberryPi.rmiRobot.listener.SwitchListenerLocal.changedEvent(SwitchListenerLocal.java:27)
+at net.fustinoni.raspberryPi.pi2Go.sensor.SwitchImpl.lambda$null$14(SwitchImpl.java:73)
+	at net.fustinoni.raspberryPi.pi2Go.sensor.SwitchImpl$$Lambda$2/19136946.accept(Unknown Source)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1359)
+	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:580)
+	at net.fustinoni.raspberryPi.pi2Go.sensor.SwitchImpl.lambda$new$15(SwitchImpl.java:72)
+	at net.fustinoni.raspberryPi.pi2Go.sensor.SwitchImpl$$Lambda$1/3208541.handleGpioPinDigitalStateChangeEvent(Unknown Source)
+	at com.pi4j.io.gpio.tasks.impl.GpioEventDispatchTaskImpl.run(GpioEventDispatchTaskImpl.java:66)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.net.ConnectException: Connection refused
+at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at sun.rmi.transport.proxy.RMIDirectSocketFactory.createSocket(RMIDirectSocketFactory.java:40)
+	at sun.rmi.transport.proxy.RMIMasterSocketFactory.createSocket(RMIMasterSocketFactory.java:148)
+	at sun.rmi.transport.tcp.TCPEndpoint.newSocket(TCPEndpoint.java:613)
+	... 17 more
+Mar 16, 2016 6:45:23 PM net.fustinoni.raspberryPi.rmiRobot.listener.SwitchListenerLocal changedEvent
+SEVERE: null
+java.rmi.ConnectException: Connection refused to host: 127.0.1.1; nested exception is: 
+	java.net.ConnectException: Connection refused
+	at sun.rmi.transport.tcp.TCPEndpoint.newSocket(TCPEndpoint.java:619)
+	at sun.rmi.transport.tcp.TCPChannel.createConnection(TCPChannel.java:216)
+	at sun.rmi.transport.tcp.TCPChannel.newConnection(TCPChannel.java:202)
+	at sun.rmi.server.UnicastRef.invoke(UnicastRef.java:130)
+	at java.rmi.server.RemoteObjectInvocationHandler.invokeRemoteMethod(RemoteObjectInvocationHandler.java:194)
+	at java.rmi.server.RemoteObjectInvocationHandler.invoke(RemoteObjectInvocationHandler.java:148)
+	at com.sun.proxy.$Proxy4.changedEvent(Unknown Source)
+	at net.fustinoni.raspberryPi.rmiRobot.listener.SwitchListenerLocal.changedEvent(SwitchListenerLocal.java:27)
+	at net.fustinoni.raspberryPi.pi2Go.sensor.SwitchImpl.lambda$null$14(SwitchImpl.java:73)
+	at net.fustinoni.raspberryPi.pi2Go.sensor.SwitchImpl$$Lambda$2/19136946.accept(Unknown Source)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1359)
+	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:580)
+	at net.fustinoni.raspberryPi.pi2Go.sensor.SwitchImpl.lambda$new$15(SwitchImpl.java:72)
+	at net.fustinoni.raspberryPi.pi2Go.sensor.SwitchImpl$$Lambda$1/3208541.handleGpioPinDigitalStateChangeEvent(Unknown Source)
+at com.pi4j.io.gpio.tasks.impl.GpioEventDispatchTaskImpl.run(GpioEventDispatchTaskImpl.java:66)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at sun.rmi.transport.proxy.RMIDirectSocketFactory.createSocket(RMIDirectSocketFactory.java:40)
+	at sun.rmi.transport.proxy.RMIMasterSocketFactory.createSocket(RMIMasterSocketFactory.java:148)
+	at sun.rmi.transport.tcp.TCPEndpoint.newSocket(TCPEndpoint.java:613)
+	... 17 more
+BUILD STOPPED (total time: 1 minute 32 seconds)
