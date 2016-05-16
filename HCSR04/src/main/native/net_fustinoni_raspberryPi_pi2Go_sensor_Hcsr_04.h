@@ -40,6 +40,7 @@
 extern "C" {
 #endif
 
+extern int is_wiringPi_Setup = 0;
 
 jlong getDist(int);
 

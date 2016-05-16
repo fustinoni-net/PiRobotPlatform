@@ -38,7 +38,13 @@ JNIEXPORT jlong JNICALL Java_net_fustinoni_raspberryPi_pi2Go_sensor_Hcsr04_getDi
 
 jlong getDist(int pin) {
 
-    wiringPiSetup();
+    
+    //https://groups.google.com/forum/#!msg/pi4j/XoZXD2VxG1M/IsJAJnu3BgAJ
+    
+    if (is_wiringPi_Setup==0){
+        wiringPiSetup();
+        is_wiringPi_Setup=1;
+    }
     
     unsigned int start = 0;
     unsigned int end = 0;

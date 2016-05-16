@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--esemppio di POM-->
+<!-- https://github.com/marcandreuf/sunfounder-sensors-raspi-4j/blob/master/pom.xml-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.fustinoni.pi</groupId>
-    <artifactId>ExecuteFromJar</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>PiRobot</artifactId>
     <packaging>jar</packaging>
     <parent>
             <groupId>net.fustinoni.pi</groupId>
             <artifactId>PiRobotPlatform</artifactId>
             <version>0.0.1-SNAPSHOT</version>
     </parent>
-    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+    <name>PiRobot</name>
+    <dependencies>
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-core</artifactId>
+            <version>1.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
 </project>

@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>net.fustinoni.raspberryPi</groupId>
-    <artifactId>RaspberryPiRobotPlatform</artifactId>
+    <groupId>net.fustinoni.pi</groupId>
+    <artifactId>PiRobotPlatform</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <!-- ORGANIZATION -->
@@ -13,9 +13,9 @@
     <modules>
         <module>ExecuteFromJar</module>
         <module>HCSR04</module>
-        <module>RaspberryPiRobot</module>
+        <module>PiRobot</module>
         <module>Pi2Go</module>
-        <module>RaspberryPiRobotRMI</module>
+        <module>PiRobotRMI</module>
         <module>Pi2GoRMI</module>        
     </modules>
     <properties>
@@ -31,7 +31,7 @@
         <pi.main.class>examples.LedsExample</pi.main.class>
 
         <!-- SETTINGS FOR REMOTELY BUILDING NATIVE LIBRARY ON RASPBERRY PI -->
-        <pi.dirBuildTemp>/home/pi/RaspberryPiRobotPlatform-temp</pi.dirBuildTemp>
+        <pi.dirBuildTemp>/home/pi/PiRobotPlatform-temp</pi.dirBuildTemp>
 
         <!-- SETTINGS FOR COPYING Pi4J ARTIFACTS TO DEVELOPMENT RASPBERRY PI -->
         <pi.transfer.dev>false</pi.transfer.dev>
@@ -39,7 +39,7 @@
         <pi.port.dev>${pi.port}</pi.port.dev>
         <pi.user.dev>${pi.user}</pi.user.dev>
         <pi.password.dev>${pi.password}</pi.password.dev>
-        <pi.dirCopyTo.dev>/home/pi/RaspberryPiRobotPlatform-dev</pi.dirCopyTo.dev>
+        <pi.dirCopyTo.dev>/home/pi/PiRobotPlatform-dev</pi.dirCopyTo.dev>
 
         <!-- PROJECT ENCODING PROPERTIES -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -72,4 +72,5 @@
             </snapshots>
         </repository>
     </repositories>
+    <name>PiRobotPlatform</name>
 </project>

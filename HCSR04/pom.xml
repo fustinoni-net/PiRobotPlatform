@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>net.fustinoni.raspberryPi</groupId>
+    <groupId>net.fustinoni.pi</groupId>
     <artifactId>HCSR04</artifactId>
     <description>HCSR04 JNI Native Library</description>
     <packaging>pom</packaging>
     <parent>
-        <groupId>net.fustinoni.raspberryPi</groupId>
-        <artifactId>RaspberryPiRobotPlatform</artifactId>
+        <groupId>net.fustinoni.pi</groupId>
+        <artifactId>PiRobotPlatform</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     
@@ -47,7 +47,7 @@
                 <!-- we define the pi4j Java project as a dependency so that the .H header 
                 files can be generated based on the Java native wrapper classes -->
                 <dependency>
-                    <groupId>net.fustinoni.raspberryPi</groupId>
+                    <groupId>net.fustinoni.pi</groupId>
                     <artifactId>Pi2Go</artifactId>
                     <version>${project.version}</version>
                     <scope>compile</scope>
@@ -98,12 +98,6 @@
     <build>
         <finalName>hcsr04</finalName>
         <plugins>
-
-            <!-- GENERATE LICENSE HEADERS IN SOURCE FILES -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-            </plugin>
 
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>

@@ -60,7 +60,6 @@ public abstract class BaseRobot {
     protected final GpioController gpio = GpioFactory.getInstance();
 
     public BaseRobot() {
-        Gpio.wiringPiSetup();
         setSafeGPIOPinStart();
         
     }
@@ -560,6 +559,61 @@ public abstract class BaseRobot {
         @Override
         public int hashCode() {
             return this.delegate.hashCode();
+        }
+
+        @Override
+        public void unexport(Pin... pins) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public GpioPinPwmOutput provisionSoftPwmOutputPin(GpioProvider gp, Pin pin, String string, int i) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public GpioPinPwmOutput provisionSoftPwmOutputPin(GpioProvider gp, Pin pin, int i) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public GpioPinPwmOutput provisionSoftPwmOutputPin(GpioProvider gp, Pin pin, String string) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public GpioPinPwmOutput provisionSoftPwmOutputPin(GpioProvider gp, Pin pin) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public GpioPinPwmOutput provisionSoftPwmOutputPin(Pin pin, String string, int i) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public GpioPinPwmOutput provisionSoftPwmOutputPin(Pin pin, int i) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public GpioPinPwmOutput provisionSoftPwmOutputPin(Pin pin, String string) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public GpioPinPwmOutput provisionSoftPwmOutputPin(Pin pin) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public GpioPin getProvisionedPin(Pin pin) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public GpioPin getProvisionedPin(String string) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
 
