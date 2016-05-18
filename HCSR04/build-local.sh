@@ -59,7 +59,7 @@ make all
 echo "-------------------------------------------"
 echo " -- COPYING FINAL LIBPI4J.SO TO TARGET"
 echo "-------------------------------------------"
-cp libpi4j.so ../hcsr04.so
+cp hcsr04.so ../hcsr04.so
 
 echo "-------------------------------------------"
 echo " -- DONE BUILDING Pi4J NATIVE LIBRARY"
