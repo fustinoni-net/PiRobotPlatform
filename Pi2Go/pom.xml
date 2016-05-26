@@ -15,8 +15,8 @@
         <!--pi.main.class>examples.testHcsr04</pi.main.class-->
         <!--pi.main.class>examples.UltrasoundSensorExample</pi.main.class-->
         <!--pi.main.class>examples.MotorsExample</pi.main.class-->
-        <!--pi.main.class>examples.LedsExample</pi.main.class-->
-        <pi.main.class>examples.ServosExample</pi.main.class>
+        <pi.main.class>examples.LedsExample</pi.main.class>
+        <!--pi.main.class>examples.ServosExample</pi.main.class-->
     </properties>
 <build>
     <plugins>
