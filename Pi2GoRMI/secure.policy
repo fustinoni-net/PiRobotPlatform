@@ -1,0 +1,7 @@
+grant codeBase "file://home/pi/artifacts/" {
+    permission java.security.AllPermission;
+};
+
+grant {
+    permission java.security.AllPermission;
+};

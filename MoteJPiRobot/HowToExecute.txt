@@ -1,0 +1,7 @@
+-Dbluecove.jsr82.psm_minimum_off=true 
+
+-Djava.security.policy=/home/pi/NetBeansProjects/wiimotePi2go/client.policy -Djava.rmi.server.codebase=file://home/pi/NetBeansProjects/wiimotePi2go/dist/lib/pi2goLite.jar 
+
+cmd : cd '/home/pi/NetBeansProjects//wiimotePi2go'; 'sudo' '/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt//bin/java'  -Dfile.encoding=ISO-8859-1 -Dbluecove.jsr82.psm_minimum_off=true -Djava.security.policy=/home/pi/NetBeansProjects/wiimotePi2go/client.policy -Djava.rmi.server.codebase=file://home/pi/NetBeansProjects/wiimotePi2go/dist/lib/pi2goLite.jar   -jar /home/pi/NetBeansProjects//wiimotePi2go/dist/wiimotePi2go.jar 
+
+sudo java  -cp /home/pi/artifacts/lib/motej-extras-0.9.jar:/home/pi/artifacts/lib/motej-library-0.9.jar:/home/pi/artifacts/lib/bluecove-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-emu-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-gpl-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/MoteJPiRobot-0.0.1-SNAPSHOT-jar-with-dependencies.jar net.fustinoni.pi.motejpirobot.WiimotePiRobot

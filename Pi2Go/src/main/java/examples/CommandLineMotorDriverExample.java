@@ -27,11 +27,11 @@
 
 package examples;
 
-import net.fustinoni.raspberryPi.robot.component.LeftRightMotors;
-import static net.fustinoni.raspberryPi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
-import net.fustinoni.raspberryPi.robot.robotUtils.MotorsDrivers.CommandLine.CommandLineMotorDriver;
-import net.fustinoni.raspberryPi.robot.robotUtils.MotorsDrivers.CommandLine.CommandLineMotorDriverImpl;
-import net.fustinoni.raspberryPi.robot.robotUtils.MotorsDrivers.MotorsDriverImpl;
+import net.fustinoni.pi.robot.component.LeftRightMotors;
+import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
+import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.CommandLine.CommandLineMotorDriver;
+import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.CommandLine.CommandLineMotorDriverImpl;
+import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.MotorsDriverImpl;
 
 /**
  *

@@ -27,9 +27,9 @@
 
 package examples;
 
-import net.fustinoni.raspberryPi.robot.component.FrontalUltraSoundSensor;
-import static net.fustinoni.raspberryPi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
-import net.fustinoni.raspberryPi.robot.sensor.UltraSoundSensor;
+import net.fustinoni.pi.robot.component.FrontalUltraSoundSensor;
+import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
+import net.fustinoni.pi.robot.sensor.UltraSoundSensor;
 
 /**
  *

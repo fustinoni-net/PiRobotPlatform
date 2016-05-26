@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>net.fustinoni.pi</groupId>
     <artifactId>HCSR04</artifactId>
     <description>HCSR04 JNI Native Library</description>
     <packaging>pom</packaging>
@@ -10,14 +9,12 @@
         <artifactId>PiRobotPlatform</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    
     <properties>
         <hcsr04-native-ant-build-target>build-hcsr04.so-remote</hcsr04-native-ant-build-target>
     </properties>
 
     <!-- BUILD PROFILES -->
     <profiles>
-
         <!-- SPECIAL PROFILE TO DETERMINE IF RUNNING ON THE PI HARDWARE -->
         <profile>
             <id>rpi-local</id>
@@ -75,7 +72,7 @@
 
                                     <!-- trigger javah execution -->
                                     <javahClassNames>
-                                        <javahClassName>net.fustinoni.raspberryPi.pi2Go.sensor.Hcsr04</javahClassName>
+                                        <javahClassName>net.fustinoni.raspberrypi.hcsr04.Hcsr04</javahClassName>
                                     </javahClassNames>
 
                                     <!-- enable additional javah interface in dependencies list -->
@@ -190,5 +187,11 @@
             </plugin>
         </plugins>
     </build>
-
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>PiRobot</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

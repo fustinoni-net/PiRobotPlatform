@@ -16,7 +16,9 @@
         <module>PiRobot</module>
         <module>Pi2Go</module>
         <module>PiRobotRMI</module>
-        <module>Pi2GoRMI</module>        
+        <module>Pi2GoRMI</module>
+        <module>MoteJPiRobot</module>
+        <module>PiRobotImplementation</module>
     </modules>
     <properties>
 
@@ -33,13 +35,14 @@
         <!-- SETTINGS FOR REMOTELY BUILDING NATIVE LIBRARY ON RASPBERRY PI -->
         <pi.dirBuildTemp>/home/pi/PiRobotPlatform-temp</pi.dirBuildTemp>
 
-        <!-- SETTINGS FOR COPYING Pi4J ARTIFACTS TO DEVELOPMENT RASPBERRY PI -->
+        <!-- SETTINGS FOR COPYING ARTIFACTS TO DEVELOPMENT RASPBERRY PI -->
         <pi.transfer.dev>false</pi.transfer.dev>
         <pi.host.dev>${pi.host}</pi.host.dev>
         <pi.port.dev>${pi.port}</pi.port.dev>
         <pi.user.dev>${pi.user}</pi.user.dev>
         <pi.password.dev>${pi.password}</pi.password.dev>
         <pi.dirCopyTo.dev>/home/pi/PiRobotPlatform-dev</pi.dirCopyTo.dev>
+        <!-- /usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/ -->
 
         <!-- PROJECT ENCODING PROPERTIES -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -51,6 +54,9 @@
         <!-- JAVA COMPILER VERSIONS -->
         <jdk.source.version>1.8</jdk.source.version>
         <jdk.target.version>1.8</jdk.target.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        
 
         <!-- DEPENDENCY VERSIONS -->
         <ant-jsch.version>1.7.1</ant-jsch.version>
@@ -60,7 +66,44 @@
         <!-- PLUGIN VERSIONS -->
         <build-helper-maven-plugin.version>1.9</build-helper-maven-plugin.version>
         
+        <!-- remote debug command -->
+        <debug.command></debug.command>
     </properties>
+
+    <profiles>
+        <!-- two profile for debug the library on a remote raspberry pi.
+        
+            to start a vrtual machine that connect to your listening IDE use:
+            mvn antrun:run -Denv=debug-client
+        
+            to start a vrtual machine that wait for your IDE to connect to it use:
+            mvn antrun:run -Denv=debug-server
+        -->
+      <profile>
+        <activation>
+          <property>
+            <name>debug-client</name>
+          </property>
+        </activation>
+        <properties>
+            <!-- jpda.address in the form ip:port ( ex: 192.168.1.10:8765) -->
+          <debug.command>-Xdebug -Xrunjdwp:transport=dt_socket,address=${jpda.address}</debug.command>
+        </properties>        
+      </profile>
+      <profile>
+          <id>debug-server</id>
+        <activation>
+          <property>
+            <name>debug-server</name>
+          </property>
+        </activation>
+        <properties>
+          <debug.command>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8765</debug.command>
+        </properties>
+      </profile>
+    </profiles>
+
+
     <repositories>
         <repository>
             <id>oss-snapshots-repo</id>
@@ -73,4 +116,55 @@
         </repository>
     </repositories>
     <name>PiRobotPlatform</name>
+    <build>
+        <plugins>
+        <!--This plugin will Transfer the executable JAR file to the Pi and runs it.
+            used for remote running and remote debugging of the application/libraRY  -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+                <execution>
+                    <id>default-cli</id>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                    <configuration>
+                        <tasks>
+                            <!-- ensure the target directory exists on the Raspberry Pi -->
+                            <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}" password="${pi.password}" 
+                                     trust="true" failonerror="false" verbose="true" 
+                                     command="mkdir --parents ${pi.deployDirectory}"/>
+
+                            <!-- copy the JAR file to the Raspberry Pi -->
+                            <scp
+                                file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar"
+                                todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}"
+                                port="${pi.port}" trust="true" verbose="true" failonerror="true">
+                            </scp> 
+
+                            <!-- run the JAR file on the Raspberry Pi -->
+                            <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}"
+                                     password="${pi.password}" trust="true" failonerror="false"
+                                     verbose="true" 
+                                     command="sudo java ${debug.command} -jar ${pi.deployDirectory}/${project.build.finalName}-jar-with-dependencies.jar"
+                                     
+                            />
+                            
+                            <!---Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address}-->
+                        </tasks>
+                    </configuration>
+                </execution>
+            </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.ant</groupId>
+                    <artifactId>ant-jsch</artifactId>
+                    <version>1.9.6</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+        </plugins>
+    </build>            
 </project>

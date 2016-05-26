@@ -27,9 +27,9 @@
 
 package examples;
 
-import static net.fustinoni.raspberryPi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
-import net.fustinoni.raspberryPi.robot.device.Servo;
-import net.fustinoni.raspberryPi.robot.component.PanTiltServos;
+import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
+import net.fustinoni.pi.robot.device.Servo;
+import net.fustinoni.pi.robot.component.PanTiltServos;
 
 /**
  * https://unpocodejava.wordpress.com/2013/08/15/control-de-motores-con-java-pi4j-en-raspberry-pi/

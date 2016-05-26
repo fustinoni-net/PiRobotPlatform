@@ -27,9 +27,9 @@
 
 package examples;
 
-import net.fustinoni.raspberryPi.pi2Go.Pi2GoLite;
-import net.fustinoni.raspberryPi.robot.listener.IRSensorListener;
-import static net.fustinoni.raspberryPi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
+import net.fustinoni.pi.pi2Go.Pi2GoLite;
+import net.fustinoni.pi.robot.listener.IRSensorListener;
+import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
 
 
 /**

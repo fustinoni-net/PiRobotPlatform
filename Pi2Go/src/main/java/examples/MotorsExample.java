@@ -28,9 +28,9 @@
 package examples;
 
 import java.rmi.RemoteException;
-import static net.fustinoni.raspberryPi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
-import net.fustinoni.raspberryPi.robot.component.LeftRightMotors;
-import net.fustinoni.raspberryPi.robot.device.Motor;
+import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
+import net.fustinoni.pi.robot.component.LeftRightMotors;
+import net.fustinoni.pi.robot.device.Motor;
 
 /**
  * https://unpocodejava.wordpress.com/2013/08/15/control-de-motores-con-java-pi4j-en-raspberry-pi/
