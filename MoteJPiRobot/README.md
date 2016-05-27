@@ -11,7 +11,7 @@ Runnable class in the package:
 * net.fustinoni.pi.motejpirobot.WiimotePiRobot
 
 You can run the program in the artifacts directory using the command:
-    sudo java  -cp /home/pi/artifacts/lib/motej-extras-0.9.jar:/home/pi/artifacts/lib/motej-library-0.9.jar:/home/pi/artifacts/lib/bluecove-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-emu-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-gpl-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/MoteJPiRobot-0.0.1-SNAPSHOT-jar-with-dependencies.jar net.fustinoni.pi.motejpirobot.WiimotePiRobot
+`sudo java  -cp /home/pi/artifacts/lib/motej-extras-0.9.jar:/home/pi/artifacts/lib/motej-library-0.9.jar:/home/pi/artifacts/lib/bluecove-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-emu-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-gpl-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/MoteJPiRobot-0.0.1-SNAPSHOT-jar-with-dependencies.jar net.fustinoni.pi.motejpirobot.WiimotePiRobot`
 
 **** Running the program will make your robot move with all the possible consequences. ****
 
