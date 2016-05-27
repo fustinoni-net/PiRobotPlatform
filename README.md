@@ -145,44 +145,27 @@ Running Maven for the first time will take a while. Maven will download, in a .m
 
 After some minutes the process will stop and you will get something like this (plus many more line before):
 
->[INFO] ------------------------------------------------------------------------
-
->[INFO] Reactor Summary:
-
->[INFO]
-
->[INFO] PiRobotPlatform .................................... SUCCESS [  7.847 s]
-
->[INFO] ExecuteFromJar ..................................... SUCCESS [ 21.767 s]
-
->[INFO] PiRobot ............................................ SUCCESS [ 17.922 s]
-
->[INFO] HCSR04 ............................................. SUCCESS [ 43.005 s]
-
->[INFO] Pi2Go .............................................. SUCCESS [ 56.633 s]
-
->[INFO] PiRobotRMI ......................................... SUCCESS [  1.579 s]
-
->[INFO] Pi2GoRMI ........................................... SUCCESS [ 18.336 s]
-
->[INFO] MoteJPiRobot ....................................... SUCCESS [ 25.597 s]
-
->[INFO] PiRobotImplementation .............................. SUCCESS [  0.897 s]
-
->[INFO] ------------------------------------------------------------------------
-
->[INFO] BUILD SUCCESS
-
->[INFO] ------------------------------------------------------------------------
-
->[INFO] Total time: 03:18 min
-
->[INFO] Finished at: 2016-05-26T21:32:36+00:00
-
->[INFO] Final Memory: 12M/33M
-
->[INFO] ------------------------------------------------------------------------
-
+```
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] PiRobotPlatform .................................... SUCCESS [  7.847 s]
+[INFO] ExecuteFromJar ..................................... SUCCESS [ 21.767 s]
+[INFO] PiRobot ............................................ SUCCESS [ 17.922 s]
+[INFO] HCSR04 ............................................. SUCCESS [ 43.005 s]
+[INFO] Pi2Go .............................................. SUCCESS [ 56.633 s]
+[INFO] PiRobotRMI ......................................... SUCCESS [  1.579 s]
+[INFO] Pi2GoRMI ........................................... SUCCESS [ 18.336 s]
+[INFO] MoteJPiRobot ....................................... SUCCESS [ 25.597 s]
+[INFO] PiRobotImplementation .............................. SUCCESS [  0.897 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 03:18 min
+[INFO] Finished at: 2016-05-26T21:32:36+00:00
+[INFO] Final Memory: 12M/33M
+[INFO] ------------------------------------------------------------------------
+```
 
 If all success you are done. Otherwise sorry :-( 
 
