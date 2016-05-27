@@ -28,7 +28,7 @@
 ###
 
 echo "-------------------------------------------"
-echo "BUILDING hcsr04 NATIVE LIBRARY"
+echo "BUILDING HCSR04 NATIVE LIBRARY"
 echo "-------------------------------------------"
 
 # ----------------------------------
@@ -51,7 +51,7 @@ sudo chmod +x wiringpi-build.sh
 
 
 echo "-------------------------------------------"
-echo " -- COMPILING LIBPI4J.SO JNI NATIVE LIBRARY"
+echo " -- COMPILING hcsr04.so JNI NATIVE LIBRARY"
 echo "-------------------------------------------"
 make clean
 make all
@@ -62,5 +62,5 @@ echo "-------------------------------------------"
 cp hcsr04.so ../hcsr04.so
 
 echo "-------------------------------------------"
-echo " -- DONE BUILDING Pi4J NATIVE LIBRARY"
+echo " -- DONE BUILDING HCSR04 NATIVE LIBRARY"
 echo "-------------------------------------------"

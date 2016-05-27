@@ -67,32 +67,6 @@
     </properties>
     <build>
         <plugins>
-        <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <configuration>
-                <archive>
-                    <manifest>
-                        <addClasspath>true</addClasspath>
-                        <mainClass>${pi.main.class}</mainClass>
-                    </manifest>
-                </archive>
-                <descriptorRefs>
-                    <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-            </configuration>
-            <executions>
-                <execution>
-                    <id>make-my-jar-with-dependencies</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>single</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
-
-
             <!-- This plugin will generate JAR MANIFEST file inside the JAR in order to make our applicationeasily runnable -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -119,93 +93,90 @@
             </plugin>
 
 
-        <!--This plugin will Transfer the executable JAR file to the Pi and runs it.
+            <!--This plugin will Transfer the executable JAR file to the Pi and runs it.
             used for remote running and remote debugging of the application/libraRY  -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.8</version>
-            <executions>
-                <execution>
-                    <id>default-cli</id>
-                    <goals>
-                        <goal>run</goal>
-                    </goals>
-                    <configuration>
-                        <tasks>
-                            <!-- ensure the target directory exists on the Raspberry Pi -->
-                            <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}" password="${pi.password}" 
-                                     trust="true" failonerror="false" verbose="true" 
-                                     command="mkdir --parents ${pi.deployDirectory}"/>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <!-- ensure the target directory exists on the Raspberry Pi -->
+                                <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}" password="${pi.password}" 
+                                         trust="true" failonerror="false" verbose="true" 
+                                         command="mkdir --parents ${pi.deployDirectory}"/>
 
-                            <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}" password="${pi.password}" 
-                                     trust="true" failonerror="false" verbose="true" 
-                                     command="mkdir --parents ${pi.deployDirectory}/lib"/>
+                                <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}" password="${pi.password}" 
+                                         trust="true" failonerror="false" verbose="true" 
+                                         command="mkdir --parents ${pi.deployDirectory}/lib"/>
                             
-                            <!-- copy the JAR file to the Raspberry Pi -->
-                            <scp
-                                file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar"
-                                todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}"
-                                port="${pi.port}" trust="true" verbose="true" failonerror="true">
-                            </scp> 
+                                <!-- copy the JAR file to the Raspberry Pi -->
+                                <scp
+                                    file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar"
+                                    todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}"
+                                    port="${pi.port}" trust="true" verbose="true" failonerror="true">
+                                </scp> 
 
-                            <scp
-                                file="${project.build.directory}/../jarDependencies/motej-extras-0.9.jar"
-                                todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}/lib"
-                                port="${pi.port}" trust="true" verbose="true" failonerror="true">
-                            </scp> 
+                                <scp
+                                    file="${project.build.directory}/../jarDependencies/motej-extras-0.9.jar"
+                                    todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}/lib"
+                                    port="${pi.port}" trust="true" verbose="true" failonerror="true">
+                                </scp> 
 
-                            <scp
-                                file="${project.build.directory}/../jarDependencies/motej-library-0.9.jar"
-                                todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}/lib"
-                                port="${pi.port}" trust="true" verbose="true" failonerror="true">
-                            </scp> 
+                                <scp
+                                    file="${project.build.directory}/../jarDependencies/motej-library-0.9.jar"
+                                    todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}/lib"
+                                    port="${pi.port}" trust="true" verbose="true" failonerror="true">
+                                </scp> 
                                                         
-                            <scp
-                                file="${project.build.directory}/../jarDependencies/bluecove-2.1.1-SNAPSHOT.jar"
-                                todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}/lib"
-                                port="${pi.port}" trust="true" verbose="true" failonerror="true">
-                            </scp> 
-                            <scp
-                                file="${project.build.directory}/../jarDependencies/bluecove-emu-2.1.1-SNAPSHOT.jar"
-                                todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}/lib"
-                                port="${pi.port}" trust="true" verbose="true" failonerror="true">
-                            </scp> 
-                            <scp
-                                file="${project.build.directory}/../jarDependencies/bluecove-gpl-2.1.1-SNAPSHOT.jar"
-                                todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}/lib"
-                                port="${pi.port}" trust="true" verbose="true" failonerror="true">
-                            </scp> 
-                            <scp
-                                file="${project.build.directory}/../jarDependencies/libbluecove_arm.so"
-                                todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}"
-                                port="${pi.port}" trust="true" verbose="true" failonerror="true">
-                            </scp> 
+                                <scp
+                                    file="${project.build.directory}/../jarDependencies/bluecove-2.1.1-SNAPSHOT.jar"
+                                    todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}/lib"
+                                    port="${pi.port}" trust="true" verbose="true" failonerror="true">
+                                </scp> 
+                                <scp
+                                    file="${project.build.directory}/../jarDependencies/bluecove-emu-2.1.1-SNAPSHOT.jar"
+                                    todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}/lib"
+                                    port="${pi.port}" trust="true" verbose="true" failonerror="true">
+                                </scp> 
+                                <scp
+                                    file="${project.build.directory}/../jarDependencies/bluecove-gpl-2.1.1-SNAPSHOT.jar"
+                                    todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}/lib"
+                                    port="${pi.port}" trust="true" verbose="true" failonerror="true">
+                                </scp> 
+                                <scp
+                                    file="${project.build.directory}/../jarDependencies/libbluecove_arm.so"
+                                    todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}"
+                                    port="${pi.port}" trust="true" verbose="true" failonerror="true">
+                                </scp> 
 
-                            <!-- run the JAR file on the Raspberry Pi -->
-                            <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}"
-                                     password="${pi.password}" trust="true" failonerror="false"
-                                     verbose="true" 
-                                     command="sudo java ${debug.command} -cp ${pi.deployDirectory}/lib/motej-extras-0.9.jar:${pi.deployDirectory}/lib/motej-library-0.9.jar:${pi.deployDirectory}/lib/bluecove-2.1.1-SNAPSHOT.jar:${pi.deployDirectory}/lib/bluecove-emu-2.1.1-SNAPSHOT.jar:${pi.deployDirectory}/lib/bluecove-gpl-2.1.1-SNAPSHOT.jar:${pi.deployDirectory}/MoteJPiRobot-0.0.1-SNAPSHOT-jar-with-dependencies.jar ${pi.main.class}"
+                                <!-- run the JAR file on the Raspberry Pi -->
+                                <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}"
+                                         password="${pi.password}" trust="true" failonerror="false"
+                                         verbose="true" 
+                                         command="sudo java ${debug.command} -cp ${pi.deployDirectory}/lib/motej-extras-0.9.jar:${pi.deployDirectory}/lib/motej-library-0.9.jar:${pi.deployDirectory}/lib/bluecove-2.1.1-SNAPSHOT.jar:${pi.deployDirectory}/lib/bluecove-emu-2.1.1-SNAPSHOT.jar:${pi.deployDirectory}/lib/bluecove-gpl-2.1.1-SNAPSHOT.jar:${pi.deployDirectory}/MoteJPiRobot-0.0.1-SNAPSHOT-jar-with-dependencies.jar ${pi.main.class}"
                                      
-                            />
+                                />
                             
-                            <!---Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address}-->
-                        </tasks>
-                    </configuration>
-                </execution>
-            </executions>
-            <dependencies>
-                <dependency>
-                    <groupId>org.apache.ant</groupId>
-                    <artifactId>ant-jsch</artifactId>
-                    <version>1.9.6</version>
-                </dependency>
-            </dependencies>
-        </plugin>
-
-
-
+                                <!---Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address}-->
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.ant</groupId>
+                        <artifactId>ant-jsch</artifactId>
+                        <version>1.9.6</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
 
         </plugins>
     </build>
