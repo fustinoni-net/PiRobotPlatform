@@ -15,9 +15,9 @@ The projects are managed with Maven (https://maven.apache.org/), so it's possibl
 Running the library on the wrong hardware can brake your pi and your robot. Carefully check the sources and read the instruction.
 Running the examples will make your robot move with all the possible consequences.
 
-#  ***** Use at your own risk. *****
+##  ***** Use at your own risk. *****
 
-## All the trademarks are properties of theirs owners.
+### All the trademarks are properties of theirs owners.
 
 
 ## Prerequisites
