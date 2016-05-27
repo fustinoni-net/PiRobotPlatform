@@ -1,6 +1,7 @@
 # MoteJPiRobot
 
 Example of how to use the library to command the Pi2Go-Lite, but also other robots, using a Nintendo Wii Remote and Nunchuk (https://en.wikipedia.org/wiki/Wii_Remote).
+To run this program you need a Bluetooth USB dongle or a Rspberry Pi 3, and of course the Bluetooth support from the SO.
 
 ## Build the project
 Before building the subproject locally you have to build the parent one. Refer to the PiRobotPlatform readme file for instructions.
