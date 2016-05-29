@@ -23,7 +23,7 @@ Running the examples will make your robot move with all the possible consequence
 ## Prerequisites
 
 ### Robots
-To use this library you mast have one of the supported robots based on the Raspberry Pi board or extend the library to support your own one.
+To use this library you must have one of the supported robots based on the Raspberry Pi board or extend the library to support your own one.
 Supported robot:
 * Pi2Go-Lite (http://www.pi2go.co.uk/) with a Raspberry Pi B+ (Should work with every Raspberry Pi models)
 * CamJam EduKit 3 – Robotics (http://camjam.me/?page_id=1035)
@@ -79,7 +79,7 @@ Otherwise if you get:
 
     -bash: mvn: command not found
 
-you have to install it.
+you will have to install it.
 
 The most convenient way to do it on your Pi is to follow the guide at https://www.xianic.net/post/installing-maven-on-the-raspberry-pi/
 
@@ -94,12 +94,13 @@ I summerized the procedure for you:
     export M2_HOME=/opt/apache-maven-3.3.9
     export PATH=$PATH:$M2_HOME/bin
 
-then you have to close and reopen the shell, or logout and login back.
-
+then you have to close and reopen the shell, or logout and log back in.
+ 
 Check the installation with:
     mvn -version
 
 you will get:
+
     Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T17:41:47+01:00)
     Maven home: /opt/apache-maven-3.3.9
     Java version: 1.8.0, vendor: Oracle Corporation
@@ -112,7 +113,8 @@ For others platform refer to the Maven project web site.
 
 
 ### Git
-To install git on your Pi:
+To install Git on your Pi:
+
     sudo apt-get update && sudo apt-get upgrade
     sudo apt-get install git
 
@@ -123,21 +125,21 @@ On other systems refer to https://github.com or https://git-scm.com/
 ## Installation guide
 To install the library on your Pi, and get something to run and test, follows this step:
 
-1. execute:
+* execute:
 
     git clone https://github.com/fustinoni-net/PiRobotPlatform.git
 
 This command will create the directory  PiRobotPlatform and download inside it the main project and all sub-projects.
 
-2. move into the directory: 
+* move into the directory: 
 
     cd PiRobotPlatform
 
-3. edit the pom.xml file (use your favorit editor or nano): 
+* edit the pom.xml file (use your favorite editor or nano): 
 
     nano pom.xml 
 
-4. In the pom.xml customize the following part with your own one. Also if you run the build locally you have to set the right parameter here or the project will not build.
+* In the pom.xml customize the following part with your own one. Also if you run the build locally you have to set the right parameter here or the project will not build.
 
         <!-- DEFAULT RASPBERRY PI PROPERTIES -->
         <pi.host>raspi-pi2go.homenet.telecomitalia.it</pi.host>
@@ -145,13 +147,13 @@ This command will create the directory  PiRobotPlatform and download inside it t
         <pi.user>pi</pi.user>
         <pi.password>raspberry</pi.password>
 
-5. save and exit from the editor :-)
+* save and exit from the editor :-)
 
-6. execute Maven:
+* execute Maven:
 
     mvn install
 
-Running Maven for the first time will take a while. Maven will download, in a .m2 directory in your user home, all the necessary dependencies for itself and for the projects too. Don't be scare, let it run and build all the projects.
+Running Maven for the first time will take a while. Maven will download, in a .m2 directory in your user home, all the necessary dependencies for itself and for the projects too. Don't be scared, let it run and build all the projects.
 
 After some minutes the process will stop and you will get something like this (plus many more line before):
 
@@ -184,7 +186,6 @@ If all success you are done. Otherwise sorry :-(
 The library is composed by some different subproject that logically, at least for me, divide the sources for scopes. 
 
 * PiRobotPlatform: the aggregator for all other modules.
-
 * ExecuteFromJar: utility to run a program from inside a jar file. Used to run the ServoBlaster.
 * PiRobot: all the interfaces use to describe the robots components.
 * PiRobotImplementation: the implementation of all common component
@@ -209,8 +210,8 @@ To run the projects from their jar files, with all the dependencies inside, go t
     mvn antrun:run
 
 You can execute this Maven plug-in on the Pi itself, but also from a remote computer. In this case the project will be executed on the Pi via SSH.
-After you have run the project the first time from Maven, you will find a new directory on the Pi named "artifacts" containing the executable jar file.
-You can run those jar file on the Pi wiht the command:
+After having run the project the first time from Maven, you will find a new directory on the Pi named "artifacts" containing the executable jar file.
+You can run those jar file on the Pi with the command:
     
     sudo java -jar file.jar
 
