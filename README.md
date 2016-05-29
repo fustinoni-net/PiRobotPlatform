@@ -1,15 +1,15 @@
 # PiRobotPlatform
 
-Java API to control generic robot based on the Raspberry Pi (https://www.raspberrypi.org/).
+Java API to control generic robots based on the Raspberry Pi (https://www.raspberrypi.org/).
 
 The aim of this library is purely educational. Don't use it for any other purpose.
 
-This library is base on:
+This library is based on:
 * Pi4J library (http://pi4j.com/)
 * Wiring Pi library ( http://wiringpi.com/ )
 * ServoBlaster driver (https://github.com/richardghirst/PiBits/tree/master/ServoBlaster )
 
-The projects are managed with Maven (https://maven.apache.org/), so it's possible to open them in many different IDE and build them via the Maven command line program.
+The projects are managed with Maven (https://maven.apache.org/), so it's possible to open them in many different IDEs and build them via the Maven command line program.
 
 ## Please be careful. 
 Running the library on the wrong hardware can brake your pi and your robot. Carefully check the sources and read the instruction.
@@ -23,35 +23,35 @@ Running the examples will make your robot move with all the possible consequence
 ## Prerequisites
 
 ### Robots
-To use this library you mast have one of the supported robot base on the Raspberry Pi board or extend the library to support your own one.
+To use this library you mast have one of the supported robots based on the Raspberry Pi board or extend the library to support your own one.
 Supported robot:
 * Pi2Go-Lite (http://www.pi2go.co.uk/) with a Raspberry Pi B+ (Should work with every Raspberry Pi models)
-* CamJam EduKit 3 – Robotics (http://camjam.me/?page_id=1035) planned.
+* CamJam EduKit 3 – Robotics (http://camjam.me/?page_id=1035)
 
 ### Operating system
-The library was built and tested using Raspbian Jessie version May 2016, but should works also in previous version.
+The library was built and tested using Raspbian Jessie version May 2016, but should also works in previous version.
 
 ### Java
-The library is base on Java 8. Previous versions are not supported.
+The library is based on Java 8. Previous versions are not supported.
 To test the java version you can use the command:
 
-java -version
+    java -version
 
 that will prompt something like:
 
-java version "1.8.0_65"
-Java(TM) SE Runtime Environment (build 1.8.0_65-b17)
-Java HotSpot(TM) Client VM (build 25.65-b01, mixed mode)
+    java version "1.8.0_65"
+    Java(TM) SE Runtime Environment (build 1.8.0_65-b17)
+    Java HotSpot(TM) Client VM (build 25.65-b01, mixed mode)
 
-1.8.xxx or greater is ok.
+version 1.8.xxx or greater is ok.
 
 If your Java version is a previous one, or you get 
 
--bash: java: command not found
+    -bash: java: command not found
 
 you can install Java 8 with this procedure:
 
-First upgrade to the latest and greatest:
+First upgrade your OS:
 
     sudo apt-get update && sudo apt-get upgrade
 
@@ -64,47 +64,48 @@ Then install JDK8 for ARM:
 ### Maven
 To build the library you need Maven. To test if is installed on your pi, execute the command:
 
-mvn -version
+    mvn -version
 
 if you get a response like the following one Maven is installed.
-Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T16:41:47+00:00)
-Maven home: /opt/apache-maven-3.3.9
-Java version: 1.8.0_65, vendor: Oracle Corporation
-Java home: /usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/jre
-Default locale: en_GB, platform encoding: UTF-8
-OS name: "linux", version: "4.4.9+", arch: "arm", family: "unix"
+
+    Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T16:41:47+00:00)
+    Maven home: /opt/apache-maven-3.3.9
+    Java version: 1.8.0_65, vendor: Oracle Corporation
+    Java home: /usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/jre
+    Default locale: en_GB, platform encoding: UTF-8
+    OS name: "linux", version: "4.4.9+", arch: "arm", family: "unix"
 
 Otherwise if you get:
 
--bash: mvn: command not found
+    -bash: mvn: command not found
 
 you have to install it.
 
 The most convenient way to do it on your Pi is to follow the guide at https://www.xianic.net/post/installing-maven-on-the-raspberry-pi/
 
-I summerize the procedure for you:
+I summerized the procedure for you:
 
-wget http://www.mirrorservice.org/sites/ftp.apache.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-cd /opt
-sudo tar -xzvf /home/pi/apache-maven-3.3.9-bin.tar.gz
-cd /etc/profile.d/
-sudo nano maven.sh
-
-export M2_HOME=/opt/apache-maven-3.3.9
-export PATH=$PATH:$M2_HOME/bin
+    wget http://www.mirrorservice.org/sites/ftp.apache.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+    cd /opt
+    sudo tar -xzvf /home/pi/apache-maven-3.3.9-bin.tar.gz
+    cd /etc/profile.d/
+    sudo nano maven.sh
+    
+    export M2_HOME=/opt/apache-maven-3.3.9
+    export PATH=$PATH:$M2_HOME/bin
 
 then you have to close and reopen the shell, or logout and login back.
 
 Check the installation with:
-mvn -version
+    mvn -version
 
 you will get:
-Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T17:41:47+01:00)
-Maven home: /opt/apache-maven-3.3.9
-Java version: 1.8.0, vendor: Oracle Corporation
-Java home: /usr/lib/jvm/jdk-8-oracle-arm-vfp-hflt/jre
-Default locale: en_GB, platform encoding: UTF-8
-OS name: "linux", version: "4.1.19+", arch: "arm", family: "unix"
+    Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T17:41:47+01:00)
+    Maven home: /opt/apache-maven-3.3.9
+    Java version: 1.8.0, vendor: Oracle Corporation
+    Java home: /usr/lib/jvm/jdk-8-oracle-arm-vfp-hflt/jre
+    Default locale: en_GB, platform encoding: UTF-8
+    OS name: "linux", version: "4.1.19+", arch: "arm", family: "unix"
 
 
 For others platform refer to the Maven project web site.
@@ -112,8 +113,8 @@ For others platform refer to the Maven project web site.
 
 ### Git
 To install git on your Pi:
-sudo apt-get update && sudo apt-get upgrade
-sudo apt-get install git
+    sudo apt-get update && sudo apt-get upgrade
+    sudo apt-get install git
 
 On other systems refer to https://github.com or https://git-scm.com/ 
 
@@ -122,7 +123,8 @@ On other systems refer to https://github.com or https://git-scm.com/
 ## Installation guide
 To install the library on your Pi, and get something to run and test, follows this step:
 
-1. execute: git clone https://github.com/fustinoni-net/PiRobotPlatform.git
+1. execute:
+    git clone https://github.com/fustinoni-net/PiRobotPlatform.git
 This command will create the directory  PiRobotPlatform and download inside it the main project and all sub-projects.
 
 2. move into the directory: cd PiRobotPlatform
