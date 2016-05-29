@@ -124,12 +124,18 @@ On other systems refer to https://github.com or https://git-scm.com/
 To install the library on your Pi, and get something to run and test, follows this step:
 
 1. execute:
+
     git clone https://github.com/fustinoni-net/PiRobotPlatform.git
+
 This command will create the directory  PiRobotPlatform and download inside it the main project and all sub-projects.
 
-2. move into the directory: cd PiRobotPlatform
+2. move into the directory: 
 
-3. edit the pom.xml file (use your favorit editor or nano): nano pom.xml 
+    cd PiRobotPlatform
+
+3. edit the pom.xml file (use your favorit editor or nano): 
+
+    nano pom.xml 
 
 4. In the pom.xml customize the following part with your own one. Also if you run the build locally you have to set the right parameter here or the project will not build.
 
@@ -141,7 +147,9 @@ This command will create the directory  PiRobotPlatform and download inside it t
 
 5. save and exit from the editor :-)
 
-6. execute Maven: mvn install
+6. execute Maven:
+
+    mvn install
 
 Running Maven for the first time will take a while. Maven will download, in a .m2 directory in your user home, all the necessary dependencies for itself and for the project too. Don't be scare, let it run and build all the projects.
 
