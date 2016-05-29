@@ -25,7 +25,7 @@
  * 
  **/
 
-package net.fustinoni.pi.pirobotimplementation;
+package net.fustinoni.pi.robotImpl;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;

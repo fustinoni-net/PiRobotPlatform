@@ -27,9 +27,9 @@
 
 package net.fustinoni.pi.pi2Go;
 
-import net.fustinoni.pi.pi2Go.device.MotorImpl;
-import net.fustinoni.pi.pi2Go.sensor.IRSensorImpl;
-import net.fustinoni.pi.pi2Go.sensor.SwitchImpl;
+import net.fustinoni.pi.robotImpl.device.MotorImpl;
+import net.fustinoni.pi.robotImpl.sensor.IRSensorImpl;
+import net.fustinoni.pi.robotImpl.sensor.SwitchImpl;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.RaspiPin;
 import java.io.IOException;
@@ -38,8 +38,8 @@ import java.util.logging.Logger;
 import net.fustinoni.pi.robot.device.Led;
 import net.fustinoni.pi.robot.device.Motor;
 import net.fustinoni.pi.robot.device.Servo;
-import net.fustinoni.pi.pi2Go.device.LedImpl;
-import net.fustinoni.pi.pi2Go.device.ServoImpl;
+import net.fustinoni.pi.robotImpl.device.LedImpl;
+import net.fustinoni.pi.robotImpl.device.ServoImpl;
 import net.fustinoni.pi.robot.sensor.IRSensor;
 import net.fustinoni.pi.robot.sensor.Switch;
 import net.fustinoni.pi.robot.sensor.UltraSoundSensor;

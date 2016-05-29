@@ -5,69 +5,70 @@
  */
 package examples;
 
-import com.pi4j.io.gpio.Pin;
-import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.wiringpi.Gpio;
 
 /**
  *
  * @author efustinoni
  */
-public class testHcsr04 {
-    
-    private static final int ULTRA_SOUND_SENSOR_PIN = 15;
-    
-    public static void main(String[] args) {
-        
-        long start = 0;
-        long end = 0;
+public class TestHcsr04 {
 
-        long loopStart = 0;
+    private static final int ULTRA_SOUND_SENSOR_PIN = 1;  //BCM 18
+    private static final int ULTRA_SOUND_TRIGGER_PIN = 0; //BCM 17
+
+    public static void main(String[] args) {
 
         if (Gpio.wiringPiSetup() == -1) {
             System.out.println(" ==>> GPIO SETUP FAILED");
             return;
         }
         
-        Gpio.pinMode(ULTRA_SOUND_SENSOR_PIN, Gpio.OUTPUT);
-        Gpio.digitalWrite(ULTRA_SOUND_SENSOR_PIN, false);
-        Gpio.delayMicroseconds(2);
-        Gpio.digitalWrite(ULTRA_SOUND_SENSOR_PIN, true);
-        Gpio.delayMicroseconds(10);
-        Gpio.digitalWrite(ULTRA_SOUND_SENSOR_PIN, false);
-        Gpio.delayMicroseconds(2);
-        Gpio.pinMode(ULTRA_SOUND_SENSOR_PIN, Gpio.INPUT);
-        
-        
-        
-        
-        
-        loopStart = Gpio.micros();
-        // Wait for the signal to return
-        while ( Gpio.digitalRead(ULTRA_SOUND_SENSOR_PIN) == 0 && (Gpio.micros() - loopStart) < 500000) //mezzo secondo
-            start = Gpio.micros();
+        for (int i = 0; i < 10; ++i) {
+            long start = 0;
+            long end = 0;
+
+            long loop1Start = 0;
+            long loop2Start = 0;
+
+            Gpio.pinMode(ULTRA_SOUND_TRIGGER_PIN, Gpio.OUTPUT);
+            Gpio.pinMode(ULTRA_SOUND_SENSOR_PIN, Gpio.INPUT);
+
+            
+            Gpio.digitalWrite(ULTRA_SOUND_TRIGGER_PIN, false);
+            Gpio.delayMicroseconds(500);
+            loop1Start = Gpio.micros();
+            Gpio.digitalWrite(ULTRA_SOUND_TRIGGER_PIN, true);
+            Gpio.delayMicroseconds(10);
+            Gpio.digitalWrite(ULTRA_SOUND_TRIGGER_PIN, false);
+
+             
+            
+            // Wait for the signal to return
+            while (Gpio.digitalRead(ULTRA_SOUND_SENSOR_PIN) == 0 && (Gpio.micros() - loop1Start) < 500000) //mezzo secondo
+            {
+                start = Gpio.micros();
+            }
 
 //        System.out.println("loopStart: " + loopStart);
 //        System.out.println("Start: " + start);
-        
-        // There it is
-        loopStart = Gpio.micros();
-        while (Gpio.digitalRead(ULTRA_SOUND_SENSOR_PIN) == 1 && (Gpio.micros() - loopStart) < 500000)
-            end = Gpio.micros();
+            // There it is
+            loop2Start = Gpio.micros();
+            while (Gpio.digitalRead(ULTRA_SOUND_SENSOR_PIN) == 1 && (Gpio.micros() - loop2Start) < 500000) {
+                end = Gpio.micros();
+            }
 
-//        System.out.println("loopStart: " + loopStart);
-//        System.out.println("end: " + end);
+        System.out.println("loop1Start: " + loop1Start);    
+        System.out.println("start: " + start);
+        System.out.println("loop2Start: " + loop2Start);
+        System.out.println("end: " + end);
+            //Considerare lo spostamento delle assegnazioni fuori dai cicli, per risparmiare tempo
+            if (start == 00 || end == 0) {
+                System.out.println(" ==>> " + start + " " + end);
+                return;
+            }
 
-        //Considerare lo spostamento delle assegnazioni fuori dai cicli, per risparmiare tempo
-
-
-        if (start == 00 || end == 0) {
-            System.out.println(" ==>> " + start + " " + end);
-            return ;
+            long distanza = ((end - start) * 17190 / 100000);
+            System.out.println("distanza = " + distanza); //distanza in mm
         }
-
-        long distanza;
-        System.out.println(distanza = ((end - start) * 17190/100000)); //distanza in mm
-        
     }
 }

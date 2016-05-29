@@ -6,7 +6,7 @@
         <artifactId>PiRobotPlatform</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>PiRobotImplementation</artifactId>
+    <artifactId>PiRobotImpl</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -14,5 +14,12 @@
             <artifactId>PiRobot</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-device</artifactId>
+            <version>1.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
+    <name>PiRobotImpl</name>
 </project>

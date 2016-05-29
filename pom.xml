@@ -18,7 +18,8 @@
         <module>PiRobotRMI</module>
         <module>Pi2GoRMI</module>
         <module>MoteJPiRobot</module>
-        <module>PiRobotImplementation</module>
+        <module>CamJamEK3</module>
+        <module>PiRobotImpl</module>
     </modules>
     <properties>
 
