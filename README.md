@@ -151,7 +151,7 @@ This command will create the directory  PiRobotPlatform and download inside it t
 
     mvn install
 
-Running Maven for the first time will take a while. Maven will download, in a .m2 directory in your user home, all the necessary dependencies for itself and for the project too. Don't be scare, let it run and build all the projects.
+Running Maven for the first time will take a while. Maven will download, in a .m2 directory in your user home, all the necessary dependencies for itself and for the projects too. Don't be scare, let it run and build all the projects.
 
 After some minutes the process will stop and you will get something like this (plus many more line before):
 
@@ -185,28 +185,50 @@ The library is composed by some different subproject that logically, at least fo
 
 * PiRobotPlatform: the aggregator for all other modules.
 
-* ExecuteFromJar: utility to run the ServoBlaster user space daemon from the jar file.
+* ExecuteFromJar: utility to run a program from inside a jar file. Used to run the ServoBlaster.
 * PiRobot: all the interfaces use to describe the robots components.
+* PiRobotImplementation: the implementation of all common component
 * HCSR04: build the native library (Jni) for driving the HCSR04 ultrasound sensor.
 * Pi2Go: class implementation of the Pi2Go-Lite robot, plus some examples on how to use the library.
 * PiRobotRMI: interfaces and local object to use the library and command the robot remotely via RMI (https://docs.oracle.com/javase/tutorial/rmi/)
 * Pi2GoRMI: the Pi2Go-Lite implementation of the PiRobotRMI library plus an example on how to use it.
+* CamJamEK3: class to command the CamJam EduKit #3 robot, plus examples
 * MoteJPiRobot: an example of how to use the library to command the Pi2Go-Lite, but also other robots, using a Nintendo Wii Remote and Nunchuk (https://en.wikipedia.org/wiki/Wii_Remote). Enjoy :-)
-* PiRobotImplementation: future use. Committed by mistake :-)
+
 
 The projects that have an executable part (examples or main class) are:
 * Pi2Go
 * Pi2GoRMI
+* CamJamEK3
 * MoteJPiRobot
+
 Refer to the projects readme for more specific information and remember: running the examples will make your robot move with all the possible consequences.
 
-To run the projects from their jar files, with all the dependencies inside, go to the subproject dir and execute the commnad: mvn antrun:run
-That Maven task will run on the Pi itself but also from a remote computer. In this case the program will be executed on the Pi via SSH.
-After have run the project the first time from Maven, you will find a new directory on the Pi named "artifacts" containing the executable jar file.
-You can run those jar file on the Pi wiht the command: sudo java -jar file.jar
-In the pom.xml file of each subprograms,  you will find the default executable class declared like <pi.main.class>examples.LedsExample</pi.main.class> (from Pi2Go project).
-You can change it and and then rebuild the subproject with mvn install and then execute it with mvn antrun:run or just execute the class from the jars in the "artifacts" directory with the command
-sudo java -cp file.jar class
+To run the projects from their jar files, with all the dependencies inside, go to the subproject dir and execute the commnad: 
+
+    mvn antrun:run
+
+You can execute this Maven plug-in on the Pi itself, but also from a remote computer. In this case the project will be executed on the Pi via SSH.
+After you have run the project the first time from Maven, you will find a new directory on the Pi named "artifacts" containing the executable jar file.
+You can run those jar file on the Pi wiht the command:
+    
+    sudo java -jar file.jar
+
+In the pom.xml file of each subprograms,  you will find the default executable class declared like
+
+    <pi.main.class>examples.LedsExample</pi.main.class> (from Pi2Go project).
+
+You can change it and and then rebuild the subproject with
+    
+    mvn install 
+
+and then execute it with 
+
+    mvn antrun:run 
+
+or just execute the class from the jars in the "artifacts" directory with the command
+
+    sudo java -cp file.jar class
 
 
 ## Terms and conditions:
