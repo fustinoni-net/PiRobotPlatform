@@ -1,6 +1,6 @@
-# PiRobotImplementation
+# PiRobotImpl
 
-
+Classes implementing the PiRobot interfaces.
 
 
 ## Terms and conditions:

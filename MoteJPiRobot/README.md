@@ -1,7 +1,7 @@
 # MoteJPiRobot
 
 Example of how to use the library to command the Pi2Go-Lite, but also other robots, using a Nintendo Wii Remote and Nunchuk (https://en.wikipedia.org/wiki/Wii_Remote).
-To run this program you need a Bluetooth USB dongle or a Rspberry Pi 3, and of course the Bluetooth support from the SO.
+To run this program you need a Bluetooth USB dongle or a Rspberry Pi 3, and of course the Bluetooth support from the OS.
 
 ## Build the project
 Before building the subproject locally you have to build the parent one. Refer to the PiRobotPlatform readme file for instructions.
@@ -11,7 +11,9 @@ Runnable class in the package:
 * net.fustinoni.pi.motejpirobot.WiimotePiRobot
 
 You can run the program in the artifacts directory using the command:
+
 `sudo java  -cp /home/pi/artifacts/lib/motej-extras-0.9.jar:/home/pi/artifacts/lib/motej-library-0.9.jar:/home/pi/artifacts/lib/bluecove-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-emu-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-gpl-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/MoteJPiRobot-0.0.1-SNAPSHOT-jar-with-dependencies.jar net.fustinoni.pi.motejpirobot.WiimotePiRobot`
+
 
 **** Running the program will make your robot move with all the possible consequences. ****
 
@@ -33,8 +35,8 @@ Let me know if you know a better way to manage this dependencies. I will integra
     * Nunchuk buttons: turn the front and rear led on and off.
     * Remote arrows: move the cam servos
     * Remote A button: center the servos.
-    * Remote Home make the remote rumble
-    * Pi2Go-Lite switch alt the program and shutdown the Pi.
+    * Remote Home button: make the remote rumble
+    * Pi2Go-Lite switch: alt the program and shutdown the Pi.
 
 ### Feedback:
     * When the left and right IR sensor catches an obstacle the remote rumble and the 1 and 4 player led  on the remote tourn on.

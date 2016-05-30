@@ -1,24 +1,23 @@
-# Pi2GoRMI
+# CamJamEK3
 
-Java API to control a PI2GO-Lite remotely via RMI.
+Java API to control a CamJam EduKit #3 robot.
+
+All the component use the PI4J library (http://pi4j.com/) except for the HCSR04 ultrasound sensor that use a native library build base on the Wiring Pi library ( http://wiringpi.com/ )
+
 
 ## Build the project
 Before building the subproject locally you have to build the parent one. Refer to the PiRobotPlatform readme file for instructions.
-Then you can build and run the program with
-
-     mvn install 
-
-and 
-
-    mvn antrun:run
-
+Then you can build and run the program with mvn install and mvn antrun:run
 
 Runnable examples in the examples package:
-* RMIExample.java
+* LineSingleIRSensorExample.java
+* MotorsExampleCJEK3.java
 
-You can run the example in the artifacts directory using the command:
+You can run each one in the artifacts directory using the command sudo java -cp file.jar class for example:
+sudo java -cp Pi2Go-0.0.1-SNAPSHOT-jar-with-dependencies.jar examples.LineSingleIRSensorExample
 
-    sudo java  -Djava.security.policy=/home/pi/artifacts/secure.policy -Djava.rmi.server.codebase=file://home/pi/artifacts/Pi2Go-0.0.1-SNAPSHOT-jar-with-dependencies.jar -jar /home/pi/artifacts/Pi2GoRMI-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+**** Running the examples will make your robot move with all the possible consequences. ****
+
 
 
 ## Terms and conditions:
@@ -35,5 +34,3 @@ This author is not related in any way to any entity (corporation, person, brand,
 All the people that developed the projects quoted in this page. I learned a lot from their work and also get many part and idea.
 Expecially for the Maven pom files I have to thank the people of the Pi4J projects.
 I hope I have respected all the licenses terms and conditions. Otherwise, let me know, and I will comply with their requirements.
-
-

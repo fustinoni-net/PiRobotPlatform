@@ -9,7 +9,14 @@ The servos, for pan and tilt camera, are supported via the Pi4J library and the 
 
 ## Build the project
 Before building the subproject locally you have to build the parent one. Refer to the PiRobotPlatform readme file for instructions.
-Then you can build and run the program with mvn install and mvn antrun:run
+Then you can build and run the program with
+
+ mvn install 
+
+and 
+
+    mvn antrun:run
+
 
 Runnable examples in the examples package:
 * CommandLineMotorDriverExample.java
@@ -21,7 +28,8 @@ Runnable examples in the examples package:
 * UltrasoundSensorExample.java
 
 You can run each one in the artifacts directory using the command sudo java -cp file.jar class for example:
-sudo java -cp Pi2Go-0.0.1-SNAPSHOT-jar-with-dependencies.jar examples.LedsExample
+
+    sudo java -cp Pi2Go-0.0.1-SNAPSHOT-jar-with-dependencies.jar examples.LedsExample
 
 **** Running the examples will make your robot move with all the possible consequences. ****
 
