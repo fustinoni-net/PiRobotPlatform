@@ -27,26 +27,26 @@
 
 package examples;
 
+import static net.fustinoni.pi.camjamek3.CJEK3Impl.getCJEK3Impl;
 import net.fustinoni.pi.robot.component.FrontalUltraSoundSensor;
-import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
 import net.fustinoni.pi.robot.sensor.UltraSoundSensor;
 
 /**
  *
  * @author efustinoni
  */
-public class UltrasoundSensorExample {
+public class UltrasoundSensorExampleCJEK3 {
     
     public static void main (String... args) throws InterruptedException{
         
-        FrontalUltraSoundSensor pi2go = getPi2GoLite();
+        FrontalUltraSoundSensor sensor = getCJEK3Impl();
         
-        UltraSoundSensor usSensor =  pi2go.getUltraSoundSensor();
+        UltraSoundSensor usSensor =  sensor.getUltraSoundSensor();
         
         for (int i = 0; i < 10; ++i){
             
-            System.out.println(usSensor.getDistance());
-            Thread.sleep(2000);
+            System.out.println("Cycle: " + i + " distane: " +  usSensor.getDistance());
+            Thread.sleep(500);
         }
 
         System.exit(0);

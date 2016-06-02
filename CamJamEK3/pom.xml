@@ -22,7 +22,8 @@
     </dependencies>
     <properties>
         <!--pi.main.class>examples.LineSingleIRSensorExample</pi.main.class-->
-        <pi.main.class>examples.MotorsExampleCJEK3</pi.main.class>
+        <!--pi.main.class>examples.MotorsExampleCJEK3</pi.main.class-->
+        <pi.main.class>examples.UltrasoundSensorExampleCJEK3</pi.main.class>
     </properties>
     <build>
         <plugins>

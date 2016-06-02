@@ -27,32 +27,17 @@
 
 package net.fustinoni.pi.hcsr04;
 
-import net.fustinoni.pi.robot.listener.UltraSoundSensorListener;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinMode;
-import com.pi4j.util.NativeLibraryLoader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import net.fustinoni.pi.robot.component.RobotGPIO;
-import net.fustinoni.pi.robot.sensor.UltraSoundSensor;
 
 /**
  * "C:\Program Files\Java\jdk1.8.0_45\bin\javah" -o net_fustinoni_pi_hcsr04_Hcsr04SinglePin.h -classpath target\classes;..\PiRobot\target\classes net.fustinoni.pi.hcsr04.Hcsr04SinglePin
  * @author efustinoni
  */
-public class Hcsr04SinglePin extends TimerTask  implements UltraSoundSensor {
-    
-    static {
-        //System.load("/home/pi/.netbeans/remote/192.168.1.186/efustinoni7-Windows-x86_64/C/Users/efustinoni/Dropbox/raspberryPi/robot/pi2goLiteJava/HCSR04/dist/hcsr04.so");
-
-        NativeLibraryLoader.load("hcsr04.so");
-       }
+public class Hcsr04SinglePin extends Hcsr04 {
     
     final int sensorPin;
-    private ArrayList<UltraSoundSensorListener> listeners;     
-    private Timer timer;
     
     public Hcsr04SinglePin (final RobotGPIO pi2goGPIO, final Pin pin){
         sensorPin = pin.getAddress();
@@ -60,56 +45,8 @@ public class Hcsr04SinglePin extends TimerTask  implements UltraSoundSensor {
 //        pi2goGPIO.setShutdownOptions(Boolean.TRUE, pi2goGPIO.provisionDigitalInputPin(pin));
     }
 
-    
     @Override
     public long getDistance(){
         return getDistanceNative(sensorPin);
-    }
-    
-    private native long getDistanceNative(int pin);
-
-    @Override
-    public void run() {
-        
-        long distance = getDistanceNative(sensorPin);
-
-        listeners.stream().forEach((listener) -> {
-            listener.tick(distance);
-        });
-    }
-
-    private List <UltraSoundSensorListener> getListener(){
-        if (listeners == null) listeners = new ArrayList<>();
-        return listeners;
-    }
-    
-    @Override
-    public void addListener (final UltraSoundSensorListener listener){
-        getListener().add(listener);
-    }
-    
-    @Override
-    public void removeListener (final UltraSoundSensorListener listener){
-        getListener().remove(listener);
-    }
-    
-    /**
-     *  
-     * @param intervallSeconds
-     **/
-    @Override
-    public void startSensor(int intervallSeconds){
-    
-        if (this.timer == null) this.timer = new Timer();
-        
-        timer.scheduleAtFixedRate(this, 0, intervallSeconds * 1000);
-    }
-    
-    @Override
-    public void stopSensor(){
-        if (this.timer != null){
-            this.timer.cancel();
-            this.timer.purge();
-        }
     }
 }

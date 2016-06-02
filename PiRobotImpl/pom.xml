@@ -22,4 +22,62 @@
         </dependency>
     </dependencies>
     <name>PiRobotImpl</name>
+    <build>
+        <plugins>
+            <!-- RETRIEVE THE JNI NATIVE LIBRARY DEPENDENCY -->
+            <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <executions>
+                            <execution>
+                                    <id>copy</id>
+                                    <phase>validate</phase>
+                                    <goals>
+                                            <goal>copy</goal>
+                                    </goals>
+                                    <configuration>
+                                            <artifactItems>
+                                                    <!-- we define the libpi4j native project as a dependency so that 
+                                                            native library can be included in the final packaged pi4j.jar -->
+                                                    <artifactItem>
+                                                            <groupId>net.fustinoni.pi</groupId>
+                                                            <artifactId>HCSR04</artifactId>
+                                                            <version>${project.version}</version>
+                                                            <type>so</type>
+                                                            <overWrite>true</overWrite>
+                                                            <outputDirectory>${project.build.directory}/lib/raspberrypi/static</outputDirectory>
+                                                            <destFileName>hcsr04.so</destFileName>
+                                                    </artifactItem>
+                                            </artifactItems>
+                                    </configuration>
+                            </execution>
+                    </executions>
+            </plugin>
+
+            <!-- EMBED THE JNI NATIVE LIBRARY INSIDE THE JAR -->
+            <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build-helper-maven-plugin.version}</version>
+                    <executions>
+                            <execution>
+                                    <id>embed-jni-native-resource</id>
+                                    <phase>generate-resources</phase>
+                                    <goals>
+                                            <goal>add-resource</goal>
+                                    </goals>
+                                    <configuration>
+                                            <resources>
+                                                    <resource>
+                                                            <directory>${project.build.directory}/lib</directory>
+                                                            <targetPath>lib</targetPath>
+                                                    </resource>
+                                            </resources>
+                                    </configuration>
+                            </execution>
+                    </executions>
+            </plugin>
+            
+        </plugins>
+    </build>
 </project>

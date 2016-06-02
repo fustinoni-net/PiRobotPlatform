@@ -27,16 +27,23 @@
 
 #include <jni.h>
 #include <stdio.h>
-#include "net_fustinoni_pi_hcsr04_Hcsr04SinglePin.h"
-#include "net_fustinoni_pi_hcsr04_Hcsr04_SinglePin.h"
+#include "net_fustinoni_pi_hcsr04_Hcsr04.h"
+#include "net_fustinoni_pi_hcsr04_Hcsr04_.h"
 #include <wiringPi.h>
 
-JNIEXPORT jlong JNICALL Java_net_fustinoni_pi_hcsr04_Hcsr04SinglePin_getDistanceNative (JNIEnv * env, jobject obj, jint pin)
+JNIEXPORT jlong JNICALL Java_net_fustinoni_pi_hcsr04_Hcsr04_getDistanceNative__I (JNIEnv * env, jobject obj, jint pin)
 {
-    return getDist(pin);
+    return getDist_i(pin);
 }
 
-jlong getDist(int pin) {
+JNIEXPORT jlong JNICALL Java_net_fustinoni_pi_hcsr04_Hcsr04_getDistanceNative__II (JNIEnv * env, jobject obj, jint echo, jint trigger)
+{
+    return getDist_ii(echo, trigger);
+}
+
+
+
+jlong getDist_i(int pin) {
 
     
     //https://groups.google.com/forum/#!msg/pi4j/XoZXD2VxG1M/IsJAJnu3BgAJ
@@ -86,3 +93,49 @@ jlong getDist(int pin) {
 
     return distanza;
 }
+
+jlong getDist_ii(int echo, int trigger) {
+
+    
+    //https://groups.google.com/forum/#!msg/pi4j/XoZXD2VxG1M/IsJAJnu3BgAJ
+    
+    if (is_wiringPi_Setup==0){
+        wiringPiSetup();
+        //pinMode (ECHOPIN, INPUT) ;
+        pinMode(trigger, OUTPUT);
+        pinMode(echo, INPUT);
+        digitalWrite(trigger, 0); //LOW
+        delayMicroseconds(2);
+
+        is_wiringPi_Setup=1;
+    }
+    
+    unsigned int start = 0;
+    unsigned int end = 0;
+    
+    unsigned int loopStart = 0;
+
+
+    digitalWrite(trigger, 1); //HIGH
+    delayMicroseconds(10);
+    digitalWrite(trigger, 0); //LOW
+
+    start = micros();
+    // Wait for the signal to return
+    while (digitalRead(echo) == 0);
+        
+    start = micros();
+
+    loopStart = micros();
+    while (digitalRead(echo) == 1){
+        if ((micros() - loopStart) > 30000) return 0;
+    }
+
+    end = micros();
+
+    unsigned int distanza;
+    distanza = ((end - start) /58);
+
+    return distanza;
+}
+

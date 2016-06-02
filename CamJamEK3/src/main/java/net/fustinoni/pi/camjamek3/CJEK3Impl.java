@@ -29,6 +29,8 @@ package net.fustinoni.pi.camjamek3;
 
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.RaspiPin;
+import net.fustinoni.pi.hcsr04.Hcsr04Impl;
+import net.fustinoni.pi.hcsr04.Hcsr04SinglePin;
 import net.fustinoni.pi.robot.BaseRobot;
 import net.fustinoni.pi.robot.device.Motor;
 import net.fustinoni.pi.robot.sensor.IRSensor;
@@ -80,10 +82,13 @@ public class CJEK3Impl extends BaseRobot implements CJEK3{
     }
     
     
-//    @Override
-//    public UltraSoundSensor getUltraSoundSensor() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+    @Override
+    public UltraSoundSensor getUltraSoundSensor() {
+        if (ultraSoundSensor == null) {
+            ultraSoundSensor = new Hcsr04Impl(getRobotGPIO(), ULTRA_SOUND_SENSOR_ECHO_PIN, ULTRA_SOUND_SENSOR_TRIGGER_PIN);
+        }
+        return ultraSoundSensor;
+    }
 
     @Override
     public synchronized final Motor getRightMotor() {

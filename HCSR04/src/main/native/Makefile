@@ -16,9 +16,9 @@ LIBS    =  -L/usr/local/lib /usr/local/lib/libwiringPi.a /usr/local/lib/libwirin
 # Should not alter anything below this line
 ###############################################################################
 
-SRC	=   net_fustinoni_pi_hcsr04_Hcsr04SinglePin.c
+SRC	=   net_fustinoni_pi_hcsr04_Hcsr04.c
 
-OBJ	=   net_fustinoni_pi_hcsr04_Hcsr04SinglePin.o
+OBJ	=   net_fustinoni_pi_hcsr04_Hcsr04.o
 
 all:		$(TARGET)
 
@@ -55,4 +55,4 @@ uninstall:
 
 
 # DO NOT DELETE
-net_fustinoni_pi_hcsr04_Hcsr04SinglePin.o: net_fustinoni_pi_hcsr04_Hcsr04SinglePin.h
+net_fustinoni_pi_hcsr04_Hcsr04.o: net_fustinoni_pi_hcsr04_Hcsr04.h

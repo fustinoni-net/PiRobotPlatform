@@ -25,17 +25,30 @@
  * 
  **/
 
-package net.fustinoni.pi.camjamek3;
+package examples;
 
-import net.fustinoni.pi.robot.component.FrontalLineFollowareSensor;
 import net.fustinoni.pi.robot.component.FrontalUltraSoundSensor;
-import net.fustinoni.pi.robot.component.LeftRightMotors;
+import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
+import net.fustinoni.pi.robot.sensor.UltraSoundSensor;
 
 /**
  *
  * @author efustinoni
  */
-public interface CJEK3  extends LeftRightMotors, FrontalLineFollowareSensor, FrontalUltraSoundSensor
-{
+public class UltrasoundSensorExamplePi2Go {
     
+    public static void main (String... args) throws InterruptedException{
+        
+        FrontalUltraSoundSensor pi2go = getPi2GoLite();
+        
+        UltraSoundSensor usSensor =  pi2go.getUltraSoundSensor();
+        
+        for (int i = 0; i < 10; ++i){
+            
+            System.out.println(usSensor.getDistance());
+            Thread.sleep(2000);
+        }
+
+        System.exit(0);
+    }
 }

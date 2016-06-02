@@ -4,7 +4,7 @@
  * This file is part of the PI2GO java library project. 
  *
  * More information about this project can be found here:  
- *   http://robots.fustinoni.net
+ *   http://pi2go.fustinoni.net
  * **********************************************************************
  * 
  * Copyright (C) 2015 Enrico Fustinoni
@@ -25,17 +25,29 @@
  * 
  **/
 
-package net.fustinoni.pi.camjamek3;
-
-import net.fustinoni.pi.robot.component.FrontalLineFollowareSensor;
-import net.fustinoni.pi.robot.component.FrontalUltraSoundSensor;
-import net.fustinoni.pi.robot.component.LeftRightMotors;
-
-/**
+/* 
+ * File:   Hcsr_04.h
+ * Author: efustinoni
  *
- * @author efustinoni
+ * Created on October 14, 2015, 8:45 PM
  */
-public interface CJEK3  extends LeftRightMotors, FrontalLineFollowareSensor, FrontalUltraSoundSensor
-{
-    
+#include <jni.h>
+
+#ifndef HCSR_04_H
+#define	HCSR_04_H
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
+
+extern int is_wiringPi_Setup = 0;
+
+jlong getDist_i(int);
+jlong getDist_ii(int, int);
+
+#ifdef	__cplusplus
 }
+#endif
+
+#endif	/* HCSR_04_H */
+

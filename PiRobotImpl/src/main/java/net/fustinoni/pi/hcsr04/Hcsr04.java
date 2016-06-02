@@ -25,24 +25,25 @@
  * 
  **/
 
-package net.fustinoni.pi.pi2Go.sensor;
+package net.fustinoni.pi.hcsr04;
 
 import net.fustinoni.pi.robot.listener.UltraSoundSensorListener;
-import com.pi4j.io.gpio.Pin;
-import com.pi4j.io.gpio.PinMode;
 import com.pi4j.util.NativeLibraryLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import net.fustinoni.pi.robot.component.RobotGPIO;
 import net.fustinoni.pi.robot.sensor.UltraSoundSensor;
 
 /**
  * "C:\Program Files\Java\jdk1.8.0_45\bin\javah" -o net_fustinoni_raspberryPi_pi2Go_sensor_Hcsr04.h -classpath build\classes net.fustinoni.raspberryPi.pi2Go.sensor.Hcsr04
+ * 
+ * "C:\Program Files\Java\jdk1.8.0_45\bin\javah" -o net_fustinoni_pi_hcsr04_Hcsr04.h -classpath target\classes;..\PiRobot\target\classes net.fustinoni.pi.hcsr04.Hcsr04
+
+ * 
  * @author efustinoni
  */
-public class Hcsr04 extends TimerTask  implements UltraSoundSensor {
+public abstract class Hcsr04 extends TimerTask  implements UltraSoundSensor {
     
     static {
         //System.load("/home/pi/.netbeans/remote/192.168.1.186/efustinoni7-Windows-x86_64/C/Users/efustinoni/Dropbox/raspberryPi/robot/pi2goLiteJava/HCSR04/dist/hcsr04.so");
@@ -50,28 +51,23 @@ public class Hcsr04 extends TimerTask  implements UltraSoundSensor {
         NativeLibraryLoader.load("hcsr04.so");
        }
     
-    final int sensorPin;
+
     private ArrayList<UltraSoundSensorListener> listeners;     
     private Timer timer;
     
-    public Hcsr04 (final RobotGPIO pi2goGPIO, final Pin pin){
-        sensorPin = pin.getAddress();
-        pi2goGPIO.export(PinMode.DIGITAL_INPUT,pi2goGPIO.provisionDigitalInputPin(pin));
-//        pi2goGPIO.setShutdownOptions(Boolean.TRUE, pi2goGPIO.provisionDigitalInputPin(pin));
-    }
 
     
+    protected native long getDistanceNative(int echoPin, int triggerPin);    
+    protected native long getDistanceNative(int pin);
+
     @Override
-    public long getDistance(){
-        return getDistanceNative(sensorPin);
-    }
+    public abstract long getDistance();
     
-    private native long getDistanceNative(int pin);
-
+    
     @Override
     public void run() {
         
-        long distance = getDistanceNative(sensorPin);
+        long distance = getDistance();
 
         listeners.stream().forEach((listener) -> {
             listener.tick(distance);
