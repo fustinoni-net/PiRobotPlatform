@@ -28,11 +28,12 @@
 package net.fustinoni.pi.robotRMI;
 
 import java.rmi.Remote;
+import net.fustinoni.pi.robot.PiRobot;
 
 /**
  *
  * @author efustinoni
  */
-public interface BaseRobotRemote extends Remote{
+public interface BaseRobotRemote extends PiRobot, Remote{
     
 }
