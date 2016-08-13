@@ -55,7 +55,7 @@ import net.fustinoni.pi.robot.component.RobotGPIO;
  *
  * @author efustinoni
  */
-public abstract class BaseRobot {
+public abstract class BaseRobot implements PiRobot {
     // create gpio controller
     protected final GpioController gpio = GpioFactory.getInstance();
 

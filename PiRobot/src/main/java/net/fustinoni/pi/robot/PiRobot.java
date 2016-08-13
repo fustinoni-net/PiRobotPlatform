@@ -33,7 +33,6 @@ import net.fustinoni.pi.robot.component.RobotGPIO;
  *
  * @author efustinoni
  */
-public interface Robot {
+public interface PiRobot {
 
-    public Robot getRobot();
 }
