@@ -25,30 +25,23 @@
  * 
  **/
 
-package examples;
+package examplesCJEK3;
 
+import static examples.MotorsExample.runExample;
 import static net.fustinoni.pi.camjamek3.CJEK3Impl.getCJEK3Impl;
-import net.fustinoni.pi.robot.component.FrontalUltraSoundSensor;
-import net.fustinoni.pi.robot.sensor.UltraSoundSensor;
+import net.fustinoni.pi.robot.component.LeftRightMotors;
 
 /**
- *
- * @author efustinoni
+ * https://unpocodejava.wordpress.com/2013/08/15/control-de-motores-con-java-pi4j-en-raspberry-pi/
+ * 
  */
-public class UltrasoundSensorExampleCJEK3 {
-    
-    public static void main (String... args) throws InterruptedException{
-        
-        FrontalUltraSoundSensor sensor = getCJEK3Impl();
-        
-        UltraSoundSensor usSensor =  sensor.getUltraSoundSensor();
-        
-        for (int i = 0; i < 10; ++i){
-            
-            System.out.println("Cycle: " + i + " distane: " +  usSensor.getDistance());
-            Thread.sleep(500);
-        }
+public class MotorsExample {
 
-        System.exit(0);
+    public static void main( String[] args ) throws InterruptedException {
+
+        LeftRightMotors robot = getCJEK3Impl();
+
+        runExample(robot);
     }
+
 }

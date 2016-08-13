@@ -30,7 +30,6 @@ package net.fustinoni.pi.camjamek3;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.RaspiPin;
 import net.fustinoni.pi.hcsr04.Hcsr04Impl;
-import net.fustinoni.pi.hcsr04.Hcsr04SinglePin;
 import net.fustinoni.pi.robot.BaseRobot;
 import net.fustinoni.pi.robot.device.Motor;
 import net.fustinoni.pi.robot.sensor.IRSensor;

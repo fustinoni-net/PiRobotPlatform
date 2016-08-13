@@ -9,12 +9,15 @@ All the component use the PI4J library (http://pi4j.com/) except for the HCSR04 
 Before building the subproject locally you have to build the parent one. Refer to the PiRobotPlatform readme file for instructions.
 Then you can build and run the program with mvn install and mvn antrun:run
 
-Runnable examples in the examples package:
+Runnable examples in the examplesCJEK3 package:
 * LineSingleIRSensorExample.java
-* MotorsExampleCJEK3.java
+* MotorsExample.java
+* UltrasoundSensorExample
 
-You can run each one in the artifacts directory using the command sudo java -cp file.jar class for example:
-sudo java -cp Pi2Go-0.0.1-SNAPSHOT-jar-with-dependencies.jar examples.LineSingleIRSensorExample
+You can run each one in the artifacts directory using the command "sudo java -cp file.jar class". For example:
+
+    sudo java -cp Pi2Go-0.0.1-SNAPSHOT-jar-with-dependencies.jar examplesCJEK3.LineSingleIRSensorExample
+
 
 **** Running the examples will make your robot move with all the possible consequences. ****
 
