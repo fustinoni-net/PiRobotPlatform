@@ -8,7 +8,6 @@ package examples;
 import net.fustinoni.pi.pi2Go.Pi2GoLite;
 import net.fustinoni.pi.pi2GoRMI.Pi2GoLiteLocal;
 import net.fustinoni.pi.pi2GoRMI.Pi2GoLiteRemoteImpl;
-import net.fustinoni.pi.robot.BaseRobot;
 
 /**
  *
