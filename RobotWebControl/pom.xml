@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>net.fustinoni.pi</groupId>
+        <artifactId>PiRobotPlatform</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>RobotWebControl</artifactId>
+    <packaging>jar</packaging>
+    
+    <properties>
+        <pi.main.class>net.fustinoni.pi.robotWebControl.Pi2GoLiteDriver</pi.main.class>
+    </properties>
+ 
+<!--**********************************************************************************************************************************-->
+    <build>
+    <plugins>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+            <!-- Configures the created archive -->
+            <archive>
+                <!-- Configures the content of the created manifest -->
+                <manifest>
+                    <!-- Adds the classpath to the created manifest -->
+                    <addClasspath>true</addClasspath>
+                    <!--
+                        Specifies that all dependencies of our application are found
+                        from the lib directory.
+                    -->
+                    <classpathPrefix>lib/</classpathPrefix>
+                    <!-- Configures the main class of the application -->
+                    <!-- net.fustinoni.pi.robotWebControl.RobotDriver -->
+                    <mainClass>${pi.main.class}</mainClass>
+                </manifest>
+            </archive>
+        </configuration>
+    </plugin>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.5.1</version>
+        <configuration>
+            <!-- Configures the used assembly descriptor -->
+            <descriptors>
+                <descriptor>src/main/assembly/assembly.xml</descriptor>
+            </descriptors>
+        </configuration>
+    </plugin>    
+
+
+<!--*****************************************************-->
+
+        <!--This plugin will Transfer the executable JAR file to the Pi and runs it.
+            used for remote running and remote debugging of the application/libraRY  -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+                <execution>
+                    <id>default-cli</id>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                    <configuration>
+                        <tasks>
+                            <!-- ensure the target directory exists on the Raspberry Pi -->
+                            <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}" password="${pi.password}" 
+                                     trust="true" failonerror="false" verbose="true" 
+                                     command="mkdir --parents ${pi.deployDirectory}"/>
+
+                            <!-- copy the JAR file to the Raspberry Pi -->
+                            <scp
+                                file="${project.build.directory}/${project.build.finalName}-bin.zip"
+                                todir="${pi.user}:${pi.password}@${pi.host}:${pi.deployDirectory}"
+                                port="${pi.port}" trust="true" verbose="true" failonerror="true">
+                            </scp> 
+
+                            <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}" password="${pi.password}" 
+                                     trust="true" failonerror="false" verbose="true" 
+                                     command="unzip -uo ${pi.deployDirectory}/${project.build.finalName}-bin.zip  -d ${pi.deployDirectory}"/>
+                            
+                            
+
+                            <!-- run the JAR file on the Raspberry Pi -->
+                            <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}"
+                                     password="${pi.password}" trust="true" failonerror="false"
+                                     verbose="true" 
+                                     command="sudo java ${debug.command} -jar ${pi.deployDirectory}/${project.build.finalName}/${project.build.finalName}.jar"
+                                     
+                            />
+                            
+                            <!---Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address}-->
+                        </tasks>
+                    </configuration>
+                </execution>
+            </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.ant</groupId>
+                    <artifactId>ant-jsch</artifactId>
+                    <version>1.9.6</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+    </build>
+
+
+<!--***********************************************************************************************************************************-->    
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.sparkjava</groupId>
+            <artifactId>spark-core</artifactId>
+            <version>2.3</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20090211</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>net.fustinoni.pi</groupId>
+            <artifactId>PiRobot</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>net.fustinoni.pi</groupId>
+            <artifactId>Pi2Go</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>net.fustinoni.pi</groupId>
+            <artifactId>CamJamEK3</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+</project>

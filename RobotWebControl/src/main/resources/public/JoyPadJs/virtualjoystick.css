@@ -1,0 +1,70 @@
+* {
+    -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    touch-action: none;
+}
+
+body {
+    background-color: #000000;
+    margin: 0px;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;    
+}
+
+canvas {
+    background-color: #111133;
+    display: block;
+    /*position: absolute;*/
+}
+
+.container {
+    width: auto;
+    eight: auto;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+/*
+td:hover {
+  background: red;
+}
+*/
+
+
+.buttonTd:hover {
+  background: blue;
+}
+
+.buttonTd:active {
+  background: red;
+}
+
+
+.buttonTd{
+    width: 10%;
+    background-color: gray;
+    
+}
+
+.buttonOffTd{
+    background-color: #993300;
+}
+
+
+.sensorTd{
+    width: 33%;
+    background-color: green;
+}
+
+.controlTable{
+    width: 100%;
+}
