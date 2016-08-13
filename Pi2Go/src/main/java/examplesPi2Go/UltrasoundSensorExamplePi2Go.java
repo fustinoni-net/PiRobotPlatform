@@ -25,7 +25,7 @@
  * 
  **/
 
-package examples;
+package examplesPi2Go;
 
 import net.fustinoni.pi.robot.component.FrontalUltraSoundSensor;
 import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;

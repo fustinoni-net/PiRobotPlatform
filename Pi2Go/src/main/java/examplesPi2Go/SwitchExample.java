@@ -25,45 +25,39 @@
  * 
  **/
 
-package examples;
+package examplesPi2Go;
 
-import net.fustinoni.pi.pi2Go.Pi2GoLite;
+import net.fustinoni.pi.robot.component.GenericSwitch;
 import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
-import net.fustinoni.pi.robot.device.Led;
+import net.fustinoni.pi.robot.listener.SwitchListener;
+import net.fustinoni.pi.robot.sensor.Switch;
 
 /**
  *
  * @author efustinoni
  */
-public class LedsExample {
+public class SwitchExample {
     
     public static void main (String... args) throws InterruptedException{
         
-        Pi2GoLite pi2go = getPi2GoLite();
+        GenericSwitch pi2go = getPi2GoLite();
+
+        Switch button = pi2go.getGenericSwitch();
+        System.out.println(button.getLastPressionMillisec());
         
-        Led ledFront =  pi2go.getFrontLeds();
-        Led ledRear = pi2go.getRearLeds();
-        
-        ledFront.turnOn();
-        ledRear.turnOn();
-        
-        Thread.sleep(2000);
-        
-        ledRear.turnOff();
-        
-        for (int i = 0; i < 100; ++i){
-            ledFront.toggle();
-            ledRear.toggle();
+        button.addListener((SwitchListener) (boolean isPressed) ->{
+            System.out.println(" --> Button is: ".concat(isPressed ? "pressed" : "release" ));
+            if (!isPressed)System.out.println(button.getLastPressionMillisec());
+        });
+
             
-            Thread.sleep(50);
+        for (;;) {
+            Thread.sleep(500);
         }
         
-        ledFront.turnOff();
-        ledRear.turnOff();
-        
-        Thread.sleep(500);
-
-        System.exit(0);
+        // stop all GPIO activity/threads by shutting down the GPIO controller
+        // (this method will forcefully shutdown all GPIO monitoring threads and scheduled tasks)
+        // gpio.shutdown();   <--- implement this method call if you wish to terminate the Pi4J GPIO controller        
     }
     
     

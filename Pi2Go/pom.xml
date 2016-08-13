@@ -12,11 +12,11 @@
     <properties>
 
         <!-- DEFAULT RASPBERRY PI PROPERTIES -->
-        <pi.main.class>examples.TestHcsr04</pi.main.class>
+        <!--pi.main.class>examples.TestHcsr04</pi.main.class-->
         <!--pi.main.class>examples.UltrasoundSensorExample</pi.main.class-->
-        <!--pi.main.class>examples.MotorsExample</pi.main.class-->
+        <!--pi.main.class>examples.MotorsExamplePi2Go</pi.main.class-->
         <!--pi.main.class>examples.LedsExample</pi.main.class-->
-        <!--pi.main.class>examples.ServosExample</pi.main.class-->
+        <pi.main.class>examples.ServosExample</pi.main.class>
     </properties>
 <build>
     <plugins>
@@ -57,7 +57,7 @@
         <dependency>
             <groupId>com.pi4j</groupId>
             <artifactId>pi4j-device</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.1</version>
             <type>jar</type>
             <exclusions>
                 <exclusion>

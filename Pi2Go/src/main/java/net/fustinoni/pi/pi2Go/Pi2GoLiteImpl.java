@@ -45,6 +45,7 @@ import net.fustinoni.pi.robot.sensor.Switch;
 import net.fustinoni.pi.robot.sensor.UltraSoundSensor;
 import net.fustinoni.pi.executeFromJar.ExecuteFromJar;
 import net.fustinoni.pi.hcsr04.Hcsr04SinglePin;
+import net.fustinoni.pi.robot.PiRobot;
 
 /**
  *

@@ -25,43 +25,46 @@
  * 
  **/
 
-package examples;
+package examplesPi2Go;
 
+import net.fustinoni.pi.pi2Go.Pi2GoLite;
 import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
-import net.fustinoni.pi.robot.device.Servo;
-import net.fustinoni.pi.robot.component.PanTiltServos;
+import net.fustinoni.pi.robot.device.Led;
 
 /**
- * https://unpocodejava.wordpress.com/2013/08/15/control-de-motores-con-java-pi4j-en-raspberry-pi/
- * 
+ *
+ * @author efustinoni
  */
-public class ServosExample {
+public class LedsExample {
     
-    public static void main( String[] args ) throws InterruptedException {
+    public static void main (String... args) throws InterruptedException{
+        
+        Pi2GoLite pi2go = getPi2GoLite();
+        
+        Led ledFront =  pi2go.getFrontLeds();
+        Led ledRear = pi2go.getRearLeds();
+        
+        ledFront.turnOn();
+        ledRear.turnOn();
+        
+        Thread.sleep(2000);
+        
+        ledRear.turnOff();
+        
+        for (int i = 0; i < 100; ++i){
+            ledFront.toggle();
+            ledRear.toggle();
+            
+            Thread.sleep(50);
+        }
+        
+        ledFront.turnOff();
+        ledRear.turnOff();
+        
+        Thread.sleep(500);
 
-        PanTiltServos pi2go = getPi2GoLite();
-        
-        Servo tiltServo = pi2go.getTiltServo();
-        Servo panServo = pi2go.getPanServo();
-        
-        tiltServo.setDegree(0);
-        panServo.setDegree(0);
-        Thread.sleep( 2000 );
-        
-
-        tiltServo.setDegree(-90);
-        panServo.setDegree(-90);
-        Thread.sleep( 2000 );
-
-        
-        tiltServo.setDegree(70);
-        panServo.setDegree(70);
-        Thread.sleep( 2000 );
-
-        tiltServo.setDegree(0);
-        panServo.setDegree(0);
-        Thread.sleep( 2000 );
-        
         System.exit(0);
     }
+    
+    
 }

@@ -25,46 +25,43 @@
  * 
  **/
 
-package examples;
+package examplesPi2Go;
 
-import net.fustinoni.pi.robot.component.LeftRightMotors;
 import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
-import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.CommandLine.CommandLineMotorDriver;
-import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.CommandLine.CommandLineMotorDriverImpl;
-import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.MotorsDriverImpl;
+import net.fustinoni.pi.robot.device.Servo;
+import net.fustinoni.pi.robot.component.PanTiltServos;
 
 /**
- *
- * @author efustinoni
+ * https://unpocodejava.wordpress.com/2013/08/15/control-de-motores-con-java-pi4j-en-raspberry-pi/
+ * 
  */
-public class CommandLineMotorDriverExample {
+public class ServosExample {
+    
+    public static void main( String[] args ) throws InterruptedException {
 
-    public static void main(String[] args) throws InterruptedException {
+        PanTiltServos pi2go = getPi2GoLite();
         
-        LeftRightMotors pi2go = getPi2GoLite();
-        CommandLineMotorDriver pi = new CommandLineMotorDriverImpl(new MotorsDriverImpl(pi2go));
-
-        pi.moveForward(20);
+        Servo tiltServo = pi2go.getTiltServo();
+        Servo panServo = pi2go.getPanServo();
+        
+        tiltServo.setDegree(0);
+        panServo.setDegree(0);
         Thread.sleep( 2000 );
         
-        pi.moveForward(60);
+
+        tiltServo.setDegree(-90);
+        panServo.setDegree(-90);
         Thread.sleep( 2000 );
 
-        pi.moveLeft(60, 80);
-        Thread.sleep( 4000 );
         
+        tiltServo.setDegree(70);
+        panServo.setDegree(70);
+        Thread.sleep( 2000 );
 
-        pi.moveRight(60, 20);
-        Thread.sleep( 4000 );
-       
-        pi.moveBackward(60);
-        Thread.sleep( 4000 );
-        
-        
-        pi.stopMotors();
+        tiltServo.setDegree(0);
+        panServo.setDegree(0);
+        Thread.sleep( 2000 );
         
         System.exit(0);
-        
     }
-    
 }

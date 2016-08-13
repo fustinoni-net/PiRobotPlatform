@@ -25,40 +25,23 @@
  * 
  **/
 
-package examples;
+package examplesPi2Go;
 
-import net.fustinoni.pi.robot.component.GenericSwitch;
+import static examples.MotorsExample.runExample;
 import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
-import net.fustinoni.pi.robot.listener.SwitchListener;
-import net.fustinoni.pi.robot.sensor.Switch;
+import net.fustinoni.pi.robot.component.LeftRightMotors;
 
 /**
- *
- * @author efustinoni
+ * https://unpocodejava.wordpress.com/2013/08/15/control-de-motores-con-java-pi4j-en-raspberry-pi/
+ * 
  */
-public class SwitchExample {
+public class MotorsExample {
     
-    public static void main (String... args) throws InterruptedException{
-        
-        GenericSwitch pi2go = getPi2GoLite();
+    public static void main( String[] args ) throws InterruptedException {
 
-        Switch button = pi2go.getGenericSwitch();
-        System.out.println(button.getLastPressionMillisec());
-        
-        button.addListener((SwitchListener) (boolean isPressed) ->{
-            System.out.println(" --> Button is: ".concat(isPressed ? "pressed" : "release" ));
-            if (!isPressed)System.out.println(button.getLastPressionMillisec());
-        });
+        LeftRightMotors pi2go = getPi2GoLite();
 
-            
-        for (;;) {
-            Thread.sleep(500);
-        }
-        
-        // stop all GPIO activity/threads by shutting down the GPIO controller
-        // (this method will forcefully shutdown all GPIO monitoring threads and scheduled tasks)
-        // gpio.shutdown();   <--- implement this method call if you wish to terminate the Pi4J GPIO controller        
+        runExample(pi2go);
     }
-    
-    
+
 }

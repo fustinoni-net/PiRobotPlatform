@@ -18,7 +18,7 @@ and
     mvn antrun:run
 
 
-Runnable examples in the examples package:
+Runnable examples in the examplesPi2Go package:
 * CommandLineMotorDriverExample.java
 * IRSensorsExample.java
 * LedsExample.java
@@ -29,7 +29,7 @@ Runnable examples in the examples package:
 
 You can run each one in the artifacts directory using the command sudo java -cp file.jar class for example:
 
-    sudo java -cp Pi2Go-0.0.1-SNAPSHOT-jar-with-dependencies.jar examples.LedsExample
+    sudo java -cp Pi2Go-0.0.1-SNAPSHOT-jar-with-dependencies.jar examplesPi2Go.LedsExample
 
 **** Running the examples will make your robot move with all the possible consequences. ****
 

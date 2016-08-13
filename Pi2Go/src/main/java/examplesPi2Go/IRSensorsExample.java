@@ -25,27 +25,20 @@
  * 
  **/
 
-package examples;
+package examplesPi2Go;
 
 import net.fustinoni.pi.pi2Go.Pi2GoLite;
 import net.fustinoni.pi.robot.listener.IRSensorListener;
-import net.fustinoni.pi.pi2Go.Pi2GoLiteImpl;
 import static net.fustinoni.pi.pi2Go.Pi2GoLiteImpl.getPi2GoLite;
-import net.fustinoni.pi.robot.device.Led;
-import net.fustinoni.pi.robot.listener.SwitchListener;
-import net.fustinoni.pi.robot.listener.UltraSoundSensorListener;
+
 
 /**
  *
  * @author efustinoni
  */
-public class AllExample {
-    
-    static boolean exit = false;
+public class IRSensorsExample {
     
     public static void main (String... args) throws InterruptedException{
-        
-        
         
         Pi2GoLite pi2go = getPi2GoLite();
 
@@ -65,48 +58,14 @@ public class AllExample {
             System.out.println(" --> LineRightIRSensor is: ".concat(isFired ? "on" : "off" ));
         });
 
-        pi2go.getGenericSwitch().addListener((SwitchListener) (boolean isPressed) ->{
-            System.out.println(" --> Button is: ".concat(isPressed ? "pressed" : "release" ));
-            exit = true;
-        });
         
-        pi2go.getUltraSoundSensor().addListener((UltraSoundSensorListener) (long distance) -> {
-            System.out.println("--> Distance: " + distance);
-        });
-        
-        pi2go.getUltraSoundSensor().startSensor(2);
-        
-        Led ledFront =  pi2go.getFrontLeds();
-        Led ledRear = pi2go.getRearLeds();
-        
-        ledFront.turnOn();
-        ledRear.turnOn();
-        
-        Thread.sleep(2000);
-        
-        ledRear.turnOff();
-        
-        
-        
-        for (int i = 0; i < 4000; ++i){
-            ledFront.toggle();
-            ledRear.toggle();
-            
+        for (;;) {
             Thread.sleep(500);
-            if (exit) break;
         }
         
-        ledFront.turnOff();
-        ledRear.turnOff();
-        pi2go.getUltraSoundSensor().stopSensor();
-        
-        
-        
-        CommandLineMotorDriverExample.main(args);
-        
-        
-        
-        System.exit(0);
+        // stop all GPIO activity/threads by shutting down the GPIO controller
+        // (this method will forcefully shutdown all GPIO monitoring threads and scheduled tasks)
+        // gpio.shutdown();   <--- implement this method call if you wish to terminate the Pi4J GPIO controller        
     }
     
     
