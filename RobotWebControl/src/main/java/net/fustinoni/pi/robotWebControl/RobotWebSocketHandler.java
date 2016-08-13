@@ -29,6 +29,7 @@ package net.fustinoni.pi.robotWebControl;
 
 import net.fustinoni.pi.robot.component.FrontLeds;
 import net.fustinoni.pi.robot.component.RearLeds;
+import net.fustinoni.pi.robot.component.SideIRSensors;
 import static net.fustinoni.pi.robotWebControl.RobotDriver.chaufer;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
@@ -50,6 +51,12 @@ public class RobotWebSocketHandler {
         System.out.println("Connected " + user.getRemoteAddress().getHostString() );
         String username = "User" + RobotDriver.nextUserNumber++;
         RobotDriver.userUsernameMap.put(user, username);
+
+        if (RobotDriver.robot instanceof SideIRSensors){
+            RobotDriver.broadcastRightIRSensorMessage(((SideIRSensors)RobotDriver.robot).getRightIRSensor().isTriggered());
+            RobotDriver.broadcastLeftIRSensorMessage(((SideIRSensors)RobotDriver.robot).getLeftIRSensor().isTriggered());
+        }
+
     }
 
     @OnWebSocketClose
@@ -79,8 +86,8 @@ public class RobotWebSocketHandler {
             int x = Integer.valueOf(message.substring(4, message.indexOf(",")));
             int y = Integer.valueOf(message.substring(message.indexOf("y=")+2));
 
-            if (chaufer != null) chaufer.jostickImput(x, y, -100, 100, -100, 100, 0, 0);
-            
+            if (chaufer != null) chaufer.jostickImput(-x, y, -100, 100, -100, 100, 0, 0);
+
         }
         else if (message.startsWith("btn")){
 

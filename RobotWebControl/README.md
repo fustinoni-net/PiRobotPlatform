@@ -6,23 +6,31 @@ The client server communication is base on a websocket.
 
 ## Build the project
 Before building the subproject locally you have to build the parent one. Refer to the PiRobotPlatform readme file for instructions.
-Then you can build and run the program with mvn install and mvn antrun:run
+Then you can build the program with mvn install.
+
+Before building and running the program adjust the pom properties:
+
+    <pi.main.class>net.fustinoni.pi.robotWebControl.Pi2GoLiteDriver</pi.main.class>
+
+according to your robot. The committed one is: Pi2GoLiteDriver.
+
+Use  CUSTOM-clean package assembly:single to create a zip file with all the dependencies to run the program on the Raspberry Pi and mvn antrun:run to run it.
 
 Runnable class in the package:
 * net.fustinoni.pi.robotWebControl.CamJamEK3Driver
 * net.fustinoni.pi.robotWebControl.Pi2GoLiteDriver
-* net.fustinoni.pi.robotWebControl.RobotDriver
+* net.fustinoni.pi.robotWebControl.RobotDriver (No robot just web interface)
 
 You can run the program in the artifacts directory using the command:
 
-sudo java  -jar /home/pi/artifacts/RobotWebControl-0.0.1-SNAPSHOT/RobotWebControl-0.0.1-SNAPSHOT.jar
+`sudo java  -jar /home/pi/artifacts/RobotWebControl-0.0.1-SNAPSHOT/RobotWebControl-0.0.1-SNAPSHOT.jar`
 
 
-`sudo java  -cp /home/pi/artifacts/lib/motej-extras-0.9.jar:/home/pi/artifacts/lib/motej-library-0.9.jar:/home/pi/artifacts/lib/bluecove-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-emu-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-gpl-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/MoteJPiRobot-0.0.1-SNAPSHOT-jar-with-dependencies.jar net.fustinoni.pi.motejpirobot.WiimotePi2GoLiteRobot`
+`sudo java  -cp /home/pi/artifacts/RobotWebControl-0.0.1-SNAPSHOT/RobotWebControl-0.0.1-SNAPSHOT.jar net.fustinoni.pi.robotWebControl.Pi2GoLiteDriver`
 
 to drive a Pi2Go-Lite or
 
-`sudo java  -cp /home/pi/artifacts/lib/motej-extras-0.9.jar:/home/pi/artifacts/lib/motej-library-0.9.jar:/home/pi/artifacts/lib/bluecove-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-emu-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-gpl-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/MoteJPiRobot-0.0.1-SNAPSHOT-jar-with-dependencies.jar net.fustinoni.pi.motejpirobot.WiimoteCamJamEK3Robot`
+`sudo java  -cp /home/pi/artifacts/RobotWebControl-0.0.1-SNAPSHOT/RobotWebControl-0.0.1-SNAPSHOT.jar net.fustinoni.pi.robotWebControl.CamJamEK3Driver`
 
 
 to drive a CamJam EduKit #3 robot.
@@ -32,25 +40,11 @@ to drive a CamJam EduKit #3 robot.
 
 ## Program use
 
-### Controls:
-    * Nunchuk joystick: move the robot in all direction.
-    * Nunchuk buttons: turn the front and rear led on and off.
-    * Remote arrows: move the cam servos
-    * Remote A button: center the servos.
-    * Remote Home button: make the remote rumble
-    * Pi2Go-Lite switch: alt the program and shutdown the Pi.
+To run the program insert in a browser the your Raspberry Pi address followed by :4567 for example:
 
-### Feedback:
-    * When the left and right IR sensor catches an obstacle the remote rumble and the 1 and 4 player led  on the remote tourn on.
-    * When the ultrasound get an obstacle closer then 2 cm the remote rumble and 2 player led tourn on.
+    http://raspi-pi2go.homenet.telecomitalia.it:4567/
 
-### Pairing the Wii Remote.
-Run the program. When both the front led and rear led turn on press the 1 and 2 remote button together.
-After a while the remote and the robot will pair, the led will turn off and the player 3 led on the remote will turn on.
-
-Note that the pairing procedure is critical so press the 2 buttons immediately after the led turn on otherwise the pairing process will fail.
-Feel free to improve the procedure :-)
-
+A web page will start.
 
 
 ## Terms and conditions:

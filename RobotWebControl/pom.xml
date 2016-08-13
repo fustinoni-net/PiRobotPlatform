@@ -10,7 +10,9 @@
     <packaging>jar</packaging>
     
     <properties>
+        <!-- Set here your robot class -->
         <pi.main.class>net.fustinoni.pi.robotWebControl.Pi2GoLiteDriver</pi.main.class>
+        <!--pi.main.class>net.fustinoni.pi.robotWebControl.CamJamEK3Driver</pi.main.class-->
     </properties>
  
 <!--**********************************************************************************************************************************-->
