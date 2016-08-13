@@ -120,7 +120,6 @@ jlong getDist_ii(int echo, int trigger) {
     delayMicroseconds(10);
     digitalWrite(trigger, 0); //LOW
 
-    start = micros();
     // Wait for the signal to return
     while (digitalRead(echo) == 0);
         
