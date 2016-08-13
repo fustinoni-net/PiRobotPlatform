@@ -161,21 +161,22 @@ After some minutes the process will stop and you will get something like this (p
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary:
 [INFO]
-[INFO] PiRobotPlatform .................................... SUCCESS [  7.847 s]
-[INFO] ExecuteFromJar ..................................... SUCCESS [ 21.767 s]
-[INFO] PiRobot ............................................ SUCCESS [ 17.922 s]
-[INFO] HCSR04 ............................................. SUCCESS [ 43.005 s]
-[INFO] Pi2Go .............................................. SUCCESS [ 56.633 s]
-[INFO] PiRobotRMI ......................................... SUCCESS [  1.579 s]
-[INFO] Pi2GoRMI ........................................... SUCCESS [ 18.336 s]
-[INFO] MoteJPiRobot ....................................... SUCCESS [ 25.597 s]
-[INFO] PiRobotImplementation .............................. SUCCESS [  0.897 s]
+[INFO] PiRobotPlatform .................................... SUCCESS [  6.929 s]
+[INFO] ExecuteFromJar ..................................... SUCCESS [ 36.223 s]
+[INFO] PiRobot ............................................ SUCCESS [ 31.716 s]
+[INFO] HCSR04 ............................................. SUCCESS [01:57 min]
+[INFO] PiRobotImpl ........................................ SUCCESS [ 33.358 s]
+[INFO] Pi2Go .............................................. SUCCESS [ 40.817 s]
+[INFO] PiRobotRMI ......................................... SUCCESS [  7.725 s]
+[INFO] Pi2GoRMI ........................................... SUCCESS [ 22.335 s]
+[INFO] MoteJPiRobot ....................................... SUCCESS [ 50.163 s]
+[INFO] CamJamEK3 .......................................... SUCCESS [ 17.780 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 03:18 min
-[INFO] Finished at: 2016-05-26T21:32:36+00:00
-[INFO] Final Memory: 12M/33M
+[INFO] Total time: 06:10 min
+[INFO] Finished at: 2016-06-02T06:53:20+00:00
+[INFO] Final Memory: 17M/46M
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -195,6 +196,7 @@ The library is composed by some different subproject that logically, at least fo
 * Pi2GoRMI: the Pi2Go-Lite implementation of the PiRobotRMI library plus an example on how to use it.
 * CamJamEK3: class to command the CamJam EduKit #3 robot, plus examples
 * MoteJPiRobot: an example of how to use the library to command the Pi2Go-Lite, but also other robots, using a Nintendo Wii Remote and Nunchuk (https://en.wikipedia.org/wiki/Wii_Remote). Enjoy :-)
+* RobotWebControl: an example of how to use the PiRobotPlatform library to command a Pi2Go-Lite or a CamJam EduKit #3 robot using a web page on a pc, tablet, smartphone.
 
 
 The projects that have an executable part (examples or main class) are:
@@ -202,6 +204,7 @@ The projects that have an executable part (examples or main class) are:
 * Pi2GoRMI
 * CamJamEK3
 * MoteJPiRobot
+* RobotWebControl
 
 Refer to the projects readme for more specific information and remember: running the examples will make your robot move with all the possible consequences.
 

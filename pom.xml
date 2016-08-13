@@ -14,12 +14,14 @@
         <module>ExecuteFromJar</module>
         <module>HCSR04</module>
         <module>PiRobot</module>
+        <module>PiRobotImpl</module>
         <module>Pi2Go</module>
         <module>PiRobotRMI</module>
         <module>Pi2GoRMI</module>
-        <module>MoteJPiRobot</module>
         <module>CamJamEK3</module>
-        <module>PiRobotImpl</module>
+        <module>MoteJPiRobot</module>
+        <!--module>RobotSparkRestControl</module-->
+        <module>RobotWebControl</module>
     </modules>
     <properties>
 
