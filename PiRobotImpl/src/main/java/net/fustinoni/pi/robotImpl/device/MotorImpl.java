@@ -62,7 +62,7 @@ public class MotorImpl implements Motor {
     }
     
     @Override
-    public void moveForward (int speed){
+    public synchronized void moveForward (int speed){
 
         if (!forward){
             SoftPwm.softPwmWrite( backwardPin.getAddress(), 0 );
@@ -79,7 +79,7 @@ public class MotorImpl implements Motor {
     }
     
     @Override
-    public void moveBackward (int speed){
+    public synchronized void moveBackward (int speed){
 
         if (forward){
             SoftPwm.softPwmWrite( forwardPin.getAddress(), 0 );
@@ -97,7 +97,7 @@ public class MotorImpl implements Motor {
     }
     
     @Override
-    public void stop(){
+    public synchronized  void stop(){
         SoftPwm.softPwmWrite( forwardPin.getAddress(), 0 );
         SoftPwm.softPwmWrite( backwardPin.getAddress(), 0 );
         this.speed = 0;
