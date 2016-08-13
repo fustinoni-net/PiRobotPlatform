@@ -1,18 +1,31 @@
 # MoteJPiRobot
 
-Example of how to use the library to command the Pi2Go-Lite, but also other robots, using a Nintendo Wii Remote and Nunchuk (https://en.wikipedia.org/wiki/Wii_Remote).
+Example of how to use the PiRobotPlatform library to command a Pi2Go-Lite or a CamJam EduKit #3 robot, but also other robots, using a Nintendo Wii Remote and Nunchuk (https://en.wikipedia.org/wiki/Wii_Remote).
 To run this program you need a Bluetooth USB dongle or a Rspberry Pi 3, and of course the Bluetooth support from the OS.
 
 ## Build the project
 Before building the subproject locally you have to build the parent one. Refer to the PiRobotPlatform readme file for instructions.
 Then you can build and run the program with mvn install and mvn antrun:run
+Before building and running the program adjust the pom properties:
+
+    <pi.main.class>net.fustinoni.pi.motejpirobot.WiimotePi2GoLiteRobot</pi.main.class>
+
+according to your robot. The committed one is: WiimotePi2GoLiteRobot.
 
 Runnable class in the package:
-* net.fustinoni.pi.motejpirobot.WiimotePiRobot
+* net.fustinoni.pi.motejpirobot.WiimotePi2GoLiteRobot
+* net.fustinoni.pi.motejpirobot.WiimoteCamJamEK3Robot
 
 You can run the program in the artifacts directory using the command:
 
-`sudo java  -cp /home/pi/artifacts/lib/motej-extras-0.9.jar:/home/pi/artifacts/lib/motej-library-0.9.jar:/home/pi/artifacts/lib/bluecove-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-emu-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-gpl-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/MoteJPiRobot-0.0.1-SNAPSHOT-jar-with-dependencies.jar net.fustinoni.pi.motejpirobot.WiimotePiRobot`
+`sudo java  -cp /home/pi/artifacts/lib/motej-extras-0.9.jar:/home/pi/artifacts/lib/motej-library-0.9.jar:/home/pi/artifacts/lib/bluecove-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-emu-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-gpl-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/MoteJPiRobot-0.0.1-SNAPSHOT-jar-with-dependencies.jar net.fustinoni.pi.motejpirobot.WiimotePi2GoLiteRobot`
+
+to drive a Pi2Go-Lite or
+
+`sudo java  -cp /home/pi/artifacts/lib/motej-extras-0.9.jar:/home/pi/artifacts/lib/motej-library-0.9.jar:/home/pi/artifacts/lib/bluecove-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-emu-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/lib/bluecove-gpl-2.1.1-SNAPSHOT.jar:/home/pi/artifacts/MoteJPiRobot-0.0.1-SNAPSHOT-jar-with-dependencies.jar net.fustinoni.pi.motejpirobot.WiimoteCamJamEK3Robot`
+
+
+to drive a CamJam EduKit #3 robot.
 
 
 **** Running the program will make your robot move with all the possible consequences. ****

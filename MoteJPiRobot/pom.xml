@@ -15,11 +15,6 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Pi2Go</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>motej</groupId>
             <artifactId>motej-library</artifactId>
             <version>1.0</version>
@@ -60,10 +55,24 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.12</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CamJamEK3</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Pi2Go</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <properties>
         <!--sudo java -cp ./lib/bluecove-2.1.1-SNAPSHOT.jar:./lib/bluecove-emu-2.1.1-SNAPSHOT.jar:./lib/bluecove-gpl-2.1.1-SNAPSHOT.jar:./MoteJPiRobot-0.0.1-SNAPSHOT-jar-with-dependencies.jar net.fustinoni.pi.motejpirobot.WiimotePiRobot-->
-        <pi.main.class>net.fustinoni.pi.motejpirobot.WiimotePiRobot</pi.main.class>
+        
+        <!-- Set here your robot start class -->
+        <pi.main.class>net.fustinoni.pi.motejpirobot.WiimotePi2GoLiteRobot</pi.main.class>
+        <!--pi.main.class>net.fustinoni.pi.motejpirobot.WiimoteCamJamEK3Robot</pi.main.class-->
+        
     </properties>
     <build>
         <plugins>

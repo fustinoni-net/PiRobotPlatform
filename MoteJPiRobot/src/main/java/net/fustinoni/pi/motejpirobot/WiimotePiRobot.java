@@ -54,9 +54,7 @@ import net.fustinoni.pi.motejpirobot.moteListener.dPadListener.ButtonDPadDownLis
 import net.fustinoni.pi.motejpirobot.moteListener.dPadListener.ButtonDPadLeftListener;
 import net.fustinoni.pi.motejpirobot.moteListener.dPadListener.ButtonDPadRightListener;
 import net.fustinoni.pi.motejpirobot.moteListener.dPadListener.ButtonDPadUpListener;
-import net.fustinoni.pi.pi2Go.Pi2GoLite;
-import net.fustinoni.pi.pi2Go.Pi2GoLiteImpl;
-import net.fustinoni.pi.robot.BaseRobot;
+import net.fustinoni.pi.robot.PiRobot;
 import net.fustinoni.pi.robot.component.FrontLeds;
 import net.fustinoni.pi.robot.component.FrontalUltraSoundSensor;
 import net.fustinoni.pi.robot.component.GenericSwitch;
@@ -77,6 +75,7 @@ import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.MotorsDriverSetMinimumSpe
 import net.fustinoni.pi.robot.robotUtils.PanTiltServoDrivers.PanTiltServoDriverImpl;
 import net.fustinoni.pi.robot.robotUtils.PanTiltServoDrivers.StepByStep.PanTiltStepByStepDriver;
 import net.fustinoni.pi.robot.robotUtils.PanTiltServoDrivers.StepByStep.PanTiltStepByStepDriverImpl;
+import net.fustinoni.pi.utils.ShutDown;
 
 /**
  *
@@ -110,88 +109,72 @@ public class WiimotePiRobot {
      */
     public static void main(String[] args) throws NotBoundException, MalformedURLException, RemoteException {
 
-        
+
+        System.out.println("Use one of the dedicated class to commnad the robot");
+        System.exit(0);
+
         //BaseRobot piLocal = Pi2GoLiteLocal.getPi2GoLiteLocat(\"raspi-pi2go.homenet.telecomitalia.it");
-        BaseRobot piLocal = Pi2GoLiteImpl.getPi2GoLite();
+        
+        //BaseRobot piLocal = Pi2GoLiteImpl.getPi2GoLite();
+        
+        //BaseRobot piLocal = CJEK3Impl.getCJEK3Impl();
 
-        if (piLocal instanceof GenericSwitch)
-            ((GenericSwitch)piLocal).getGenericSwitch().addListener((SwitchListener) (boolean isPressed) ->{
+        //startWiimotePiRobot(piLocal);
+    }
 
-                //http://stackoverflow.com/questions/2258066/java-run-a-function-after-a-specific-number-of-seconds
-                //sleep 30s; shutdown -h now
-
-                if (piLocal instanceof Pi2GoLiteImpl)
-                    new java.util.Timer().schedule(
-                            new java.util.TimerTask() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        Process p = Runtime.getRuntime().exec("shutdown -h -P now");
-                                        p.waitFor();
-
-                                        BufferedReader reader =
-                                                new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-                                        String line = "";
-                                        while ((line = reader.readLine())!= null) {
-                                            System.out.println(line);
-                                        }
-                                        reader.close();
-                                        p.getInputStream().close();
-                                    } catch (Exception ex) {
-                                        System.out.println(ex);
-                                    }
-                                }
-                            },
-                            2000L
-                    );
+    public static void startWiimotePiRobot(PiRobot piRobot) {
+        
+        
+        if (piRobot instanceof GenericSwitch)
+            ((GenericSwitch)piRobot).getGenericSwitch().addListener((SwitchListener) (boolean isPressed) ->{
+                ShutDown.timedShutDownNow(2000L);
                 exit = true;
             });
 
 
         AnalogJoystickMotorsDriver chaufer = null;
-        if (piLocal instanceof LeftRightMotors)
+        if (piRobot instanceof LeftRightMotors)
             chaufer = new AnalogJoystickMotorsDriverEnlargedCenterDecorator( 
                     new AnalogJoystickMotorsDriverImpl(
-                            new MotorsDriverSetMinimumSpeedDecorator(new MotorsDriverImpl((LeftRightMotors)piLocal)),
+                            new MotorsDriverSetMinimumSpeedDecorator(new MotorsDriverImpl((LeftRightMotors)piRobot)),
                             new StepperDecorator(new LinearConverter())
                     )
             );
 
         PanTiltStepByStepDriver camera = null;
-        if (piLocal instanceof PanTiltServos)
+        if (piRobot instanceof PanTiltServos)
             camera = new PanTiltStepByStepDriverImpl(
-                        new PanTiltServoDriverImpl((PanTiltServos)piLocal, minimumPan, minimumTilt, maximumPan, maximumTilt),1,1);
-
-
+                    new PanTiltServoDriverImpl((PanTiltServos)piRobot, minimumPan, minimumTilt, maximumPan, maximumTilt),1,1);
+        
+        
         Nunchuk nunchuk = null;
 
         SimpleMoteFinder simpleMoteFinder = new SimpleMoteFinder();
         
-        if (piLocal instanceof FrontLeds) ((FrontLeds)piLocal).getFrontLeds().turnOn();
-        if (piLocal instanceof RearLeds) ((RearLeds)piLocal).getRearLeds().turnOn();
+        if (piRobot instanceof FrontLeds) ((FrontLeds)piRobot).getFrontLeds().turnOn();
+        if (piRobot instanceof RearLeds) ((RearLeds)piRobot).getRearLeds().turnOn();
         Mote mote = simpleMoteFinder.findMote();
-        if (piLocal instanceof FrontLeds) ((FrontLeds)piLocal).getFrontLeds().turnOff();
-        if (piLocal instanceof RearLeds) ((RearLeds)piLocal).getRearLeds().turnOff();
-
+        if (piRobot instanceof FrontLeds) ((FrontLeds)piRobot).getFrontLeds().turnOff();
+        if (piRobot instanceof RearLeds) ((RearLeds)piRobot).getRearLeds().turnOff();
+        
         
         PlayerLeds playerLeds = new PlayerLedsImpl(mote);
 
         playerLeds.player3LedOn();
-
-
+        
+        
         Extension ext =  mote.getExtension();
 
         while (ext==null){
             ext =  mote.getExtension();
             try {
-                    Thread.sleep(50);
+                Thread.sleep(50);
             } catch (InterruptedException ex) {
             }            
         }
-
-        if (ext instanceof Nunchuk) {
         
+        if (ext instanceof Nunchuk) {
+            
             nunchuk = (Nunchuk) ext;
 
             //printCalibrationData(nunchuk);
@@ -200,12 +183,12 @@ public class WiimotePiRobot {
 
             if (chaufer != null) addAnalogStickListener(nunchuk, chaufer);
             
-            addNunchukButtonListener(nunchuk, piLocal);
+            addNunchukButtonListener(nunchuk, piRobot);
 
         }
         
-        if (piLocal instanceof SideIRSensors){
-            ((SideIRSensors)piLocal).getLeftIRSensor().addListener((IRSensorListener) (boolean isFired) ->{
+        if (piRobot instanceof SideIRSensors){
+            ((SideIRSensors)piRobot).getLeftIRSensor().addListener((IRSensorListener) (boolean isFired) ->{
                 System.out.println(" --> LeftIRSensor is: ".concat(isFired ? "on" : "off" ));
                 if (isFired){
                     playerLeds.player1LedOn();
@@ -215,7 +198,7 @@ public class WiimotePiRobot {
                 }
             });
 
-            ((SideIRSensors)piLocal).getRightIRSensor().addListener((IRSensorListener) (boolean isFired) ->{
+            ((SideIRSensors)piRobot).getRightIRSensor().addListener((IRSensorListener) (boolean isFired) ->{
                 System.out.println(" --> RightIRSensor is: ".concat(isFired ? "on" : "off" ));
                 if (isFired){ 
                     playerLeds.player4LedOn();
@@ -226,8 +209,8 @@ public class WiimotePiRobot {
             });
         }
         
-        if (piLocal instanceof FrontalUltraSoundSensor){
-            ((FrontalUltraSoundSensor)piLocal).getUltraSoundSensor().addListener((UltraSoundSensorListener) (long distance) ->{
+        if (piRobot instanceof FrontalUltraSoundSensor){
+            ((FrontalUltraSoundSensor)piRobot).getUltraSoundSensor().addListener((UltraSoundSensorListener) (long distance) ->{
                 if (distance < 200){
                     playerLeds.player2LedOn();
                     mote.rumble(200);
@@ -237,12 +220,12 @@ public class WiimotePiRobot {
                 //mote.rumble(distance*10);
             });
 
-            ((FrontalUltraSoundSensor)piLocal).getUltraSoundSensor().startSensor(1);
+            ((FrontalUltraSoundSensor)piRobot).getUltraSoundSensor().startSensor(1);
         }
         
         if (camera != null) addCoreButtonListener(mote, camera);
         
-//*****************************        
+        //*****************************
         while (!exit) {
             try {
                 Thread.sleep(500);
@@ -252,15 +235,15 @@ public class WiimotePiRobot {
             }
         }
 
-//        chaufer.stopMotors();
+        //        chaufer.stopMotors();
         mote.disconnect();
 
-            try {
-                Thread.sleep(5000);
-                //printCalibrationData(nunchuk);
-            } catch (InterruptedException ex) {
-                //			log.error(ex.getMessage(), ex);
-            }
+        try {
+            Thread.sleep(5000);
+            //printCalibrationData(nunchuk);
+        } catch (InterruptedException ex) {
+            //			log.error(ex.getMessage(), ex);
+        }
 
         System.exit(0);
     }
@@ -305,7 +288,7 @@ public class WiimotePiRobot {
     }
     
     
-    private static void addNunchukButtonListener(Nunchuk nunchuk, BaseRobot piLocal) {
+    private static void addNunchukButtonListener(Nunchuk nunchuk, PiRobot piLocal) {
 
         if (piLocal instanceof FrontLeds) 
             nunchuk.addNunchukButtonListener(new ButtonCListener(
