@@ -69,7 +69,7 @@ public class IRSensorImpl implements IRSensor {
     
     @Override
     public boolean isTriggered() {
-        return iRSensor.isHigh();
+        return iRSensor.isLow();
     }
 
     @Override
