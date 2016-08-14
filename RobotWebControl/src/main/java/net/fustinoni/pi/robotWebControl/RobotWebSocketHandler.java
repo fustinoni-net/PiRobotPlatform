@@ -66,7 +66,7 @@ public class RobotWebSocketHandler {
         String username = RobotDriver.userUsernameMap.get(user);
 
         if (RobotDriver.userUsernameMap.get(user).equals("User1"))
-            RobotDriver.shutDown();
+            RobotDriver.exit();
 
         RobotDriver.userUsernameMap.remove(user);
     }

@@ -105,20 +105,29 @@ public class RobotDriver {
         
         robot = piRobot;
 
+//        if (robot instanceof LeftRightMotors)
+//            chaufer = new AnalogJoystickMotorsDriverEnlargedCenterDecorator( 
+//                    new AnalogJoystickMotorsDriverImpl(
+//                            new MotorsDriverSetMinimumSpeedDecorator(new MotorsDriverImpl((LeftRightMotors)robot)),
+//                            new StepperDecorator(new LinearConverter())
+//                    )
+//            );
+
         if (robot instanceof LeftRightMotors)
-            chaufer = new AnalogJoystickMotorsDriverEnlargedCenterDecorator( 
-                    new AnalogJoystickMotorsDriverImpl(
-                            new MotorsDriverSetMinimumSpeedDecorator(new MotorsDriverImpl((LeftRightMotors)robot)),
+            chaufer = new AnalogJoystickMotorsDriverEnlargedCenterDecorator(
+                      new AnalogJoystickMotorsDriverImpl(
+                            new MotorsDriverImpl((LeftRightMotors)robot),
                             new StepperDecorator(new LinearConverter())
-                    )
+                      )
             );
 
 
-        if (piRobot instanceof PanTiltServos)
+        if (piRobot instanceof PanTiltServos){
             camera = new PanTiltStepByStepDriverImpl(
                     new PanTiltServoDriverImpl((PanTiltServos)piRobot, minimumPan, minimumTilt, maximumPan, maximumTilt),1,1);
-        
-        
+            camera.setPanTiltCenter();
+        }
+
         
         if (piRobot instanceof SideIRSensors){
             ((SideIRSensors)piRobot).getLeftIRSensor().addListener((IRSensorListener) (boolean isFired) ->{
@@ -170,12 +179,19 @@ public class RobotDriver {
         });
     }
 
-    static void shutDown() {
+    static void turnAllOff(){
         if (chaufer != null) chaufer.stopMotors();
         if (camera != null) camera.setPanTiltCenter();
         if (robot instanceof FrontLeds) ((FrontLeds) robot).getFrontLeds().turnOff();
         if (robot instanceof RearLeds) ((RearLeds) robot).getRearLeds().turnOff();
-
+    }
+    static void exit(){
+        turnAllOff();
+        System.exit(0);
+    }
+    
+    static void shutDown() {
+        turnAllOff();
         if (robot != null) ShutDown.shutDownNow();
         System.exit(0);
     }

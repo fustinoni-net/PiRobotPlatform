@@ -256,8 +256,10 @@ function motorStop(){
 
 function motorChange(x,y){
     
-    x = Math.floor(x/10)*10;
-    y = Math.floor(y/10)*10;
+    x = Math.sign(x)* 9 + Math.floor(x/10)*10;
+    y = Math.sign(y)* 9 + Math.floor(y/10)*10;
+//    x =  Math.floor(x/10)*10;
+//    y =  Math.floor(y/10)*10;
     
     if (oldMotorX === x && oldMotorY ===y) return;
     

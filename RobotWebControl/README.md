@@ -14,7 +14,7 @@ Before building and running the program adjust the pom properties:
 
 according to your robot. The committed one is: Pi2GoLiteDriver.
 
-Use  CUSTOM-clean package assembly:single to create a zip file with all the dependencies to run the program on the Raspberry Pi and mvn antrun:run to run it.
+Use mvn clean package assembly:single to create a zip file with all the dependencies to run the program on the Raspberry Pi and mvn antrun:run to run it.
 
 Runnable class in the package:
 * net.fustinoni.pi.robotWebControl.CamJamEK3Driver
@@ -25,6 +25,7 @@ You can run the program in the artifacts directory using the command:
 
 `sudo java  -jar /home/pi/artifacts/RobotWebControl-0.0.1-SNAPSHOT/RobotWebControl-0.0.1-SNAPSHOT.jar`
 
+to drive the robot set in the pom, or
 
 `sudo java  -cp /home/pi/artifacts/RobotWebControl-0.0.1-SNAPSHOT/RobotWebControl-0.0.1-SNAPSHOT.jar net.fustinoni.pi.robotWebControl.Pi2GoLiteDriver`
 
