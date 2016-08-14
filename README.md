@@ -234,6 +234,12 @@ or just execute the class from the jars in the "artifacts" directory with the co
 
     sudo java -cp file.jar class
 
+To debug the projects use the command
+
+    mvn antrun:run -P debug-server
+
+that will use the debug-server maven profile and then connect the remote debug of your ide via dt_socket to your Raspeberry Pi on the port 8765.
+
 
 ## Terms and conditions:
 
