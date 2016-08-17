@@ -238,7 +238,7 @@ To debug the projects use the command
 
     mvn antrun:run -P debug-server
 
-that will use the debug-server maven profile and then connect the remote debug of your ide via dt_socket to your Raspeberry Pi on the port 8765.
+that will use the debug-server maven profile. Then connect the remote debug of your IDE via dt_socket to your Raspeberry Pi on the port 8765.
 
 
 ## Terms and conditions:
