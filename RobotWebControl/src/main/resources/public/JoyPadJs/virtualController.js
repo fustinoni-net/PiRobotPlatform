@@ -131,11 +131,22 @@ function draw() {
             c.lineWidth = 2;
             c.arc(leftPointerStartPos.x, leftPointerStartPos.y-canvas.getBoundingClientRect().top, 50, 0, Math.PI * 2, true);
             c.stroke();
+            
             c.beginPath();
             c.strokeStyle = outCircleColor;
             c.lineWidth = 4;
-            c.arc(leftPointerStartPos.x, leftPointerStartPos.y-canvas.getBoundingClientRect().top, 100, 0, Math.PI * 2, true);
+            c.arc(leftPointerStartPos.x, leftPointerStartPos.y-canvas.getBoundingClientRect().top, 100, .25 * Math.PI, .75 * Math.PI);
             c.stroke();
+            c.beginPath();
+            c.arc(leftPointerStartPos.x, leftPointerStartPos.y-canvas.getBoundingClientRect().top, 100, 1.25 * Math.PI, 1.75 * Math.PI);
+            c.stroke();            
+            
+            //c.beginPath();
+            //c.strokeStyle = outCircleColor;
+            //c.lineWidth = 4;
+            //c.arc(leftPointerStartPos.x, leftPointerStartPos.y-canvas.getBoundingClientRect().top, 100, 0, Math.PI * 2, true);
+            //c.stroke();
+
             c.beginPath();
             c.strokeStyle = "cyan";
             c.lineWidth = 2;
@@ -166,11 +177,24 @@ function draw() {
             c.lineWidth = 2;
             c.arc(rightPointerStartPos.x, rightPointerStartPos.y-canvas.getBoundingClientRect().top, 50, 0, Math.PI * 2, true);
             c.stroke();
+
+
             c.beginPath();
             c.strokeStyle = outCircleColor;
             c.lineWidth = 4;
-            c.arc(rightPointerStartPos.x, rightPointerStartPos.y-canvas.getBoundingClientRect().top, 100, 0, Math.PI * 2, true);
+            c.arc(rightPointerStartPos.x, rightPointerStartPos.y-canvas.getBoundingClientRect().top, 100, -.25 * Math.PI, .25 * Math.PI, false);
             c.stroke();
+            c.beginPath();
+            c.arc(rightPointerStartPos.x, rightPointerStartPos.y-canvas.getBoundingClientRect().top, 100, .75 * Math.PI, 1.25 * Math.PI, false);
+            c.stroke();
+
+
+//            c.beginPath();
+//            c.strokeStyle = outCircleColor;
+//            c.lineWidth = 4;
+//            c.arc(rightPointerStartPos.x, rightPointerStartPos.y-canvas.getBoundingClientRect().top, 100, 0, Math.PI * 2, true);
+//            c.stroke();
+            
             c.beginPath();
             c.strokeStyle = "cyan";
             c.lineWidth = 2;
