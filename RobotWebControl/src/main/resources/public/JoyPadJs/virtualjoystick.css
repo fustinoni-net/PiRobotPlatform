@@ -31,6 +31,7 @@ canvas {
     eight: auto;
     text-align: center;
     background-color: #ffffff;
+    display: block;
 }
 
 /*

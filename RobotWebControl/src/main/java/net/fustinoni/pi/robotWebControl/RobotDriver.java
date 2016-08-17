@@ -29,6 +29,7 @@ package net.fustinoni.pi.robotWebControl;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -63,8 +64,8 @@ import static spark.Spark.*;
  */
 public class RobotDriver {
     
-    static Map<Session, String> userUsernameMap = new HashMap<>();
-    static int nextUserNumber = 1; //Assign to username for next connecting user
+    static HashSet<Session> userSet = new HashSet<>();
+    static Session master ; //The session with the robot controll
     
     static PiRobot robot ;
     static AnalogJoystickMotorsDriver chaufer ;
@@ -122,34 +123,34 @@ public class RobotDriver {
             );
 
 
-        if (piRobot instanceof PanTiltServos){
+        if (robot instanceof PanTiltServos){
             camera = new PanTiltStepByStepDriverImpl(
-                    new PanTiltServoDriverImpl((PanTiltServos)piRobot, minimumPan, minimumTilt, maximumPan, maximumTilt),1,1);
+                    new PanTiltServoDriverImpl((PanTiltServos)robot, minimumPan, minimumTilt, maximumPan, maximumTilt),1,1);
             camera.setPanTiltCenter();
         }
 
         
-        if (piRobot instanceof SideIRSensors){
-            ((SideIRSensors)piRobot).getLeftIRSensor().addListener((IRSensorListener) (boolean isFired) ->{
+        if (robot instanceof SideIRSensors){
+            ((SideIRSensors)robot).getLeftIRSensor().addListener((IRSensorListener) (boolean isFired) ->{
                 System.out.println(" --> LeftIRSensor is: ".concat(isFired ? "on" : "off" ));
                 broadcastLeftIRSensorMessage(isFired);
             });
 
-            ((SideIRSensors)piRobot).getRightIRSensor().addListener((IRSensorListener) (boolean isFired) ->{
+            ((SideIRSensors)robot).getRightIRSensor().addListener((IRSensorListener) (boolean isFired) ->{
                 System.out.println(" --> RightIRSensor is: ".concat(isFired ? "on" : "off" ));
                 broadcastRightIRSensorMessage(isFired);
             });
         }
         
-        if (piRobot instanceof FrontalUltraSoundSensor){
-            ((FrontalUltraSoundSensor)piRobot).getUltraSoundSensor().addListener((UltraSoundSensorListener) (long distance) ->{
+        if (robot instanceof FrontalUltraSoundSensor){
+            ((FrontalUltraSoundSensor)robot).getUltraSoundSensor().addListener((UltraSoundSensorListener) (long distance) ->{
                 broadcastFrontalUltraSoundSensorMessage(distance);
             });
 
-            ((FrontalUltraSoundSensor)piRobot).getUltraSoundSensor().startSensor(1);
+            ((FrontalUltraSoundSensor)robot).getUltraSoundSensor().startSensor(1);
         }
-    }    
-    
+    }
+
     public static void main(String[] args) {
         startPiRobotWebInterface(null);
     }
@@ -168,7 +169,7 @@ public class RobotDriver {
 
     //Sends a message to all users
     public static synchronized void broadcastMessage(String variable, String value) {
-        userUsernameMap.keySet().stream().filter(Session::isOpen).forEach(session -> {
+        userSet.stream().filter(Session::isOpen).forEach(session -> {
             try {
                 session.getRemote().sendString(String.valueOf(new JSONObject()
                     .put(variable, value)

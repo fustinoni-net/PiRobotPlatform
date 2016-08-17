@@ -1,47 +1,50 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <title>Robot JoyPad</title>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width; height=device-height; initial-scale=1.0; maximum-scale=1.0;">
-        <link href="JoyPadJs/virtualjoystick.css" rel="stylesheet" type="text/css"/>
-        <script src="JoyPadJs/Collection.js" type="text/javascript"></script>
-        <script src="JoyPadJs/Vector2.js" type="text/javascript"></script>
-        <script src="JoyPadJs/hand.js" type="text/javascript"></script>
-        <script src="JoyPadJs/JoyPad.js" type="text/javascript"></script>
+        <title>Controllers</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body{
+                background-color: #111133;
+            }
+
+            div{
+                align-content: center;
+                padding: 10% 10%;
+            }
+            a{
+                margin: 25px;
+                display: block;
+            }
+            a:link, a:visited {
+                background-color: green;
+                color: white;
+                padding: 14px 25px;
+                text-align: center;
+                text-decoration: none;
+            }
+
+            a:hover {
+                background-color: orangered;
+            }            
+
+            a:active {
+                background-color: red;
+            }            
+
+        </style>
+            
     </head>
     <body>
-    <div class="container">
-        <table class="controlTable">
-            <tr>
-                <td class="sensorTd" id="leftLed">&nbsp;</td>
-                <td class="sensorTd" id="distance"></td>
-                <td class="sensorTd" id="rightLed">&nbsp;</td>
-            </tr>
-        </table>
-        <table class="controlTable">
-            <tr>
-                <td class="buttonTd" id="bLeft">&lArr;</td>
-                <td class="buttonTd" id="bRight">&rArr;</td>
-                <td class="buttonTd" id="bUp">&uArr;</td>
-                <td class="buttonTd" id="bDown">&dArr;</td>
-                <td class="buttonTd" id="bCenter">&CircleDot;</td>
-                <td class="buttonTd" id="bA">a</td>
-                <td class="buttonTd" id="bB">b</td>
-                <td class="buttonTd" id="bC">c</td>
-                <td class="buttonTd" id="bD">d</td>
-                <td class="buttonTd buttonOffTd" id="bOff">OFF</td>
-            </tr>
-        </table>
-    </div>
-    <div class="container">
-        <canvas id="canvasSurfaceGame">
-        </canvas>
-    </div>
-
-        <!--
-        <canvas style="display: block; position: absolute; transform-origin: 30px 30px 0px; transform: translate3d(918px, 263px, 0px) rotate(0.177336deg);" height="60" width="60"></canvas>
-    -->
+        <div>
+            <a href="twoJoystick.html">Two joystick</a>
+            <a href="singleJoystick.html">Single joystick</a>
+        </div>
     </body>
 </html>

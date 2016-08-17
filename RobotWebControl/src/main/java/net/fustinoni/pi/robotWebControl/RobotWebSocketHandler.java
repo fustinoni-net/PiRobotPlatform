@@ -49,8 +49,8 @@ public class RobotWebSocketHandler {
     public void onConnect(Session user) throws Exception 
     {
         System.out.println("Connected " + user.getRemoteAddress().getHostString() );
-        String username = "User" + RobotDriver.nextUserNumber++;
-        RobotDriver.userUsernameMap.put(user, username);
+        if (RobotDriver.master == null) RobotDriver.master = user;
+        RobotDriver.userSet.add(user);
 
         if (RobotDriver.robot instanceof SideIRSensors){
             RobotDriver.broadcastRightIRSensorMessage(((SideIRSensors)RobotDriver.robot).getRightIRSensor().isTriggered());
@@ -63,31 +63,31 @@ public class RobotWebSocketHandler {
     public void onClose(Session user, int statusCode, String reason) {
         
         System.out.println("Closed " + user.getRemoteAddress().getHostString() + " statusCode " + statusCode + " reason " + reason );
-        String username = RobotDriver.userUsernameMap.get(user);
 
-        if (RobotDriver.userUsernameMap.get(user).equals("User1"))
-            RobotDriver.exit();
 
-        RobotDriver.userUsernameMap.remove(user);
+//        if (user.equals(RobotDriver.master))
+//            RobotDriver.exit();
+
+        RobotDriver.master = null;
+        RobotDriver.userSet.remove(user);
     }
 
     @OnWebSocketMessage
     public void onMessage(Session user, String message) {
-        
-        if (RobotDriver.userUsernameMap.get(user).equals("User1"))
+
+        if (user.equals(RobotDriver.master))
             System.out.println("User " + user.getRemoteAddress().getHostString() + " message " + message );
         else{
             System.out.println("User " + user.getRemoteAddress().getHostString() + " Not authorized." );
             return;
         }
-        //M:x=0,y=0
+
         if (message.startsWith("M")){
-            
+            //M:x=0,y=0            
             int x = Integer.valueOf(message.substring(4, message.indexOf(",")));
             int y = Integer.valueOf(message.substring(message.indexOf("y=")+2));
 
             if (chaufer != null) chaufer.jostickImput(-x, y, -100, 100, -100, 100, 0, 0);
-
         }
         else if (message.startsWith("btn")){
 
@@ -97,8 +97,8 @@ public class RobotWebSocketHandler {
             if (message.equals("btn:up"))     if (RobotDriver.camera!= null) RobotDriver.camera.moveUp();
             if (message.equals("btn:down"))   if (RobotDriver.camera!= null) RobotDriver.camera.moveDown();
             if (message.equals("btn:center")) if (RobotDriver.camera!= null) RobotDriver.camera.setPanTiltCenter();
-            if (message.equals("btn:a")) if (RobotDriver.robot instanceof FrontLeds) ((FrontLeds) RobotDriver.robot).getFrontLeds().toggle();
-            if (message.equals("btn:b")) if (RobotDriver.robot instanceof RearLeds) ((RearLeds) RobotDriver.robot).getRearLeds().toggle();
+            if (message.equals("btn:a"))      if (RobotDriver.robot instanceof FrontLeds) ((FrontLeds) RobotDriver.robot).getFrontLeds().toggle();
+            if (message.equals("btn:b"))      if (RobotDriver.robot instanceof RearLeds) ((RearLeds) RobotDriver.robot).getRearLeds().toggle();
             if (message.equals("btn:c")) ;
             if (message.equals("btn:d")) ;
 
