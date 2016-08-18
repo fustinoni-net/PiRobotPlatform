@@ -6,7 +6,9 @@ The client server communication is base on a websocket.
 
 ## Build the project
 Before building the subproject locally you have to build the parent one. Refer to the PiRobotPlatform readme file for instructions.
-Then you can build the program with mvn install.
+Then you can build the program with:
+    
+     mvn install
 
 Before building and running the program adjust the pom properties:
 
@@ -14,7 +16,15 @@ Before building and running the program adjust the pom properties:
 
 according to your robot. The committed one is: Pi2GoLiteDriver.
 
-Use mvn clean package assembly:single to create a zip file with all the dependencies to run the program on the Raspberry Pi and mvn antrun:run to run it.
+Use 
+    
+    mvn clean package assembly:single 
+
+to create a zip file with all the dependencies to run the program on the Raspberry Pi. Then 
+
+    mvn antrun:run 
+
+to run it.
 
 Runnable class in the package:
 * net.fustinoni.pi.robotWebControl.CamJamEK3Driver
