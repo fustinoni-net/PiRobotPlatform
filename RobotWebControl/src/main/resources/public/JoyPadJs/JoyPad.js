@@ -91,7 +91,8 @@ function resetCanvas(e) {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     
-    halfWidth = canvas.width / 2;
+    //halfWidth = canvas.width / 2;
+    halfWidth = canvas.width; // This remove the right touches that are not use for now.
     halfHeight = canvas.height / 2;
 
     //make sure we scroll to the top left. 
