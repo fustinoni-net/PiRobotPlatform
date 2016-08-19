@@ -28,9 +28,11 @@
 package net.fustinoni.pi.robotWebControl;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import net.fustinoni.pi.robot.PiRobot;
@@ -64,7 +66,7 @@ import static spark.Spark.*;
  */
 public class RobotDriver {
     
-    static HashSet<Session> userSet = new HashSet<>();
+    static Set<Session> userSet = Collections.synchronizedSet(new HashSet<>());
     static Session master ; //The session with the robot controll
     
     static PiRobot robot ;
@@ -78,8 +80,8 @@ public class RobotDriver {
 
 
     
-//    private static Timer timer;
-//    private static boolean sensorStatus = false;
+    private static Timer timer;
+    private static boolean sensorStatus = false;
     
     
     public static void startPiRobotWebInterface(final PiRobot piRobot) {
@@ -89,20 +91,20 @@ public class RobotDriver {
         
         init();
 
-//        if (timer == null){
-//        
-//            timer = new Timer();
-//            timer.scheduleAtFixedRate(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    sensorStatus = !sensorStatus;
-//                    System.out.println("messaaggio inviato");
-//                    broadcastFrontalUltraSoundSensorMessage(System.currentTimeMillis());
-//                    broadcastLeftIRSensorMessage(sensorStatus);
-//                    broadcastRightIRSensorMessage(!sensorStatus);
-//                }
-//            }, 0, 1 * 500); 
-//        }
+        if (timer == null){
+        
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    sensorStatus = !sensorStatus;
+                    System.out.println("messaaggio inviato");
+                    broadcastFrontalUltraSoundSensorMessage(System.currentTimeMillis());
+                    broadcastLeftIRSensorMessage(sensorStatus);
+                    broadcastRightIRSensorMessage(!sensorStatus);
+                }
+            }, 0, 1 * 500); 
+        }
         
         robot = piRobot;
 
@@ -169,7 +171,9 @@ public class RobotDriver {
 
     //Sends a message to all users
     public static synchronized void broadcastMessage(String variable, String value) {
-        userSet.stream().filter(Session::isOpen).forEach(session -> {
+        
+        Set<Session> s =Collections.synchronizedSet(userSet);
+        s.stream().filter(Session::isOpen).forEach(session -> {
             try {
                 session.getRemote().sendString(String.valueOf(new JSONObject()
                     .put(variable, value)
