@@ -91,21 +91,22 @@ public class RobotDriver {
         
         init();
 
-        if (timer == null){
-        
-            timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    sensorStatus = !sensorStatus;
-                    System.out.println("messaaggio inviato");
-                    broadcastFrontalUltraSoundSensorMessage(System.currentTimeMillis());
-                    broadcastLeftIRSensorMessage(sensorStatus);
-                    broadcastRightIRSensorMessage(!sensorStatus);
-                }
-            }, 0, 1 * 500); 
+        if (piRobot == null){
+            if (timer == null){
+
+                timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        sensorStatus = !sensorStatus;
+                        System.out.println("messaaggio inviato");
+                        broadcastFrontalUltraSoundSensorMessage(System.currentTimeMillis());
+                        broadcastLeftIRSensorMessage(sensorStatus);
+                        broadcastRightIRSensorMessage(!sensorStatus);
+                    }
+                }, 0, 1 * 500); 
+            }
         }
-        
         robot = piRobot;
 
 //        if (robot instanceof LeftRightMotors)
