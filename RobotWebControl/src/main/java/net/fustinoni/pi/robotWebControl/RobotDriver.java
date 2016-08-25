@@ -88,7 +88,7 @@ public class RobotDriver {
         staticFileLocation("/public");
         
         webSocket("/robot", RobotWebSocketHandler.class);
-        
+
         init();
 
         if (piRobot == null){
@@ -107,6 +107,7 @@ public class RobotDriver {
                 }, 0, 1 * 500); 
             }
         }
+
         robot = piRobot;
 
 //        if (robot instanceof LeftRightMotors)
