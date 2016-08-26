@@ -280,18 +280,27 @@ function onPointerUp(e) {
 //
 //    touches.remove(e.pointerId);
 
+    if (leftPointerID === e.pointerId){
+        touches.remove(leftPointerID);
+        touches.remove(rightPointerID);
 
-    touches.remove(leftPointerID);
-    touches.remove(rightPointerID);
+        leftPointerID = -1;
+        rightPointerID = -1;    
 
-    leftPointerID = -1;
-    rightPointerID = -1;    
+        leftVector.reset(0, 0);
+        rightVector.reset(0, 0);
 
-    leftVector.reset(0, 0);
-    rightVector.reset(0, 0);
+        yPosition = 0;
+        xPosition = 0;
+    }else if (rightPointerID === e.pointerId){
 
-    yPosition = 0;
-    xPosition = 0;
+        touches.remove(rightPointerID);
+
+        rightPointerID = -1;    
+
+        rightVector.reset(0, 0);
+        xPosition = 0;
+    }
 
     motorChange(xPosition,yPosition);
 
