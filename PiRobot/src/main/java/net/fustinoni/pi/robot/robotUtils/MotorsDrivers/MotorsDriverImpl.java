@@ -27,6 +27,8 @@
 
 package net.fustinoni.pi.robot.robotUtils.MotorsDrivers;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.fustinoni.pi.robot.component.LeftRightMotors;
 import net.fustinoni.pi.robot.device.Motor;
 
@@ -61,9 +63,25 @@ public class MotorsDriverImpl implements MotorsDriver {
 
         if (speed > 0 && speed <= 100) {
             if (motor.isForward() && speed == motor.getSpeed()) return;
+            if (motor.getSpeed()== 0){
+                motor.moveForward(50);
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException ex) {
+                    
+                }
+            }
             motor.moveForward(speed);
         } else if (speed >= -100 && speed < 0) {
             if (!motor.isForward() && -speed == motor.getSpeed()) return;
+            if (motor.getSpeed()== 0){
+                motor.moveBackward(50);
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException ex) {
+
+                }
+            }
             motor.moveBackward(-speed);
         } else {
             if (0 == motor.getSpeed()) return;

@@ -98,9 +98,9 @@ public class AnalogJoystickMotorsDriverStepperDecoratorTest {
             int x=xCenter[i]; int y=yMax[i];
             instance.jostickImput(x, y, xMin[i], xMax[i], yMin[i], yMax[i], xCenter[i], yCenter[i]);
 
-            assertEquals(95, leftMotorSpeed);
+            assertEquals(100, leftMotorSpeed);
             assertTrue(leftMotorisForward);
-            assertEquals(95, rightMotorSpeed);
+            assertEquals(100, rightMotorSpeed);
             assertTrue(rightMotorisForward);
         }
     }
@@ -129,9 +129,9 @@ public class AnalogJoystickMotorsDriverStepperDecoratorTest {
             int x=xCenter[i]; int y=yMin[i];
             instance.jostickImput(x, y, xMin[i], xMax[i], yMin[i], yMax[i], xCenter[i], yCenter[i]);
 
-            assertEquals(95, leftMotorSpeed);
+            assertEquals(100, leftMotorSpeed);
             assertFalse(leftMotorisForward);
-            assertEquals(95, rightMotorSpeed);
+            assertEquals(100, rightMotorSpeed);
             assertFalse(rightMotorisForward);
         }
     }        
@@ -162,9 +162,9 @@ public class AnalogJoystickMotorsDriverStepperDecoratorTest {
             int x=xMin[i]; int y=yCenter[i];
             instance.jostickImput(x, y, xMin[i], xMax[i], yMin[i], yMax[i], xCenter[i], yCenter[i]);
 
-            assertEquals(95, leftMotorSpeed);
+            assertEquals(100, leftMotorSpeed);
             assertFalse(leftMotorisForward);
-            assertEquals(95, rightMotorSpeed);
+            assertEquals(100, rightMotorSpeed);
             assertTrue(rightMotorisForward);
         }
     }
@@ -194,9 +194,9 @@ public class AnalogJoystickMotorsDriverStepperDecoratorTest {
             int x=xMax[i]; int y=yCenter[i];
             instance.jostickImput(x, y, xMin[i], xMax[i], yMin[i], yMax[i], xCenter[i], yCenter[i]);
 
-            assertEquals(95, leftMotorSpeed);
+            assertEquals(100, leftMotorSpeed);
             assertTrue(leftMotorisForward);
-            assertEquals(95, rightMotorSpeed);
+            assertEquals(100, rightMotorSpeed);
             assertFalse(rightMotorisForward);
         }
     }
@@ -229,7 +229,7 @@ public class AnalogJoystickMotorsDriverStepperDecoratorTest {
             int x=xMin[i] + (xCenter[i]-xMin[i])*50/100; int y= yCenter[i] + (yMax[i]-yCenter[i])*50/100;
             instance.jostickImput(x, y, xMin[i], xMax[i], yMin[i], yMax[i], xCenter[i], yCenter[i]);
 
-            assertEquals(20, leftMotorSpeed);
+            assertEquals(25, leftMotorSpeed);
             assertTrue(leftMotorisForward);
             assertEquals(40, rightMotorSpeed);
             assertTrue(rightMotorisForward);
@@ -251,7 +251,7 @@ public class AnalogJoystickMotorsDriverStepperDecoratorTest {
 
             assertEquals(40, leftMotorSpeed);
             assertTrue(leftMotorisForward);
-            assertEquals(20, rightMotorSpeed);
+            assertEquals(25, rightMotorSpeed);
             assertTrue(rightMotorisForward);
         }
     }
@@ -267,7 +267,7 @@ public class AnalogJoystickMotorsDriverStepperDecoratorTest {
 
             assertEquals(40, leftMotorSpeed);
             assertFalse(leftMotorisForward);
-            assertEquals(20, rightMotorSpeed);
+            assertEquals(25, rightMotorSpeed);
             assertFalse(rightMotorisForward);
         }
 
@@ -281,7 +281,7 @@ public class AnalogJoystickMotorsDriverStepperDecoratorTest {
         int x=x=xMin[i] + (xCenter[i]-xMin[i])*50/100; int y= yMin[i] + (yCenter[i]-yMin[i])*50/100;
         instance.jostickImput(x, y, xMin[i], xMax[i], yMin[i], yMax[i], xCenter[i], yCenter[i]);
 
-        assertEquals(20, leftMotorSpeed);
+        assertEquals(25, leftMotorSpeed);
         assertFalse(leftMotorisForward);
         assertEquals(40, rightMotorSpeed);
         assertFalse(rightMotorisForward);

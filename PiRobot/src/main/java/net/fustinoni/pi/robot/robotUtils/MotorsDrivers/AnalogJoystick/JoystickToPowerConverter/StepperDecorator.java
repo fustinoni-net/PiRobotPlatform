@@ -80,16 +80,16 @@ public class StepperDecorator implements AnalogJoystickValuesToMotorsPower{
         
         if (abs < 10) return 0;
         else if (abs <= 10) out = 0;
-        else if (abs <= 20) out = 15;
-        else if (abs <= 30) out = 20;
+        else if (abs <= 20) out = 20;
+        else if (abs <= 30) out = 25;
         else if (abs <= 40) out = 30;
         else if (abs <= 50) out = 40;
         else if (abs <= 60) out = 50;
         else if (abs <= 70) out = 60;
         else if (abs <= 80) out = 70;
         else if (abs <= 90) out = 80;
-        else if (abs <= 100) out = 95;
-        else if (abs > 100) out = 100;
+        else if (abs < 100) out = 95;
+        else if (abs >= 100) out = 100;
         
         return sign * out;
     }
