@@ -257,8 +257,11 @@ function motorStop(){
 
 function motorChange(x,y){
     
-    x = Math.sign(x)* 9 + Math.floor(x/10)*10;
-    y = Math.sign(y)* 9 + Math.floor(y/10)*10;
+    
+    //(a/b>>0) integer division see: http://stackoverflow.com/questions/4228356/integer-division-in-javascript
+    
+    x = Math.sign(x)* 9 + (x/10>>0)*10;
+    y = Math.sign(y)* 9 + (y/10>>0)*10;
 //    x =  Math.floor(x/10)*10;
 //    y =  Math.floor(y/10)*10;
     
@@ -269,3 +272,12 @@ function motorChange(x,y){
     sendMessage("M:x=" + x + ",y=" + y);
 }
 
+
+
+Math.sign = Math.sign || function(x) {
+  x = +x; // convert to a number
+  if (x === 0 || isNaN(x)) {
+    return x;
+  }
+  return x > 0 ? 1 : -1;
+};
