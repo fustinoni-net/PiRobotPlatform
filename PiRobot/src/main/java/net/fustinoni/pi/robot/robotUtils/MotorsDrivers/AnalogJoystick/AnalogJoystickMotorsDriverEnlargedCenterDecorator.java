@@ -39,10 +39,9 @@ public class AnalogJoystickMotorsDriverEnlargedCenterDecorator extends AnalogJoy
 
     @Override
     public void jostickImput(int x, int y, int xMin, int xMax, int yMin, int yMax, int xCenter, int yCenter) {
-        y= (y > (yCenter-9) && y < (yCenter+9))? yCenter : y;
-        x= (x > (xCenter-9 ) && x < (xCenter+9) )? xCenter : x;
+        y= (y >= (yCenter-9) && y <= (yCenter+9))? yCenter : y;
+        x= (x >= (xCenter-9 ) && x <= (xCenter+9) )? xCenter : x;
         super.jostickImput(x, y, xMin, xMax, yMin, yMax, xCenter, yCenter);
     }
-    
     
 }
