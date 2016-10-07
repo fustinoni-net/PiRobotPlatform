@@ -99,12 +99,12 @@ public class RobotDriver {
                     @Override
                     public void run() {
                         sensorStatus = !sensorStatus;
-                        System.out.println("messaaggio inviato");
+                        //System.out.println("messaaggio inviato");
                         broadcastFrontalUltraSoundSensorMessage(System.currentTimeMillis());
                         broadcastLeftIRSensorMessage(sensorStatus);
                         broadcastRightIRSensorMessage(!sensorStatus);
                     }
-                }, 0, 1 * 500); 
+                }, 0, 2 * 500); 
             }
         }
 
