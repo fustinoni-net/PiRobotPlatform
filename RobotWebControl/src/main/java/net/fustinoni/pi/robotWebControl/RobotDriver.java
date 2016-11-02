@@ -29,9 +29,7 @@ package net.fustinoni.pi.robotWebControl;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -50,7 +48,6 @@ import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.AnalogJoystick.AnalogJoys
 import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.AnalogJoystick.JoystickToPowerConverter.LinearConverter;
 import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.AnalogJoystick.JoystickToPowerConverter.StepperDecorator;
 import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.MotorsDriverImpl;
-import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.MotorsDriverSetMinimumSpeedDecorator;
 import net.fustinoni.pi.robot.robotUtils.PanTiltServoDrivers.PanTiltServoDriverImpl;
 import net.fustinoni.pi.robot.robotUtils.PanTiltServoDrivers.StepByStep.PanTiltStepByStepDriver;
 import net.fustinoni.pi.robot.robotUtils.PanTiltServoDrivers.StepByStep.PanTiltStepByStepDriverImpl;
@@ -81,7 +78,9 @@ public class RobotDriver {
 
     
     private static Timer timer;
+    private static Timer watchDog;
     private static boolean sensorStatus = false;
+    static boolean pong;
     
     
     public static void startPiRobotWebInterface(final PiRobot piRobot) {
@@ -129,7 +128,7 @@ public class RobotDriver {
 
         if (robot instanceof PanTiltServos){
             camera = new PanTiltStepByStepDriverImpl(
-                    new PanTiltServoDriverImpl((PanTiltServos)robot, minimumPan, minimumTilt, maximumPan, maximumTilt),1,1);
+                    new PanTiltServoDriverImpl((PanTiltServos)robot, minimumPan, minimumTilt, maximumPan, maximumTilt),5,5);
             camera.setPanTiltCenter();
         }
 
@@ -153,12 +152,34 @@ public class RobotDriver {
 
             ((FrontalUltraSoundSensor)robot).getUltraSoundSensor().startSensor(1);
         }
+        
+        if (watchDog == null){
+
+            watchDog = new Timer();
+            watchDog.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    if (master == null) return;
+                    if (!pong){ turnAllOff();
+                        sensorStatus = !sensorStatus;
+                        System.out.println("watchDog");
+                    }
+                    pong = false;
+                    broadcastPingMessage();
+                }
+            }, 0, 1000); 
+        }
     }
 
     public static void main(String[] args) {
         startPiRobotWebInterface(null);
     }
 
+    public static void broadcastPingMessage() {
+        broadcastMessage("ping", String.valueOf(System.currentTimeMillis()));
+    }
+
+    
     public static void broadcastFrontalUltraSoundSensorMessage( long distance) {
         broadcastMessage("distanceFront", String.valueOf(distance));
     }
@@ -187,11 +208,13 @@ public class RobotDriver {
     }
 
     static void turnAllOff(){
+        System.out.println("All off");
         if (chaufer != null) chaufer.stopMotors();
         if (camera != null) camera.setPanTiltCenter();
         if (robot instanceof FrontLeds) ((FrontLeds) robot).getFrontLeds().turnOff();
         if (robot instanceof RearLeds) ((RearLeds) robot).getRearLeds().turnOff();
     }
+
     static void exit(){
         turnAllOff();
         System.exit(0);

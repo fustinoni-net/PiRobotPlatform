@@ -65,20 +65,24 @@ public class RobotWebSocketHandler {
         System.out.println("Closed " + user.getRemoteAddress().getHostString() + " statusCode " + statusCode + " reason " + reason );
 
 
-//        if (user.equals(RobotDriver.master))
-//            RobotDriver.exit();
+        if (user.equals(RobotDriver.master)){
+            //RobotDriver.exit();
 
-        RobotDriver.master = null;
+            RobotDriver.turnAllOff();
+            RobotDriver.master = null;
+        }
+
         RobotDriver.userSet.remove(user);
     }
 
     @OnWebSocketMessage
     public void onMessage(Session user, String message) {
 
-        if (user.equals(RobotDriver.master))
-            System.out.println("User " + user.getRemoteAddress().getHostString() + " message " + message );
+        if (RobotDriver.master != null && user.equals(RobotDriver.master)){
+            if (!message.equals("pong")) System.out.println("User " + user.getRemoteAddress().getHostString() + " message " + message );
+        }
         else{
-            System.out.println("User " + user.getRemoteAddress().getHostString() + " Not authorized." );
+            if (!message.equals("pong")) System.out.println("User " + user.getRemoteAddress().getHostString() + " Not authorized." );
             return;
         }
 
@@ -88,6 +92,8 @@ public class RobotWebSocketHandler {
             int y = Integer.valueOf(message.substring(message.indexOf("y=")+2));
 
             if (chaufer != null) chaufer.jostickImput(-x, y, -100, 100, -100, 100, 0, 0);
+        }else if (message.equals("pong")){
+            RobotDriver.pong = true;
         }
         else if (message.startsWith("btn")){
 

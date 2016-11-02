@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Robot JoyPad</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <!--meta name="viewport" content="width=device-width; height=device-height; initial-scale=1.0; maximum-scale=1.0;"-->
+        <meta name="viewport" content="width=device-width; height=device-height; initial-scale=1.5; maximum-scale=0.5;">
+        <link href="JoyPadJs/virtualjoystickCanvasVideo.css" rel="stylesheet" type="text/css"/>
+        <script src="JoyPadJs/Collection.js" type="text/javascript"></script>
+        <script src="JoyPadJs/Vector2.js" type="text/javascript"></script>
+        <script src="JoyPadJs/hand.js" type="text/javascript"></script>
+        <script src="JoyPadJs/JoyPadCanvasVideo.js" type="text/javascript"></script>
+
+    </head>
+    <body>
+    <div class="controlsContainer">
+        <div class="sensors">
+                <canvas class="sensor leftLedSensor" id="leftLed"></canvas>
+                <canvas class="sensor distanceSensor" id="distance"></canvas>
+                <canvas class="sensor rightLedSensor" id="rightLed"></canvas>
+        </div>
+        <div class="distanceTextSensor" id="distanceText">00</div>
+        <div class="buttons">
+
+                <div class="button" id="bLeft">&lArr;</div>
+                <div class="button" id="bRight">&rArr;</div>
+                <div class="button" id="bUp">&uArr;</div>
+                <div class="button" id="bDown">&dArr;</div>
+                <div class="button" id="bCenter">&CircleDot;</div>
+                <div class="button" id="bA">a</div>
+                <div class="button" id="bB">b</div>
+                <div class="button" id="bC">c</div>
+                <div class="button" id="bD">d</div>
+                <div class="button buttonOff" id="bOff">OFF</div>
+
+        </div>
+
+    </div>
+      
+    <div class="container">
+        <canvas class="gameCanvas" id="canvasSurfaceGame"></canvas>
+    </div>
+    </body>
+</html>

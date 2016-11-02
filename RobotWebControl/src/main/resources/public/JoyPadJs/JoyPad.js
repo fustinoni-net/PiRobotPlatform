@@ -57,10 +57,12 @@ function updateStatus(msg) {
 
     if (data.distanceFront){
         distance.innerHTML = data.distanceFront;
-        if (data.distanceFront < 50)
+        if (data.distanceFront < 300)
             distance.style.backgroundColor = "red";
         else
             distance.style.backgroundColor = "green";
+    }else if (data.ping){
+        sendMessage("pong");
     }else if (data.leftIRSensor){
         if (data.leftIRSensor == "true")
             leftLed.style.backgroundColor = "red";

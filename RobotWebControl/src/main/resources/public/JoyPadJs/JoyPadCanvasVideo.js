@@ -54,7 +54,7 @@ function updateStatus(msg) {
 
     if (data.distanceFront){
 
-        if (data.distanceFront < 50)
+        if (data.distanceFront < 300)
             distance.style.backgroundColor = "red";
         else
             distance.style.backgroundColor = "green";
@@ -224,6 +224,9 @@ function onPointerUp(e) {
 function setupCanvas() {
 
     canvas = document.getElementById('canvasSurfaceGame');
+    
+    canvas.style.backgroundImage = "url(http://raspi-pi2go.homenet.telecomitalia.it:8080/stream/video.mjpeg)";
+    //canvas.style.backgroundImage = "url(http://" + location.hostname + ":8080/stream/video.mjpeg)";
     c = canvas.getContext('2d');
 
     leftLed = document.getElementById('leftLed');
