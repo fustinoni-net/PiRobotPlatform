@@ -1,15 +1,43 @@
 # PiRobotPlatform
 
-Java API to control generic robots based on the Raspberry Pi (https://www.raspberrypi.org/).
+Java API to control: 
+* Pi2Go-Lite Robot Kit ( http://pi2go.co.uk/ )
+* CamJam EduKit 3 – Robotics ( http://camjam.me/?page_id=1035 )
+* generic robots based on the Raspberry Pi ( https://www.raspberrypi.org/ ).
 
-The aim of this library is purely educational. Don't use it for any other purpose.
+The library is composed by some different subproject that logically, at least for me, divide the sources for scopes.
 
-This library is based on:
-* Pi4J library (http://pi4j.com/)
+* PiRobotPlatform: the aggregator for all other modules.
+* ExecuteFromJar: utility to run a program from inside a jar file. Used to run the ServoBlaster.
+* PiRobot: all the interfaces used to describe the robots components.
+* PiRobotImplementation: the implementation of all common component
+* HCSR04: build the native C library (Jni) for driving the HCSR04 ultrasound sensor.
+* Pi2Go: all the classes implementing the Pi2Go-Lite robot, plus some examples on how to use the library.
+* PiRobotRMI: interfaces and local object to command the robot remotely via RMI ( https://docs.oracle.com/javase/tutorial/rmi/ )
+* Pi2GoRMI: the Pi2Go-Lite implementation of the PiRobotRMI library plus an example on how to use it.
+* CamJamEK3: classes to command the CamJam EduKit #3 robot, plus examples
+* MoteJPiRobot: an example of how to use the library to command the Pi2Go-Lite, the CamJam EduKit 3, but also other robots, using a Nintendo Wii Remote and Nunchuk ( https://en.wikipedia.org/wiki/Wii_Remote ). Enjoy :-)
+* RobotWebControl: an example of how to use the PiRobotPlatform library to command a Pi2Go-Lite or a CamJam EduKit #3 robot using a web page on a pc, tablet, smartphone.  Enjoy :-)
+
+
+The projects that have an executable part (examples or main class) are:
+* Pi2Go
+* Pi2GoRMI
+* CamJamEK3
+* MoteJPiRobot
+* RobotWebControl
+
+Refer to the projects readme for more specific information and remember: running the examples will make your robot move with all the possible consequences.
+
+
+Those libraries are based on:
+* Pi4J library ( http://pi4j.com/ )
 * Wiring Pi library ( http://wiringpi.com/ )
-* ServoBlaster driver (https://github.com/richardghirst/PiBits/tree/master/ServoBlaster )
+* ServoBlaster driver ( https://github.com/richardghirst/PiBits/tree/master/ServoBlaster )
 
 The projects are managed with Maven (https://maven.apache.org/), so it's possible to open them in many different IDEs and build them via the Maven command line program.
+
+The aim of this library is purely educational. Don't use it for any other purpose.
 
 ## Please be careful. 
 Running the library on the wrong hardware can brake your pi and your robot. Carefully check the sources and read the instruction.
@@ -25,8 +53,8 @@ Running the examples will make your robot move with all the possible consequence
 ### Robots
 To use this library you must have one of the supported robots based on the Raspberry Pi board or extend the library to support your own one.
 Supported robot:
-* Pi2Go-Lite (http://www.pi2go.co.uk/) with a Raspberry Pi B+ (Should work with every Raspberry Pi models)
-* CamJam EduKit 3 – Robotics (http://camjam.me/?page_id=1035)
+* Pi2Go-Lite ( http://www.pi2go.co.uk/ ) with a Raspberry Pi B+ (Should work with every Raspberry Pi models)
+* CamJam EduKit 3 – Robotics ( http://camjam.me/?page_id=1035 )
 
 ### Operating system
 The library was built and tested using Raspbian Jessie version May 2016, but should also works in previous version.
@@ -182,32 +210,7 @@ After some minutes the process will stop and you will get something like this (p
 
 If all success you are done. Otherwise sorry :-( 
 
-
-## OK, and now????
-The library is composed by some different subproject that logically, at least for me, divide the sources for scopes. 
-
-* PiRobotPlatform: the aggregator for all other modules.
-* ExecuteFromJar: utility to run a program from inside a jar file. Used to run the ServoBlaster.
-* PiRobot: all the interfaces use to describe the robots components.
-* PiRobotImplementation: the implementation of all common component
-* HCSR04: build the native library (Jni) for driving the HCSR04 ultrasound sensor.
-* Pi2Go: class implementation of the Pi2Go-Lite robot, plus some examples on how to use the library.
-* PiRobotRMI: interfaces and local object to use the library and command the robot remotely via RMI (https://docs.oracle.com/javase/tutorial/rmi/)
-* Pi2GoRMI: the Pi2Go-Lite implementation of the PiRobotRMI library plus an example on how to use it.
-* CamJamEK3: class to command the CamJam EduKit #3 robot, plus examples
-* MoteJPiRobot: an example of how to use the library to command the Pi2Go-Lite, but also other robots, using a Nintendo Wii Remote and Nunchuk (https://en.wikipedia.org/wiki/Wii_Remote). Enjoy :-)
-* RobotWebControl: an example of how to use the PiRobotPlatform library to command a Pi2Go-Lite or a CamJam EduKit #3 robot using a web page on a pc, tablet, smartphone.
-
-
-The projects that have an executable part (examples or main class) are:
-* Pi2Go
-* Pi2GoRMI
-* CamJamEK3
-* MoteJPiRobot
-* RobotWebControl
-
-Refer to the projects readme for more specific information and remember: running the examples will make your robot move with all the possible consequences.
-
+## Run the projects
 To run the projects from their jar files, with all the dependencies inside, go to the subproject dir and execute the commnad: 
 
     mvn antrun:run
@@ -234,6 +237,7 @@ or just execute the class from the jars in the "artifacts" directory with the co
 
     sudo java -cp file.jar class
 
+## Debug the projects
 To debug the projects use the command
 
     mvn antrun:run -P debug-server

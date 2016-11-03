@@ -1,6 +1,6 @@
 # Pi2GoRMI
 
-Java API to control a PI2GO-Lite remotely via RMI.
+Java API to control a Pi2Go-Lite Robot Kit (http://pi2go.co.uk/) remotely via RMI.
 
 ## Build the project
 Before building the subproject locally you have to build the parent one. Refer to the PiRobotPlatform readme file for instructions.

@@ -1,6 +1,6 @@
 # MoteJPiRobot
 
-Example of how to use the PiRobotPlatform library to command a Pi2Go-Lite or a CamJam EduKit #3 robot, but also other robots, using a Nintendo Wii Remote and Nunchuk (https://en.wikipedia.org/wiki/Wii_Remote).
+Example of how to use the PiRobotPlatform library to command a Pi2Go-Lite Robot Kit (http://pi2go.co.uk/) or a CamJam EduKit 3 – Robotics (http://camjam.me/?page_id=1035), but also other robots, using a Nintendo Wii Remote and Nunchuk (https://en.wikipedia.org/wiki/Wii_Remote).
 To run this program you need a Bluetooth USB dongle or a Rspberry Pi 3, and of course the Bluetooth support from the OS.
 
 ## Build the project

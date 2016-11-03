@@ -1,6 +1,6 @@
 # Pi2Go
 
-Java API to control a PI2GO-Lite.
+Java API to control a PI2GO-Lite (http://pi2go.co.uk/).
 The library support all the features of the robot, wheels sensors and cam servos too.
 
 All the component use the PI4J library (http://pi4j.com/) except for the HCSR04 ultrasound sensor that use a native library build base on the Wiring Pi library ( http://wiringpi.com/ )

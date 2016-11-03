@@ -1,6 +1,6 @@
 # RobotWebControl
 
-Example of how to use the PiRobotPlatform library to command a Pi2Go-Lite or a CamJam EduKit #3 robot using a web page on a pc, tablet, smartphone.
+Example of how to use the PiRobotPlatform library to command a Pi2Go-Lite Robot Kit (http://pi2go.co.uk/) or a CamJam EduKit 3 – Robotics (http://camjam.me/?page_id=1035) using a web page on a pc, tablet, smartphone.
 A web application is started using Spark micro framework (http://sparkjava.com/) so that is possible to command the robot and receive the sensor status through a web page.
 The client server communication is base on a websocket.
 

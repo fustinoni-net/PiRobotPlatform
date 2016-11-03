@@ -1,6 +1,6 @@
 # CamJamEK3
 
-Java API to control a CamJam EduKit #3 robot.
+Java API to control a CamJam EduKit 3 – Robotics (http://camjam.me/?page_id=1035).
 
 All the component use the PI4J library (http://pi4j.com/) except for the HCSR04 ultrasound sensor that use a native library build base on the Wiring Pi library ( http://wiringpi.com/ )
 
