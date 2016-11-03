@@ -36,11 +36,13 @@ import java.util.TimerTask;
 import net.fustinoni.pi.robot.PiRobot;
 import net.fustinoni.pi.robot.component.FrontLeds;
 import net.fustinoni.pi.robot.component.FrontalUltraSoundSensor;
+import net.fustinoni.pi.robot.component.GenericSwitch;
 import net.fustinoni.pi.robot.component.LeftRightMotors;
 import net.fustinoni.pi.robot.component.PanTiltServos;
 import net.fustinoni.pi.robot.component.RearLeds;
 import net.fustinoni.pi.robot.component.SideIRSensors;
 import net.fustinoni.pi.robot.listener.IRSensorListener;
+import net.fustinoni.pi.robot.listener.SwitchListener;
 import net.fustinoni.pi.robot.listener.UltraSoundSensorListener;
 import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.AnalogJoystick.AnalogJoystickMotorsDriver;
 import net.fustinoni.pi.robot.robotUtils.MotorsDrivers.AnalogJoystick.AnalogJoystickMotorsDriverEnlargedCenterDecorator;
@@ -152,6 +154,12 @@ public class RobotDriver {
 
             ((FrontalUltraSoundSensor)robot).getUltraSoundSensor().startSensor(1);
         }
+
+        if (piRobot instanceof GenericSwitch)
+            ((GenericSwitch)robot).getGenericSwitch().addListener((SwitchListener) (boolean isPressed) ->{
+                shutDown();
+            });
+
         
         if (watchDog == null){
 
