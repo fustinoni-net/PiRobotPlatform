@@ -1,6 +1,8 @@
 # PiRobotPlatform
 
-![Pi2Go-lite](http://pirobotplatform.fustinoni.net/img/pi2go.jpg)
+![Pi2Go-Lite Robot Kit](http://pirobotplatform.fustinoni.net/img/pi2go.jpg)
+![CamJam EduKit 3 – Robotics](http://pirobotplatform.fustinoni.net/img/cam3.jpg)
+![CamJam EduKit 3 – Robotics](http://pirobotplatform.fustinoni.net/img/controllerVideo.jpg)
 
 Java API to control: 
 * Pi2Go-Lite Robot Kit ( http://pi2go.co.uk/ )
