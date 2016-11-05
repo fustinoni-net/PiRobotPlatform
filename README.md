@@ -1,14 +1,16 @@
 # PiRobotPlatform
 
+![Pi2Go-lite](http://pirobotplatform.fustinoni.net/img/pi2go.jpg)
+
 Java API to control: 
 * Pi2Go-Lite Robot Kit ( http://pi2go.co.uk/ )
 * CamJam EduKit 3 – Robotics ( http://camjam.me/?page_id=1035 )
 * generic robots based on the Raspberry Pi ( https://www.raspberrypi.org/ ).
 
-The library is composed by some different subproject that logically, at least for me, divide the sources for scopes.
+The library is composed by some different subprojects that logically, at least for me, divide the sources for scopes.
 
 * PiRobotPlatform: the aggregator for all other modules.
-* ExecuteFromJar: utility to run a program from inside a jar file. Used to run the ServoBlaster.
+* ExecuteFromJar: utility to run a program from inside a jar file. Used to run the ServoBlaster driver.
 * PiRobot: all the interfaces used to describe the robots components.
 * PiRobotImplementation: the implementation of all common component
 * HCSR04: build the native C library (Jni) for driving the HCSR04 ultrasound sensor.
@@ -27,7 +29,7 @@ The projects that have an executable part (examples or main class) are:
 * MoteJPiRobot
 * RobotWebControl
 
-Refer to the projects readme for more specific information and remember: running the examples will make your robot move with all the possible consequences.
+Refer to the readme file of each single projects for more specific information and remember: running the examples will make your robot move with all the possible consequences.
 
 
 Those libraries are based on:
@@ -40,12 +42,10 @@ The projects are managed with Maven (https://maven.apache.org/), so it's possibl
 The aim of this library is purely educational. Don't use it for any other purpose.
 
 ## Please be careful. 
-Running the library on the wrong hardware can brake your pi and your robot. Carefully check the sources and read the instruction.
+Running the library on the wrong hardware can brake your pi and or your robot. Carefully check the sources and read the instruction.
 Running the examples will make your robot move with all the possible consequences.
 
 ####  ***** Use at your own risk. *****
-
-#### All the trademarks are properties of theirs owners.
 
 
 ## Prerequisites
@@ -237,6 +237,9 @@ or just execute the class from the jars in the "artifacts" directory with the co
 
     sudo java -cp file.jar class
 
+Each project readme file provide more specific information on how to run the project itself or the provided examples.
+
+
 ## Debug the projects
 To debug the projects use the command
 
@@ -252,7 +255,7 @@ Although the author has tried all the softwares on his computers he does not gua
 
 *** Use at your own risk!! ***
 
-All the trademarks are properties of their owner.
+### All the trademarks are properties of their owner.
 This author is not related in any way to any entity (corporation, person, brand, trademark, …) mentioned in this page.
 
 ## Many thanks for their work to:
