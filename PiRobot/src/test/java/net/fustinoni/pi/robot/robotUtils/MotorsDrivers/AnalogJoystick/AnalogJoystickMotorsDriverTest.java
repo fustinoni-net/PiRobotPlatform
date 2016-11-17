@@ -263,7 +263,7 @@ public class AnalogJoystickMotorsDriverTest {
     public void testJostickHalfLeftHalfBackwardHalfLeft() {
 
         for (int i = 0; i< xCenter.length; ++i){
-        int x=x=xMin[i] + (xCenter[i]-xMin[i])*50/100; int y= yMin[i] + (yCenter[i]-yMin[i])*50/100;
+        int x=xMin[i] + (xCenter[i]-xMin[i])*50/100; int y= yMin[i] + (yCenter[i]-yMin[i])*50/100;
         instance.jostickImput(x, y, xMin[i], xMax[i], yMin[i], yMax[i], xCenter[i], yCenter[i]);
 
         assertEquals(25, leftMotorSpeed);
